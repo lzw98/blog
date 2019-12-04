@@ -1,0 +1,49 @@
+library(dplyr)
+description <- read.csv('GDS5037/description.csv')
+##calulate the frequency and percentage of each category and plot pie chart
+s <- description %>%group_by(ID)%>%summarise(Counts=n())#if"%>%" errors,maybe the reason is the function can't be found
+library(ggplot2)
+type <- s$ID
+nums <- s$Counts
+df <- data.frame(type = type, nums = nums)
+
+#2.2 pie_chart
+p <- ggplot(data = df, mapping = aes(x = 'Content', y = nums, fill = type)) + geom_bar(stat = 'identity', position = 'stack', width = 1)
+p
+
+label_value <- paste('(', round(df$nums/sum(df$nums) * 100, 1), '%)', sep = '')
+label_value
+label <- paste(df$type, label_value, sep = '')
+label
+p + coord_polar(theta = 'y') + labs(x = '', y = '', title = '') + theme(axis.text = element_blank()) + theme(axis.ticks = element_blank()) + theme(legend.position = "none") + geom_text(aes(y = df$nums/2 + c(0, cumsum(df$nums)[-length(df$nums)]), x = sum(df$nums)/150, label = label))
+
+#2.3 barchart about gender 
+male_sample <-  'GSM1068462,GSM1068463,GSM1068465,GSM1068466,GSM1068467,GSM1068469,GSM1068470,GSM1068471,GSM1068475,GSM1068480,GSM1068484,GSM1068485,GSM1068489,GSM1068497,GSM1068501,GSM1068504,GSM1068509,GSM1068511,GSM1068515,GSM1068516,GSM1068519,GSM1068523,GSM1068525,GSM1068526,GSM1068529,GSM1068530,GSM1068534,GSM1068536,GSM1068541,GSM1068553,GSM1068554,GSM1068558,GSM1068559,GSM1068564'
+female_sample = 'GSM1068458,GSM1068459,GSM1068460,GSM1068461,GSM1068464,GSM1068468,GSM1068472,GSM1068473,GSM1068474,GSM1068476,GSM1068477,GSM1068478,GSM1068479,GSM1068481,GSM1068482,GSM1068483,GSM1068486,GSM1068487,GSM1068488,GSM1068490,GSM1068491,GSM1068492,GSM1068493,GSM1068494,GSM1068495,GSM1068496,GSM1068498,GSM1068499,GSM1068500,GSM1068502,GSM1068503,GSM1068505,GSM1068506,GSM1068507,GSM1068508,GSM1068510,GSM1068512,GSM1068513,GSM1068514,GSM1068517,GSM1068518,GSM1068520,GSM1068521,GSM1068522,GSM1068524,GSM1068527,GSM1068528,GSM1068531,GSM1068532,GSM1068533,GSM1068535,GSM1068537,GSM1068538,GSM1068539,GSM1068540,GSM1068542,GSM1068543,GSM1068544,GSM1068545,GSM1068546,GSM1068547,GSM1068548,GSM1068549,GSM1068550,GSM1068551,GSM1068552,GSM1068555,GSM1068556,GSM1068557,GSM1068560,GSM1068561,GSM1068562,GSM1068563,GSM1068565'
+countmale <- length(strsplit(male_sample,',')[[1]])
+countfemale <- length(strsplit(female_sample,',')[[1]])
+value <- c(countmale,countfemale)
+gender <- c('male','female')
+barplot(value,names.arg = gender,col = c('green','red'))
+
+
+#2.4 group by patients' status,calculate the sample mean and variance of IDENTIFIER FAM174bB in each group
+data_table <- read.csv('GDS5037/data_table.csv',nrows = 1);data_table#I know the data I need is the first 
+ttable <- t(data_table)
+d <- ttable
+names <- rownames(d)
+rownames(d) <- NULL
+ttable <- cbind(names,d);ttable <- ttable[-1,];ttable <- ttable[-1,]
+ttable <- data.frame(ttable)
+names(ttable) <- c('ID_REF','value')
+ttable
+data <- merge(ttable,description,by = 'ID_REF');data
+data <- data%>% mutate_at(.vars = vars('value'), .fun = as.numeric)
+#data$value=as.data.frame(lapply(data$value,as.numeric))
+mean <- aggregate(data[,2],list(data[,4]),mean);mean
+sd <- aggregate(data[,2],list(data[,4]),sd);sd
+n <- aggregate(data[,2],list(data[,4]),length);n
+z <- (mean[1,2]-mean[3,2])/sqrt(sd[1,2]^2/n[1,2]+sd[3,2]^2/n[3,2])
+q <- qnorm(z);q
+#so the result show that the mean of the two groups are equal under 5% significant level
+

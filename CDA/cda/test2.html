@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="林振炜" />
+
+<meta name="date" content="2019-11-02" />
+
+<title>cda第三次作业</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">cda第三次作业</h1>
+<h4 class="author">林振炜</h4>
+<h4 class="date">2019-11-02</h4>
+
+
+
+<div id="analysis-the-gds5037-data." class="section level2">
+<h2>1 analysis the GDS5037 data.</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>description &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;GDS5037/description.csv&#39;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>denote &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">c</span>(<span class="st">&#39;MMA&#39;</span>,<span class="st">&#39;control&#39;</span>,<span class="st">&#39;SA&#39;</span>),<span class="dt">value =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>data &lt;-<span class="st"> </span><span class="kw">merge</span>(description,denote,<span class="dt">by =</span> <span class="st">&#39;ID&#39;</span>);</span>
+<span id="cb1-6"><a href="#cb1-6"></a>ap3s2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;GDS5037/data_table.csv&#39;</span>,<span class="dt">nrows =</span> <span class="dv">2</span>)[<span class="dv">2</span>,];</span>
+<span id="cb1-7"><a href="#cb1-7"></a>ap3s2 &lt;-<span class="st"> </span><span class="kw">t</span>(ap3s2)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>d &lt;-<span class="st"> </span>ap3s2</span>
+<span id="cb1-9"><a href="#cb1-9"></a>names &lt;-<span class="st"> </span><span class="kw">rownames</span>(d)</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">rownames</span>(d) &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>ap3s2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(names,d);</span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">colnames</span>(ap3s2) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ID_REF&#39;</span>,<span class="st">&#39;ap3s2_value&#39;</span>);</span>
+<span id="cb1-13"><a href="#cb1-13"></a>data &lt;-<span class="st"> </span><span class="kw">merge</span>(data,ap3s2,<span class="dt">by =</span> <span class="st">&#39;ID_REF&#39;</span>);</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co"># build logistic regression model</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a>data2 &lt;-<span class="st"> </span>data<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="dt">.vars =</span> <span class="kw">vars</span>(<span class="st">&#39;ap3s2_value&#39;</span>), <span class="dt">.fun =</span> as.character)</span>
+<span id="cb1-18"><a href="#cb1-18"></a>data3 &lt;-<span class="st"> </span>data2<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="dt">.vars =</span> <span class="kw">vars</span>(<span class="st">&#39;ap3s2_value&#39;</span>), <span class="dt">.fun =</span> as.numeric)</span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="kw">class</span>(data)</span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="co">#&gt; [1] &quot;data.frame&quot;</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>gds_logistic &lt;-<span class="st"> </span><span class="kw">glm</span>(data3<span class="op">$</span>value <span class="op">~</span><span class="st"> </span>data3<span class="op">$</span>ap3s2_value,<span class="dt">data =</span> data3,<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));<span class="kw">summary</span>(gds_logistic)</span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="co">#&gt; </span></span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="co">#&gt; glm(formula = data3$value ~ data3$ap3s2_value, family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="co">#&gt;     data = data3)</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="co">#&gt; </span></span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="co">#&gt; -1.8625   0.6241   0.6350   0.6478   0.6736  </span></span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="co">#&gt; </span></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb1-32"><a href="#cb1-32"></a><span class="co">#&gt;                   Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a><span class="co">#&gt; (Intercept)         2.2352     3.7822   0.591    0.555</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a><span class="co">#&gt; data3$ap3s2_value  -0.1245     0.6228  -0.200    0.842</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a><span class="co">#&gt; </span></span>
+<span id="cb1-36"><a href="#cb1-36"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb1-37"><a href="#cb1-37"></a><span class="co">#&gt; </span></span>
+<span id="cb1-38"><a href="#cb1-38"></a><span class="co">#&gt;     Null deviance: 103.50  on 107  degrees of freedom</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a><span class="co">#&gt; Residual deviance: 103.46  on 106  degrees of freedom</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a><span class="co">#&gt; AIC: 107.46</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a><span class="co">#&gt; </span></span>
+<span id="cb1-42"><a href="#cb1-42"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
+<ul>
+<li>我们可以得到模型方程<span class="math inline">\(logit(\hat{\pi}(\mathrm{x}))=\hat{\alpha}+\hat{\beta} x=2.2352-0.1245 x\)</span></li>
+</ul>
+<p>即</p>
+</div>
+<div id="textbook-3.3" class="section level2">
+<h2>textbook 3.3</h2>
+<ul>
+<li><p>可以得出该模型的方程为 <span class="math inline">\(\hat{\pi}(\mathrm{x})=\hat{\alpha}+\hat{\beta} x=0.00255+0.00109 x\)</span>截距为0.00255表明，当不喝酒时，仍然约有0.00255的概率婴儿有性器官缺陷，斜率0.00109为正，表明购买酒越多对婴儿器官缺陷是正影响，程度每增加1，其风险概率增加0.00109</p></li>
+<li><p>当level为0时，器官缺陷的风险为0.00255；当level为7时，器官风险的概率为0.01018，他们的relative risk为0.00255/0.01018=0.2504912</p></li>
+</ul>
+</div>
+<div id="textbook-3.9" class="section level2">
+<h2>textbook 3.9</h2>
+<ul>
+<li><p>可以得出该模型的方程为 <span class="math inline">\(logit(\hat{\pi}(\mathrm{x}))=\hat{\alpha}+\hat{\beta} x=-3.5561+0.0532 x\)</span></p></li>
+<li><p><span class="math inline">\(\beta&gt;0\)</span>所以<span class="math inline">\(\pi(x)\)</span>随x的增大而增大</p></li>
+<li><p>当<span class="math inline">\(\pi=0\)</span>时，可以算出，income为3.5561/0.0532=66.86</p></li>
+</ul>
+</div>
+<div id="textbook-3.10" class="section level2">
+<h2>textbook 3.10</h2>
+<ul>
+<li><span class="math inline">\(\operatorname{probit}(\hat{\pi}(x))=\hat{\alpha}+\hat{\beta} x=-2.31781+0.0878 x\)</span>所以解方程<span class="math inline">\(\phi(0.5)=-2.3178+0.0878x\)</span>得到34.27406</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>(<span class="kw">pnorm</span>(<span class="fl">0.5</span>)<span class="op">+</span><span class="fl">2.3178</span>)<span class="op">/</span><span class="fl">0.0878</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; [1] 34.27406</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">pnorm</span>(<span class="op">-</span><span class="fl">2.3178+0.0878</span><span class="op">*</span><span class="dv">14</span>)<span class="op">-</span><span class="kw">pnorm</span>(<span class="op">-</span><span class="fl">2.3178+0.0878</span><span class="op">*</span><span class="dv">28</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] -0.4177419</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>label &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">6</span>,<span class="dv">40</span>,<span class="fl">0.1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>remission &lt;-<span class="st"> </span><span class="kw">pnorm</span>(<span class="op">-</span><span class="fl">2.3178+0.0878</span><span class="op">*</span>label);</span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="kw">plot</span>(<span class="dt">x =</span> label,<span class="dt">y =</span> remission,<span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,<span class="dt">lty =</span> <span class="dv">1</span>,<span class="dt">col =</span> <span class="st">&#39;black&#39;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<ul>
+<li>the difference between the estimated probabilities of remission at the upper and lower quartiles of the labeling index,14 and 28 is 0.4177</li>
+</ul>
+</div>
+<div id="textbook3.11" class="section level2">
+<h2>textbook3.11</h2>
+<ul>
+<li><span class="math inline">\(\log {\mu_a}=\alpha+\beta x_a\)</span> <span class="math inline">\(\log \mu_b=\alpha+\beta x_b\)</span> <span class="math inline">\(\Rightarrow \log \frac{\mu_a}{\mu_b}=\beta\left(x_{A}-x_{B}\right)\)</span> <span class="math inline">\(\quad \log \frac{\mu_{a}}{\mu_{b}}=-\beta\)</span> <span class="math inline">\(\Rightarrow \beta=\log \frac{\mu_{b}}{\mu_{a}}\)</span> <span class="math inline">\(\Rightarrow e^{\beta}=\mu_{b} / \mu_{a}\)</span></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">library</span>(<span class="st">&#39;cdabookdb&#39;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">data</span>(<span class="st">&#39;chip_imperfection&#39;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>denote &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Treatment =</span> <span class="kw">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>),<span class="dt">value =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb3-4"><a href="#cb3-4"></a>chip_imperfection&lt;-<span class="st"> </span><span class="kw">merge</span>(chip_imperfection,denote,<span class="dt">by =</span> <span class="st">&#39;Treatment&#39;</span>);</span>
+<span id="cb3-5"><a href="#cb3-5"></a>chip_poi &lt;-<span class="st"> </span><span class="kw">glm</span>(Imperfections <span class="op">~</span><span class="st"> </span>value ,<span class="dt">data =</span> chip_imperfection,<span class="dt">family =</span> <span class="kw">poisson</span>(<span class="dt">link =</span> <span class="st">&#39;log&#39;</span>));<span class="kw">summary</span>(chip_poi)</span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; </span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; glm(formula = Imperfections ~ value, family = poisson(link = &quot;log&quot;), </span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;     data = chip_imperfection)</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; </span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; -1.5280  -0.7622  -0.1699   0.6938   1.5399  </span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; </span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; (Intercept)   1.6094     0.1414  11.380  &lt; 2e-16 ***</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; value         0.5878     0.1764   3.332 0.000861 ***</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; ---</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; </span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; (Dispersion parameter for poisson family taken to be 1)</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt; </span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt;     Null deviance: 27.857  on 19  degrees of freedom</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt; Residual deviance: 16.268  on 18  degrees of freedom</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; AIC: 94.349</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt; </span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
+<ul>
+<li></li>
+</ul>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="林振炜" />
+
+<meta name="date" content="2019-11-26" />
+
+<title>cda作业5</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">cda作业5</h1>
+<h4 class="author">林振炜</h4>
+<h4 class="date">2019-11-26</h4>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(cdabookdb)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(cdabookfunc)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># get the lines of file</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>lines&lt;-<span class="kw">readLines</span>(<span class="st">&#39;GDS5037/data_table.csv&#39;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>len &lt;-<span class="st"> </span><span class="kw">length</span>(lines)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a>data_COL=<span class="kw">read.csv</span>(<span class="st">&#39;GDS5037/data_table.csv&#39;</span>,<span class="dt">encoding=</span><span class="st">&#39;UTF-8&#39;</span>,<span class="dt">header=</span><span class="ot">TRUE</span>,<span class="dt">nrows =</span> <span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>COL &lt;-<span class="st"> </span><span class="kw">colnames</span>(data_COL)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>description &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;GDS5037/description.csv&#39;</span>)</span>
+<span id="cb2-8"><a href="#cb2-8"></a>denote &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">c</span>(<span class="st">&#39;MMA&#39;</span>,<span class="st">&#39;control&#39;</span>,<span class="st">&#39;SA&#39;</span>),<span class="dt">Y =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb2-9"><a href="#cb2-9"></a>data &lt;-<span class="st"> </span><span class="kw">merge</span>(description,denote,<span class="dt">by =</span> <span class="st">&#39;ID&#39;</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a>des &lt;-<span class="st"> </span>data[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a>f &lt;-<span class="st"> </span><span class="cf">function</span>(nrows,line){</span>
+<span id="cb2-14"><a href="#cb2-14"></a>  data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;GDS5037/data_table.csv&#39;</span>,<span class="dt">encoding=</span><span class="st">&#39;UTF-8&#39;</span>,</span>
+<span id="cb2-15"><a href="#cb2-15"></a>                   <span class="dt">header=</span><span class="ot">TRUE</span>,</span>
+<span id="cb2-16"><a href="#cb2-16"></a>                   <span class="dt">nrows =</span> nrows,</span>
+<span id="cb2-17"><a href="#cb2-17"></a>                   <span class="dt">skip =</span> (line<span class="dv">-1</span>)<span class="op">*</span>nrows)</span>
+<span id="cb2-18"><a href="#cb2-18"></a>  <span class="co"># bug happened this skip parameter doesn&#39;t work</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>  <span class="co"># data &lt;- read.csv(&#39;GDS5037/data_table.csv&#39;,encoding=&#39;UTF-8&#39;,header=TRUE,nrows = nrows,skip = 1*nrows)</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>  coln &lt;-<span class="st"> </span><span class="kw">as.vector</span>(<span class="kw">as.matrix</span>((data[,<span class="dv">1</span>])))</span>
+<span id="cb2-21"><a href="#cb2-21"></a>  <span class="kw">colnames</span>(data) &lt;-<span class="st"> </span>COL</span>
+<span id="cb2-22"><a href="#cb2-22"></a>  data2 =<span class="st"> </span>data</span>
+<span id="cb2-23"><a href="#cb2-23"></a>  ID_REF &lt;-<span class="st"> </span><span class="kw">colnames</span>(data2)</span>
+<span id="cb2-24"><a href="#cb2-24"></a>  ID_REF &lt;-<span class="st"> </span>ID_REF[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
+<span id="cb2-25"><a href="#cb2-25"></a>  data3 &lt;-<span class="st"> </span>data2[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
+<span id="cb2-26"><a href="#cb2-26"></a>  data3 &lt;-<span class="st"> </span><span class="kw">apply</span>(data3,<span class="dv">1</span>,as.numeric)</span>
+<span id="cb2-27"><a href="#cb2-27"></a>  data4 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ID_REF,data3)</span>
+<span id="cb2-28"><a href="#cb2-28"></a>  <span class="kw">colnames</span>(data4) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ID_REF&#39;</span>,coln)</span>
+<span id="cb2-29"><a href="#cb2-29"></a>  data &lt;-<span class="st"> </span><span class="kw">merge</span>(des,data4,<span class="dt">by =</span> <span class="st">&#39;ID_REF&#39;</span>);</span>
+<span id="cb2-30"><a href="#cb2-30"></a>  <span class="kw">return</span>(data)</span>
+<span id="cb2-31"><a href="#cb2-31"></a>}</span>
+<span id="cb2-32"><a href="#cb2-32"></a></span>
+<span id="cb2-33"><a href="#cb2-33"></a></span>
+<span id="cb2-34"><a href="#cb2-34"></a>ptm &lt;-<span class="st"> </span><span class="kw">proc.time</span>()</span>
+<span id="cb2-35"><a href="#cb2-35"></a></span>
+<span id="cb2-36"><a href="#cb2-36"></a>nrows &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a>c2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">10000000</span>,<span class="dv">10</span>))</span>
+<span id="cb2-38"><a href="#cb2-38"></a>id &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
+<span id="cb2-39"><a href="#cb2-39"></a>lines &lt;-<span class="st"> </span>len<span class="op">%/%</span>nrows</span>
+<span id="cb2-40"><a href="#cb2-40"></a><span class="co"># so the bug is (len%/%) need a parenthesis</span></span>
+<span id="cb2-41"><a href="#cb2-41"></a></span>
+<span id="cb2-42"><a href="#cb2-42"></a><span class="cf">for</span> (line <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>lines){</span>
+<span id="cb2-43"><a href="#cb2-43"></a>  <span class="cf">if</span>(line <span class="op">!=</span><span class="st"> </span>lines){</span>
+<span id="cb2-44"><a href="#cb2-44"></a>    d &lt;-<span class="st"> </span><span class="kw">f</span>(nrows,line)</span>
+<span id="cb2-45"><a href="#cb2-45"></a>  }<span class="cf">else</span>{</span>
+<span id="cb2-46"><a href="#cb2-46"></a>    nrows =<span class="st"> </span>(len<span class="op">%%</span>nrows)</span>
+<span id="cb2-47"><a href="#cb2-47"></a>    d =<span class="st"> </span><span class="kw">f</span>(nrows,line)</span>
+<span id="cb2-48"><a href="#cb2-48"></a>  }</span>
+<span id="cb2-49"><a href="#cb2-49"></a>  </span>
+<span id="cb2-50"><a href="#cb2-50"></a>  coln &lt;-<span class="st"> </span><span class="kw">colnames</span>(d)[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
+<span id="cb2-51"><a href="#cb2-51"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nrows){</span>
+<span id="cb2-52"><a href="#cb2-52"></a>    m &lt;-<span class="st"> </span><span class="kw">glm</span>(Y<span class="op">~</span>d[,i<span class="op">+</span><span class="dv">2</span>],<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>),<span class="dt">data =</span> d);</span>
+<span id="cb2-53"><a href="#cb2-53"></a>    <span class="cf">if</span>(m<span class="op">$</span>aic <span class="op">&lt;</span><span class="st"> </span><span class="kw">max</span>(c2)){</span>
+<span id="cb2-54"><a href="#cb2-54"></a>      id[<span class="kw">which.max</span>(c2)] &lt;-<span class="st"> </span>coln[i]</span>
+<span id="cb2-55"><a href="#cb2-55"></a>      <span class="co"># the sentence must be ahead the next one, or which.max(c2) would change</span></span>
+<span id="cb2-56"><a href="#cb2-56"></a>      c2[<span class="kw">which.max</span>(c2)] &lt;-<span class="st"> </span>m<span class="op">$</span>aic</span>
+<span id="cb2-57"><a href="#cb2-57"></a>    }</span>
+<span id="cb2-58"><a href="#cb2-58"></a>  }</span>
+<span id="cb2-59"><a href="#cb2-59"></a>  <span class="kw">remove</span>(d)</span>
+<span id="cb2-60"><a href="#cb2-60"></a>}</span>
+<span id="cb2-61"><a href="#cb2-61"></a><span class="co">#&gt; Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</span></span>
+<span id="cb2-62"><a href="#cb2-62"></a><span class="kw">proc.time</span>() <span class="op">-</span><span class="st"> </span>ptm</span>
+<span id="cb2-63"><a href="#cb2-63"></a><span class="co">#&gt;    user  system elapsed </span></span>
+<span id="cb2-64"><a href="#cb2-64"></a><span class="co">#&gt;  102.43    0.43  102.91</span></span>
+<span id="cb2-65"><a href="#cb2-65"></a></span>
+<span id="cb2-66"><a href="#cb2-66"></a>result &lt;-<span class="st"> </span><span class="kw">list</span>(c2,id)</span>
+<span id="cb2-67"><a href="#cb2-67"></a></span>
+<span id="cb2-68"><a href="#cb2-68"></a><span class="kw">library</span>(readr)</span>
+<span id="cb2-69"><a href="#cb2-69"></a></span>
+<span id="cb2-70"><a href="#cb2-70"></a>ptm &lt;-<span class="st"> </span><span class="kw">proc.time</span>() <span class="co">#用于计算读取耗时</span></span>
+<span id="cb2-71"><a href="#cb2-71"></a></span>
+<span id="cb2-72"><a href="#cb2-72"></a></span>
+<span id="cb2-73"><a href="#cb2-73"></a>filter &lt;-<span class="st"> </span><span class="cf">function</span> (x,pos){</span>
+<span id="cb2-74"><a href="#cb2-74"></a>  <span class="kw">subset</span>(x, ID_REF <span class="op">%in%</span><span class="st"> </span>result[[<span class="dv">2</span>]])</span>
+<span id="cb2-75"><a href="#cb2-75"></a>}  <span class="co">#定义筛选条件</span></span>
+<span id="cb2-76"><a href="#cb2-76"></a>df &lt;-<span class="st"> </span><span class="kw">read_csv_chunked</span>(<span class="dt">file =</span> <span class="st">&quot;GDS5037/data_table.csv&quot;</span>, DataFrameCallback<span class="op">$</span><span class="kw">new</span>(filter), <span class="dt">chunk_size =</span> <span class="dv">1000</span>,<span class="dt">col_names =</span> <span class="ot">TRUE</span>, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb2-77"><a href="#cb2-77"></a><span class="co">#&gt; Parsed with column specification:</span></span>
+<span id="cb2-78"><a href="#cb2-78"></a><span class="co">#&gt; cols(</span></span>
+<span id="cb2-79"><a href="#cb2-79"></a><span class="co">#&gt;   .default = col_double(),</span></span>
+<span id="cb2-80"><a href="#cb2-80"></a><span class="co">#&gt;   ID_REF = col_character(),</span></span>
+<span id="cb2-81"><a href="#cb2-81"></a><span class="co">#&gt;   IDENTIFIER = col_character()</span></span>
+<span id="cb2-82"><a href="#cb2-82"></a><span class="co">#&gt; )</span></span>
+<span id="cb2-83"><a href="#cb2-83"></a><span class="co">#&gt; See spec(...) for full column specifications.</span></span>
+<span id="cb2-84"><a href="#cb2-84"></a>t &lt;-<span class="st"> </span><span class="kw">proc.time</span>() <span class="op">-</span><span class="st"> </span>ptm</span>
+<span id="cb2-85"><a href="#cb2-85"></a></span>
+<span id="cb2-86"><a href="#cb2-86"></a></span>
+<span id="cb2-87"><a href="#cb2-87"></a>pre &lt;-<span class="st"> </span><span class="cf">function</span>(df){</span>
+<span id="cb2-88"><a href="#cb2-88"></a>  coln &lt;-<span class="st"> </span><span class="kw">as.vector</span>(<span class="kw">as.matrix</span>((df[,<span class="dv">1</span>])))</span>
+<span id="cb2-89"><a href="#cb2-89"></a>  <span class="kw">colnames</span>(df) &lt;-<span class="st"> </span>COL</span>
+<span id="cb2-90"><a href="#cb2-90"></a>  data2 =<span class="st"> </span>df</span>
+<span id="cb2-91"><a href="#cb2-91"></a>  ID_REF &lt;-<span class="st"> </span><span class="kw">colnames</span>(data2)</span>
+<span id="cb2-92"><a href="#cb2-92"></a>  ID_REF &lt;-<span class="st"> </span>ID_REF[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
+<span id="cb2-93"><a href="#cb2-93"></a>  data3 &lt;-<span class="st"> </span>data2[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
+<span id="cb2-94"><a href="#cb2-94"></a>  data3 &lt;-<span class="st"> </span><span class="kw">apply</span>(data3,<span class="dv">1</span>,as.numeric)</span>
+<span id="cb2-95"><a href="#cb2-95"></a>  data4 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ID_REF,data3)</span>
+<span id="cb2-96"><a href="#cb2-96"></a>  <span class="kw">colnames</span>(data4) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ID_REF&#39;</span>,coln)</span>
+<span id="cb2-97"><a href="#cb2-97"></a>  data &lt;-<span class="st"> </span><span class="kw">merge</span>(des,data4,<span class="dt">by =</span> <span class="st">&#39;ID_REF&#39;</span>);</span>
+<span id="cb2-98"><a href="#cb2-98"></a>  <span class="kw">return</span>(data)</span>
+<span id="cb2-99"><a href="#cb2-99"></a>  </span>
+<span id="cb2-100"><a href="#cb2-100"></a>}</span>
+<span id="cb2-101"><a href="#cb2-101"></a></span>
+<span id="cb2-102"><a href="#cb2-102"></a></span>
+<span id="cb2-103"><a href="#cb2-103"></a>data &lt;-<span class="st"> </span><span class="kw">pre</span>(df)</span>
+<span id="cb2-104"><a href="#cb2-104"></a></span>
+<span id="cb2-105"><a href="#cb2-105"></a><span class="kw">library</span>(Hmisc)<span class="co">#加载包</span></span>
+<span id="cb2-106"><a href="#cb2-106"></a><span class="co">#&gt; Loading required package: lattice</span></span>
+<span id="cb2-107"><a href="#cb2-107"></a><span class="co">#&gt; Loading required package: survival</span></span>
+<span id="cb2-108"><a href="#cb2-108"></a><span class="co">#&gt; Loading required package: Formula</span></span>
+<span id="cb2-109"><a href="#cb2-109"></a><span class="co">#&gt; Loading required package: ggplot2</span></span>
+<span id="cb2-110"><a href="#cb2-110"></a><span class="co">#&gt; </span></span>
+<span id="cb2-111"><a href="#cb2-111"></a><span class="co">#&gt; Attaching package: &#39;Hmisc&#39;</span></span>
+<span id="cb2-112"><a href="#cb2-112"></a><span class="co">#&gt; The following objects are masked from &#39;package:dplyr&#39;:</span></span>
+<span id="cb2-113"><a href="#cb2-113"></a><span class="co">#&gt; </span></span>
+<span id="cb2-114"><a href="#cb2-114"></a><span class="co">#&gt;     src, summarize</span></span>
+<span id="cb2-115"><a href="#cb2-115"></a><span class="co">#&gt; The following objects are masked from &#39;package:base&#39;:</span></span>
+<span id="cb2-116"><a href="#cb2-116"></a><span class="co">#&gt; </span></span>
+<span id="cb2-117"><a href="#cb2-117"></a><span class="co">#&gt;     format.pval, units</span></span>
+<span id="cb2-118"><a href="#cb2-118"></a>res2 &lt;-<span class="st"> </span><span class="kw">rcorr</span>(<span class="kw">as.matrix</span>(data[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]))</span>
+<span id="cb2-119"><a href="#cb2-119"></a>res2</span>
+<span id="cb2-120"><a href="#cb2-120"></a><span class="co">#&gt;              A_23_P127128 A_23_P411162 A_23_P50591 A_24_P145163</span></span>
+<span id="cb2-121"><a href="#cb2-121"></a><span class="co">#&gt; A_23_P127128         1.00        -0.58        0.72        -0.51</span></span>
+<span id="cb2-122"><a href="#cb2-122"></a><span class="co">#&gt; A_23_P411162        -0.58         1.00       -0.62         0.33</span></span>
+<span id="cb2-123"><a href="#cb2-123"></a><span class="co">#&gt; A_23_P50591          0.72        -0.62        1.00        -0.51</span></span>
+<span id="cb2-124"><a href="#cb2-124"></a><span class="co">#&gt; A_24_P145163        -0.51         0.33       -0.51         1.00</span></span>
+<span id="cb2-125"><a href="#cb2-125"></a><span class="co">#&gt; A_24_P263330         0.57        -0.29        0.37        -0.44</span></span>
+<span id="cb2-126"><a href="#cb2-126"></a><span class="co">#&gt; A_24_P353638        -0.48         0.32       -0.30         0.40</span></span>
+<span id="cb2-127"><a href="#cb2-127"></a><span class="co">#&gt; A_24_P933458        -0.37         0.50       -0.35         0.26</span></span>
+<span id="cb2-128"><a href="#cb2-128"></a><span class="co">#&gt; A_32_P128023         0.57        -0.45        0.70        -0.36</span></span>
+<span id="cb2-129"><a href="#cb2-129"></a><span class="co">#&gt; A_32_P171253        -0.43         0.55       -0.39         0.29</span></span>
+<span id="cb2-130"><a href="#cb2-130"></a><span class="co">#&gt; A_32_P210622        -0.45         0.37       -0.43         0.38</span></span>
+<span id="cb2-131"><a href="#cb2-131"></a><span class="co">#&gt;              A_24_P263330 A_24_P353638 A_24_P933458 A_32_P128023</span></span>
+<span id="cb2-132"><a href="#cb2-132"></a><span class="co">#&gt; A_23_P127128         0.57        -0.48        -0.37         0.57</span></span>
+<span id="cb2-133"><a href="#cb2-133"></a><span class="co">#&gt; A_23_P411162        -0.29         0.32         0.50        -0.45</span></span>
+<span id="cb2-134"><a href="#cb2-134"></a><span class="co">#&gt; A_23_P50591          0.37        -0.30        -0.35         0.70</span></span>
+<span id="cb2-135"><a href="#cb2-135"></a><span class="co">#&gt; A_24_P145163        -0.44         0.40         0.26        -0.36</span></span>
+<span id="cb2-136"><a href="#cb2-136"></a><span class="co">#&gt; A_24_P263330         1.00        -0.52        -0.14         0.44</span></span>
+<span id="cb2-137"><a href="#cb2-137"></a><span class="co">#&gt; A_24_P353638        -0.52         1.00         0.37        -0.35</span></span>
+<span id="cb2-138"><a href="#cb2-138"></a><span class="co">#&gt; A_24_P933458        -0.14         0.37         1.00        -0.43</span></span>
+<span id="cb2-139"><a href="#cb2-139"></a><span class="co">#&gt; A_32_P128023         0.44        -0.35        -0.43         1.00</span></span>
+<span id="cb2-140"><a href="#cb2-140"></a><span class="co">#&gt; A_32_P171253        -0.30         0.28         0.55        -0.49</span></span>
+<span id="cb2-141"><a href="#cb2-141"></a><span class="co">#&gt; A_32_P210622        -0.26         0.23         0.39        -0.46</span></span>
+<span id="cb2-142"><a href="#cb2-142"></a><span class="co">#&gt;              A_32_P171253 A_32_P210622</span></span>
+<span id="cb2-143"><a href="#cb2-143"></a><span class="co">#&gt; A_23_P127128        -0.43        -0.45</span></span>
+<span id="cb2-144"><a href="#cb2-144"></a><span class="co">#&gt; A_23_P411162         0.55         0.37</span></span>
+<span id="cb2-145"><a href="#cb2-145"></a><span class="co">#&gt; A_23_P50591         -0.39        -0.43</span></span>
+<span id="cb2-146"><a href="#cb2-146"></a><span class="co">#&gt; A_24_P145163         0.29         0.38</span></span>
+<span id="cb2-147"><a href="#cb2-147"></a><span class="co">#&gt; A_24_P263330        -0.30        -0.26</span></span>
+<span id="cb2-148"><a href="#cb2-148"></a><span class="co">#&gt; A_24_P353638         0.28         0.23</span></span>
+<span id="cb2-149"><a href="#cb2-149"></a><span class="co">#&gt; A_24_P933458         0.55         0.39</span></span>
+<span id="cb2-150"><a href="#cb2-150"></a><span class="co">#&gt; A_32_P128023        -0.49        -0.46</span></span>
+<span id="cb2-151"><a href="#cb2-151"></a><span class="co">#&gt; A_32_P171253         1.00         0.57</span></span>
+<span id="cb2-152"><a href="#cb2-152"></a><span class="co">#&gt; A_32_P210622         0.57         1.00</span></span>
+<span id="cb2-153"><a href="#cb2-153"></a><span class="co">#&gt; </span></span>
+<span id="cb2-154"><a href="#cb2-154"></a><span class="co">#&gt; n= 108 </span></span>
+<span id="cb2-155"><a href="#cb2-155"></a><span class="co">#&gt; </span></span>
+<span id="cb2-156"><a href="#cb2-156"></a><span class="co">#&gt; </span></span>
+<span id="cb2-157"><a href="#cb2-157"></a><span class="co">#&gt; P</span></span>
+<span id="cb2-158"><a href="#cb2-158"></a><span class="co">#&gt;              A_23_P127128 A_23_P411162 A_23_P50591 A_24_P145163</span></span>
+<span id="cb2-159"><a href="#cb2-159"></a><span class="co">#&gt; A_23_P127128              0.0000       0.0000      0.0000      </span></span>
+<span id="cb2-160"><a href="#cb2-160"></a><span class="co">#&gt; A_23_P411162 0.0000                    0.0000      0.0005      </span></span>
+<span id="cb2-161"><a href="#cb2-161"></a><span class="co">#&gt; A_23_P50591  0.0000       0.0000                   0.0000      </span></span>
+<span id="cb2-162"><a href="#cb2-162"></a><span class="co">#&gt; A_24_P145163 0.0000       0.0005       0.0000                  </span></span>
+<span id="cb2-163"><a href="#cb2-163"></a><span class="co">#&gt; A_24_P263330 0.0000       0.0026       0.0000      0.0000      </span></span>
+<span id="cb2-164"><a href="#cb2-164"></a><span class="co">#&gt; A_24_P353638 0.0000       0.0009       0.0015      0.0000      </span></span>
+<span id="cb2-165"><a href="#cb2-165"></a><span class="co">#&gt; A_24_P933458 0.0000       0.0000       0.0002      0.0064      </span></span>
+<span id="cb2-166"><a href="#cb2-166"></a><span class="co">#&gt; A_32_P128023 0.0000       0.0000       0.0000      0.0001      </span></span>
+<span id="cb2-167"><a href="#cb2-167"></a><span class="co">#&gt; A_32_P171253 0.0000       0.0000       0.0000      0.0020      </span></span>
+<span id="cb2-168"><a href="#cb2-168"></a><span class="co">#&gt; A_32_P210622 0.0000       0.0000       0.0000      0.0000      </span></span>
+<span id="cb2-169"><a href="#cb2-169"></a><span class="co">#&gt;              A_24_P263330 A_24_P353638 A_24_P933458 A_32_P128023</span></span>
+<span id="cb2-170"><a href="#cb2-170"></a><span class="co">#&gt; A_23_P127128 0.0000       0.0000       0.0000       0.0000      </span></span>
+<span id="cb2-171"><a href="#cb2-171"></a><span class="co">#&gt; A_23_P411162 0.0026       0.0009       0.0000       0.0000      </span></span>
+<span id="cb2-172"><a href="#cb2-172"></a><span class="co">#&gt; A_23_P50591  0.0000       0.0015       0.0002       0.0000      </span></span>
+<span id="cb2-173"><a href="#cb2-173"></a><span class="co">#&gt; A_24_P145163 0.0000       0.0000       0.0064       0.0001      </span></span>
+<span id="cb2-174"><a href="#cb2-174"></a><span class="co">#&gt; A_24_P263330              0.0000       0.1477       0.0000      </span></span>
+<span id="cb2-175"><a href="#cb2-175"></a><span class="co">#&gt; A_24_P353638 0.0000                    0.0000       0.0002      </span></span>
+<span id="cb2-176"><a href="#cb2-176"></a><span class="co">#&gt; A_24_P933458 0.1477       0.0000                    0.0000      </span></span>
+<span id="cb2-177"><a href="#cb2-177"></a><span class="co">#&gt; A_32_P128023 0.0000       0.0002       0.0000                   </span></span>
+<span id="cb2-178"><a href="#cb2-178"></a><span class="co">#&gt; A_32_P171253 0.0018       0.0034       0.0000       0.0000      </span></span>
+<span id="cb2-179"><a href="#cb2-179"></a><span class="co">#&gt; A_32_P210622 0.0070       0.0190       0.0000       0.0000      </span></span>
+<span id="cb2-180"><a href="#cb2-180"></a><span class="co">#&gt;              A_32_P171253 A_32_P210622</span></span>
+<span id="cb2-181"><a href="#cb2-181"></a><span class="co">#&gt; A_23_P127128 0.0000       0.0000      </span></span>
+<span id="cb2-182"><a href="#cb2-182"></a><span class="co">#&gt; A_23_P411162 0.0000       0.0000      </span></span>
+<span id="cb2-183"><a href="#cb2-183"></a><span class="co">#&gt; A_23_P50591  0.0000       0.0000      </span></span>
+<span id="cb2-184"><a href="#cb2-184"></a><span class="co">#&gt; A_24_P145163 0.0020       0.0000      </span></span>
+<span id="cb2-185"><a href="#cb2-185"></a><span class="co">#&gt; A_24_P263330 0.0018       0.0070      </span></span>
+<span id="cb2-186"><a href="#cb2-186"></a><span class="co">#&gt; A_24_P353638 0.0034       0.0190      </span></span>
+<span id="cb2-187"><a href="#cb2-187"></a><span class="co">#&gt; A_24_P933458 0.0000       0.0000      </span></span>
+<span id="cb2-188"><a href="#cb2-188"></a><span class="co">#&gt; A_32_P128023 0.0000       0.0000      </span></span>
+<span id="cb2-189"><a href="#cb2-189"></a><span class="co">#&gt; A_32_P171253              0.0000      </span></span>
+<span id="cb2-190"><a href="#cb2-190"></a><span class="co">#&gt; A_32_P210622 0.0000</span></span>
+<span id="cb2-191"><a href="#cb2-191"></a></span>
+<span id="cb2-192"><a href="#cb2-192"></a><span class="co">## Create a formula for a model with a large number of variables:</span></span>
+<span id="cb2-193"><a href="#cb2-193"></a>xnam &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">colnames</span>(data)[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)])</span>
+<span id="cb2-194"><a href="#cb2-194"></a>(fmla &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span class="kw">paste</span>(<span class="st">&quot;Y ~ &quot;</span>, <span class="kw">paste</span>(xnam, <span class="dt">collapse=</span> <span class="st">&quot;+&quot;</span>))))</span>
+<span id="cb2-195"><a href="#cb2-195"></a><span class="co">#&gt; Y ~ A_23_P127128 + A_23_P411162 + A_23_P50591 + A_24_P145163 + </span></span>
+<span id="cb2-196"><a href="#cb2-196"></a><span class="co">#&gt;     A_24_P263330 + A_24_P353638 + A_24_P933458 + A_32_P128023 + </span></span>
+<span id="cb2-197"><a href="#cb2-197"></a><span class="co">#&gt;     A_32_P171253 + A_32_P210622</span></span>
+<span id="cb2-198"><a href="#cb2-198"></a></span>
+<span id="cb2-199"><a href="#cb2-199"></a></span>
+<span id="cb2-200"><a href="#cb2-200"></a>m2.full &lt;-<span class="st"> </span><span class="kw">glm</span>(fmla,<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>),<span class="dt">data =</span> data)</span>
+<span id="cb2-201"><a href="#cb2-201"></a>m2_step &lt;-<span class="st"> </span><span class="kw">step</span>(m2.full, <span class="dt">trace =</span> T)</span>
+<span id="cb2-202"><a href="#cb2-202"></a><span class="co">#&gt; Start:  AIC=51.38</span></span>
+<span id="cb2-203"><a href="#cb2-203"></a><span class="co">#&gt; Y ~ A_23_P127128 + A_23_P411162 + A_23_P50591 + A_24_P145163 + </span></span>
+<span id="cb2-204"><a href="#cb2-204"></a><span class="co">#&gt;     A_24_P263330 + A_24_P353638 + A_24_P933458 + A_32_P128023 + </span></span>
+<span id="cb2-205"><a href="#cb2-205"></a><span class="co">#&gt;     A_32_P171253 + A_32_P210622</span></span>
+<span id="cb2-206"><a href="#cb2-206"></a><span class="co">#&gt; </span></span>
+<span id="cb2-207"><a href="#cb2-207"></a><span class="co">#&gt;                Df Deviance    AIC</span></span>
+<span id="cb2-208"><a href="#cb2-208"></a><span class="co">#&gt; - A_32_P171253  1   29.599 49.599</span></span>
+<span id="cb2-209"><a href="#cb2-209"></a><span class="co">#&gt; - A_23_P127128  1   29.902 49.902</span></span>
+<span id="cb2-210"><a href="#cb2-210"></a><span class="co">#&gt; - A_23_P50591   1   29.943 49.943</span></span>
+<span id="cb2-211"><a href="#cb2-211"></a><span class="co">#&gt; - A_24_P353638  1   30.098 50.098</span></span>
+<span id="cb2-212"><a href="#cb2-212"></a><span class="co">#&gt; - A_32_P128023  1   30.790 50.790</span></span>
+<span id="cb2-213"><a href="#cb2-213"></a><span class="co">#&gt; &lt;none&gt;              29.382 51.382</span></span>
+<span id="cb2-214"><a href="#cb2-214"></a><span class="co">#&gt; - A_32_P210622  1   32.140 52.140</span></span>
+<span id="cb2-215"><a href="#cb2-215"></a><span class="co">#&gt; - A_24_P263330  1   32.472 52.472</span></span>
+<span id="cb2-216"><a href="#cb2-216"></a><span class="co">#&gt; - A_23_P411162  1   33.232 53.232</span></span>
+<span id="cb2-217"><a href="#cb2-217"></a><span class="co">#&gt; - A_24_P933458  1   33.803 53.803</span></span>
+<span id="cb2-218"><a href="#cb2-218"></a><span class="co">#&gt; - A_24_P145163  1   36.590 56.590</span></span>
+<span id="cb2-219"><a href="#cb2-219"></a><span class="co">#&gt; </span></span>
+<span id="cb2-220"><a href="#cb2-220"></a><span class="co">#&gt; Step:  AIC=49.6</span></span>
+<span id="cb2-221"><a href="#cb2-221"></a><span class="co">#&gt; Y ~ A_23_P127128 + A_23_P411162 + A_23_P50591 + A_24_P145163 + </span></span>
+<span id="cb2-222"><a href="#cb2-222"></a><span class="co">#&gt;     A_24_P263330 + A_24_P353638 + A_24_P933458 + A_32_P128023 + </span></span>
+<span id="cb2-223"><a href="#cb2-223"></a><span class="co">#&gt;     A_32_P210622</span></span>
+<span id="cb2-224"><a href="#cb2-224"></a><span class="co">#&gt; </span></span>
+<span id="cb2-225"><a href="#cb2-225"></a><span class="co">#&gt;                Df Deviance    AIC</span></span>
+<span id="cb2-226"><a href="#cb2-226"></a><span class="co">#&gt; - A_24_P353638  1   30.122 48.122</span></span>
+<span id="cb2-227"><a href="#cb2-227"></a><span class="co">#&gt; - A_23_P127128  1   30.127 48.127</span></span>
+<span id="cb2-228"><a href="#cb2-228"></a><span class="co">#&gt; - A_23_P50591   1   30.150 48.150</span></span>
+<span id="cb2-229"><a href="#cb2-229"></a><span class="co">#&gt; - A_32_P128023  1   31.005 49.005</span></span>
+<span id="cb2-230"><a href="#cb2-230"></a><span class="co">#&gt; &lt;none&gt;              29.599 49.599</span></span>
+<span id="cb2-231"><a href="#cb2-231"></a><span class="co">#&gt; - A_32_P210622  1   32.391 50.391</span></span>
+<span id="cb2-232"><a href="#cb2-232"></a><span class="co">#&gt; - A_24_P263330  1   32.539 50.539</span></span>
+<span id="cb2-233"><a href="#cb2-233"></a><span class="co">#&gt; - A_23_P411162  1   33.279 51.279</span></span>
+<span id="cb2-234"><a href="#cb2-234"></a><span class="co">#&gt; - A_24_P933458  1   34.158 52.158</span></span>
+<span id="cb2-235"><a href="#cb2-235"></a><span class="co">#&gt; - A_24_P145163  1   36.612 54.612</span></span>
+<span id="cb2-236"><a href="#cb2-236"></a><span class="co">#&gt; </span></span>
+<span id="cb2-237"><a href="#cb2-237"></a><span class="co">#&gt; Step:  AIC=48.12</span></span>
+<span id="cb2-238"><a href="#cb2-238"></a><span class="co">#&gt; Y ~ A_23_P127128 + A_23_P411162 + A_23_P50591 + A_24_P145163 + </span></span>
+<span id="cb2-239"><a href="#cb2-239"></a><span class="co">#&gt;     A_24_P263330 + A_24_P933458 + A_32_P128023 + A_32_P210622</span></span>
+<span id="cb2-240"><a href="#cb2-240"></a><span class="co">#&gt; </span></span>
+<span id="cb2-241"><a href="#cb2-241"></a><span class="co">#&gt;                Df Deviance    AIC</span></span>
+<span id="cb2-242"><a href="#cb2-242"></a><span class="co">#&gt; - A_23_P127128  1   30.545 46.545</span></span>
+<span id="cb2-243"><a href="#cb2-243"></a><span class="co">#&gt; - A_23_P50591   1   30.731 46.731</span></span>
+<span id="cb2-244"><a href="#cb2-244"></a><span class="co">#&gt; - A_32_P128023  1   31.924 47.924</span></span>
+<span id="cb2-245"><a href="#cb2-245"></a><span class="co">#&gt; &lt;none&gt;              30.122 48.122</span></span>
+<span id="cb2-246"><a href="#cb2-246"></a><span class="co">#&gt; - A_32_P210622  1   32.735 48.735</span></span>
+<span id="cb2-247"><a href="#cb2-247"></a><span class="co">#&gt; - A_23_P411162  1   33.887 49.887</span></span>
+<span id="cb2-248"><a href="#cb2-248"></a><span class="co">#&gt; - A_24_P263330  1   34.371 50.371</span></span>
+<span id="cb2-249"><a href="#cb2-249"></a><span class="co">#&gt; - A_24_P933458  1   35.450 51.450</span></span>
+<span id="cb2-250"><a href="#cb2-250"></a><span class="co">#&gt; - A_24_P145163  1   37.705 53.705</span></span>
+<span id="cb2-251"><a href="#cb2-251"></a><span class="co">#&gt; </span></span>
+<span id="cb2-252"><a href="#cb2-252"></a><span class="co">#&gt; Step:  AIC=46.55</span></span>
+<span id="cb2-253"><a href="#cb2-253"></a><span class="co">#&gt; Y ~ A_23_P411162 + A_23_P50591 + A_24_P145163 + A_24_P263330 + </span></span>
+<span id="cb2-254"><a href="#cb2-254"></a><span class="co">#&gt;     A_24_P933458 + A_32_P128023 + A_32_P210622</span></span>
+<span id="cb2-255"><a href="#cb2-255"></a><span class="co">#&gt; </span></span>
+<span id="cb2-256"><a href="#cb2-256"></a><span class="co">#&gt;                Df Deviance    AIC</span></span>
+<span id="cb2-257"><a href="#cb2-257"></a><span class="co">#&gt; - A_23_P50591   1   31.565 45.565</span></span>
+<span id="cb2-258"><a href="#cb2-258"></a><span class="co">#&gt; &lt;none&gt;              30.545 46.545</span></span>
+<span id="cb2-259"><a href="#cb2-259"></a><span class="co">#&gt; - A_32_P128023  1   32.579 46.579</span></span>
+<span id="cb2-260"><a href="#cb2-260"></a><span class="co">#&gt; - A_32_P210622  1   32.983 46.983</span></span>
+<span id="cb2-261"><a href="#cb2-261"></a><span class="co">#&gt; - A_23_P411162  1   33.897 47.897</span></span>
+<span id="cb2-262"><a href="#cb2-262"></a><span class="co">#&gt; - A_24_P263330  1   34.465 48.465</span></span>
+<span id="cb2-263"><a href="#cb2-263"></a><span class="co">#&gt; - A_24_P933458  1   35.482 49.482</span></span>
+<span id="cb2-264"><a href="#cb2-264"></a><span class="co">#&gt; - A_24_P145163  1   37.712 51.712</span></span>
+<span id="cb2-265"><a href="#cb2-265"></a><span class="co">#&gt; </span></span>
+<span id="cb2-266"><a href="#cb2-266"></a><span class="co">#&gt; Step:  AIC=45.57</span></span>
+<span id="cb2-267"><a href="#cb2-267"></a><span class="co">#&gt; Y ~ A_23_P411162 + A_24_P145163 + A_24_P263330 + A_24_P933458 + </span></span>
+<span id="cb2-268"><a href="#cb2-268"></a><span class="co">#&gt;     A_32_P128023 + A_32_P210622</span></span>
+<span id="cb2-269"><a href="#cb2-269"></a><span class="co">#&gt; </span></span>
+<span id="cb2-270"><a href="#cb2-270"></a><span class="co">#&gt;                Df Deviance    AIC</span></span>
+<span id="cb2-271"><a href="#cb2-271"></a><span class="co">#&gt; - A_32_P128023  1   32.646 44.646</span></span>
+<span id="cb2-272"><a href="#cb2-272"></a><span class="co">#&gt; &lt;none&gt;              31.565 45.565</span></span>
+<span id="cb2-273"><a href="#cb2-273"></a><span class="co">#&gt; - A_23_P411162  1   33.913 45.913</span></span>
+<span id="cb2-274"><a href="#cb2-274"></a><span class="co">#&gt; - A_32_P210622  1   34.537 46.537</span></span>
+<span id="cb2-275"><a href="#cb2-275"></a><span class="co">#&gt; - A_24_P263330  1   35.980 47.980</span></span>
+<span id="cb2-276"><a href="#cb2-276"></a><span class="co">#&gt; - A_24_P933458  1   36.397 48.397</span></span>
+<span id="cb2-277"><a href="#cb2-277"></a><span class="co">#&gt; - A_24_P145163  1   37.793 49.793</span></span>
+<span id="cb2-278"><a href="#cb2-278"></a><span class="co">#&gt; </span></span>
+<span id="cb2-279"><a href="#cb2-279"></a><span class="co">#&gt; Step:  AIC=44.65</span></span>
+<span id="cb2-280"><a href="#cb2-280"></a><span class="co">#&gt; Y ~ A_23_P411162 + A_24_P145163 + A_24_P263330 + A_24_P933458 + </span></span>
+<span id="cb2-281"><a href="#cb2-281"></a><span class="co">#&gt;     A_32_P210622</span></span>
+<span id="cb2-282"><a href="#cb2-282"></a><span class="co">#&gt; </span></span>
+<span id="cb2-283"><a href="#cb2-283"></a><span class="co">#&gt;                Df Deviance    AIC</span></span>
+<span id="cb2-284"><a href="#cb2-284"></a><span class="co">#&gt; &lt;none&gt;              32.646 44.646</span></span>
+<span id="cb2-285"><a href="#cb2-285"></a><span class="co">#&gt; - A_32_P210622  1   35.572 45.572</span></span>
+<span id="cb2-286"><a href="#cb2-286"></a><span class="co">#&gt; - A_24_P263330  1   36.982 46.982</span></span>
+<span id="cb2-287"><a href="#cb2-287"></a><span class="co">#&gt; - A_23_P411162  1   37.401 47.401</span></span>
+<span id="cb2-288"><a href="#cb2-288"></a><span class="co">#&gt; - A_24_P145163  1   39.577 49.577</span></span>
+<span id="cb2-289"><a href="#cb2-289"></a><span class="co">#&gt; - A_24_P933458  1   40.111 50.111</span></span>
+<span id="cb2-290"><a href="#cb2-290"></a></span>
+<span id="cb2-291"><a href="#cb2-291"></a>m2.step &lt;-<span class="st"> </span><span class="kw">glm</span>(Y <span class="op">~</span><span class="st"> </span>A_<span class="dv">23</span>_P411162 <span class="op">+</span><span class="st"> </span>A_<span class="dv">24</span>_P145163 <span class="op">+</span><span class="st"> </span>A_<span class="dv">24</span>_P263330 <span class="op">+</span><span class="st"> </span>A_<span class="dv">24</span>_P933458 <span class="op">+</span><span class="st"> </span>A_<span class="dv">32</span>_P210622,<span class="dt">data =</span> data,<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));<span class="kw">summary</span>(m2.step)</span>
+<span id="cb2-292"><a href="#cb2-292"></a><span class="co">#&gt; </span></span>
+<span id="cb2-293"><a href="#cb2-293"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb2-294"><a href="#cb2-294"></a><span class="co">#&gt; glm(formula = Y ~ A_23_P411162 + A_24_P145163 + A_24_P263330 + </span></span>
+<span id="cb2-295"><a href="#cb2-295"></a><span class="co">#&gt;     A_24_P933458 + A_32_P210622, family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb2-296"><a href="#cb2-296"></a><span class="co">#&gt;     data = data)</span></span>
+<span id="cb2-297"><a href="#cb2-297"></a><span class="co">#&gt; </span></span>
+<span id="cb2-298"><a href="#cb2-298"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb2-299"><a href="#cb2-299"></a><span class="co">#&gt;      Min        1Q    Median        3Q       Max  </span></span>
+<span id="cb2-300"><a href="#cb2-300"></a><span class="co">#&gt; -2.80446   0.00519   0.03233   0.11384   2.02219  </span></span>
+<span id="cb2-301"><a href="#cb2-301"></a><span class="co">#&gt; </span></span>
+<span id="cb2-302"><a href="#cb2-302"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb2-303"><a href="#cb2-303"></a><span class="co">#&gt;              Estimate Std. Error z value Pr(&gt;|z|)   </span></span>
+<span id="cb2-304"><a href="#cb2-304"></a><span class="co">#&gt; (Intercept)   54.9076    16.8082   3.267  0.00109 **</span></span>
+<span id="cb2-305"><a href="#cb2-305"></a><span class="co">#&gt; A_23_P411162  -3.0263     1.6101  -1.880  0.06017 . </span></span>
+<span id="cb2-306"><a href="#cb2-306"></a><span class="co">#&gt; A_24_P145163  -1.5516     0.7344  -2.113  0.03461 * </span></span>
+<span id="cb2-307"><a href="#cb2-307"></a><span class="co">#&gt; A_24_P263330   1.5478     0.8229   1.881  0.06000 . </span></span>
+<span id="cb2-308"><a href="#cb2-308"></a><span class="co">#&gt; A_24_P933458  -2.7206     1.1613  -2.343  0.01915 * </span></span>
+<span id="cb2-309"><a href="#cb2-309"></a><span class="co">#&gt; A_32_P210622  -1.2908     0.8283  -1.558  0.11914   </span></span>
+<span id="cb2-310"><a href="#cb2-310"></a><span class="co">#&gt; ---</span></span>
+<span id="cb2-311"><a href="#cb2-311"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb2-312"><a href="#cb2-312"></a><span class="co">#&gt; </span></span>
+<span id="cb2-313"><a href="#cb2-313"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb2-314"><a href="#cb2-314"></a><span class="co">#&gt; </span></span>
+<span id="cb2-315"><a href="#cb2-315"></a><span class="co">#&gt;     Null deviance: 103.500  on 107  degrees of freedom</span></span>
+<span id="cb2-316"><a href="#cb2-316"></a><span class="co">#&gt; Residual deviance:  32.646  on 102  degrees of freedom</span></span>
+<span id="cb2-317"><a href="#cb2-317"></a><span class="co">#&gt; AIC: 44.646</span></span>
+<span id="cb2-318"><a href="#cb2-318"></a><span class="co">#&gt; </span></span>
+<span id="cb2-319"><a href="#cb2-319"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 8</span></span></code></pre></div>
+<ul>
+<li><p>‘aic’ [1] 77.12579 80.90096 80.80600 73.79519 73.69083 79.28047 80.01105 80.98891 [9] 79.38464 75.35709</p></li>
+<li><p>‘id_ref’ [1] “A_32_P128023” “A_23_P50591” “A_24_P263330” “A_23_P127128” “A_23_P411162” [6] “A_32_P210622” “A_24_P933458” “A_24_P353638” “A_24_P145163” “A_32_P171253”</p></li>
+<li><p>the correlation matrix is shown above.</p></li>
+<li><p>I choose the ten identifier in question 2, because the correlative is weak among them. The result isn’t very good, because the coefficient is not significant. I can try interaction.</p></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">library</span>(cdabookdb)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">data</span>(horseshoecrabs)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>horseshoecrabs &lt;-<span class="st"> </span>horseshoecrabs <span class="op">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="dt">psat =</span> <span class="kw">as.integer</span>(horseshoecrabs<span class="op">$</span>Satellites <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>),</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="co"># psat--whether to have satellites or not</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="dt">Spine_factor =</span> <span class="kw">factor</span>(Spine, <span class="dt">levels =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">1</span>),</span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="co"># grouping of spine, spine type 3 as the benchmark</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="dt">Color_factor =</span> <span class="kw">factor</span>(Color, <span class="dt">levels =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>)</span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="co"># grouping of color, color type 4 as the benchmark</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>  )</span>
+<span id="cb3-13"><a href="#cb3-13"></a></span>
+<span id="cb3-14"><a href="#cb3-14"></a>m1.full &lt;-<span class="st"> </span><span class="kw">glm</span>(</span>
+<span id="cb3-15"><a href="#cb3-15"></a>  psat <span class="op">~</span><span class="st"> </span>Weight <span class="op">+</span><span class="st"> </span>Spine_factor <span class="op">+</span><span class="st"> </span>Color_factor,</span>
+<span id="cb3-16"><a href="#cb3-16"></a>  <span class="dt">family =</span> <span class="kw">binomial</span>(), <span class="dt">data =</span> horseshoecrabs</span>
+<span id="cb3-17"><a href="#cb3-17"></a>)</span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="kw">summary</span>(m1.full)</span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; </span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; glm(formula = psat ~ Weight + Spine_factor + Color_factor, family = binomial(), </span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt;     data = horseshoecrabs)</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt; </span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; -2.2476  -0.9320   0.4775   0.8326   2.0392  </span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt; </span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="co">#&gt;               Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="co">#&gt; (Intercept)    -4.3695     1.0080  -4.335 1.46e-05 ***</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="co">#&gt; Weight          1.6433     0.3910   4.202 2.64e-05 ***</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a><span class="co">#&gt; Spine_factor2  -0.6657     0.6133  -1.085  0.27772    </span></span>
+<span id="cb3-33"><a href="#cb3-33"></a><span class="co">#&gt; Spine_factor1  -0.4223     0.4998  -0.845  0.39815    </span></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="co">#&gt; Color_factor3   1.1222     0.5878   1.909  0.05624 .  </span></span>
+<span id="cb3-35"><a href="#cb3-35"></a><span class="co">#&gt; Color_factor2   1.5534     0.5600   2.774  0.00554 ** </span></span>
+<span id="cb3-36"><a href="#cb3-36"></a><span class="co">#&gt; Color_factor1   1.6829     0.9313   1.807  0.07073 .  </span></span>
+<span id="cb3-37"><a href="#cb3-37"></a><span class="co">#&gt; ---</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="co">#&gt; </span></span>
+<span id="cb3-40"><a href="#cb3-40"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb3-41"><a href="#cb3-41"></a><span class="co">#&gt; </span></span>
+<span id="cb3-42"><a href="#cb3-42"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb3-43"><a href="#cb3-43"></a><span class="co">#&gt; Residual deviance: 187.00  on 166  degrees of freedom</span></span>
+<span id="cb3-44"><a href="#cb3-44"></a><span class="co">#&gt; AIC: 201</span></span>
+<span id="cb3-45"><a href="#cb3-45"></a><span class="co">#&gt; </span></span>
+<span id="cb3-46"><a href="#cb3-46"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span>
+<span id="cb3-47"><a href="#cb3-47"></a>m1_backward &lt;-<span class="st"> </span><span class="kw">step</span>(m1.full,<span class="dt">direction =</span> <span class="st">&#39;backward&#39;</span>,<span class="dt">trace =</span> T)</span>
+<span id="cb3-48"><a href="#cb3-48"></a><span class="co">#&gt; Start:  AIC=201</span></span>
+<span id="cb3-49"><a href="#cb3-49"></a><span class="co">#&gt; psat ~ Weight + Spine_factor + Color_factor</span></span>
+<span id="cb3-50"><a href="#cb3-50"></a><span class="co">#&gt; </span></span>
+<span id="cb3-51"><a href="#cb3-51"></a><span class="co">#&gt;                Df Deviance    AIC</span></span>
+<span id="cb3-52"><a href="#cb3-52"></a><span class="co">#&gt; - Spine_factor  2   188.54 198.54</span></span>
+<span id="cb3-53"><a href="#cb3-53"></a><span class="co">#&gt; &lt;none&gt;              187.00 201.00</span></span>
+<span id="cb3-54"><a href="#cb3-54"></a><span class="co">#&gt; - Color_factor  3   195.33 203.33</span></span>
+<span id="cb3-55"><a href="#cb3-55"></a><span class="co">#&gt; - Weight        1   208.83 220.83</span></span>
+<span id="cb3-56"><a href="#cb3-56"></a><span class="co">#&gt; </span></span>
+<span id="cb3-57"><a href="#cb3-57"></a><span class="co">#&gt; Step:  AIC=198.54</span></span>
+<span id="cb3-58"><a href="#cb3-58"></a><span class="co">#&gt; psat ~ Weight + Color_factor</span></span>
+<span id="cb3-59"><a href="#cb3-59"></a><span class="co">#&gt; </span></span>
+<span id="cb3-60"><a href="#cb3-60"></a><span class="co">#&gt;                Df Deviance    AIC</span></span>
+<span id="cb3-61"><a href="#cb3-61"></a><span class="co">#&gt; &lt;none&gt;              188.54 198.54</span></span>
+<span id="cb3-62"><a href="#cb3-62"></a><span class="co">#&gt; - Color_factor  3   195.74 199.74</span></span>
+<span id="cb3-63"><a href="#cb3-63"></a><span class="co">#&gt; - Weight        1   212.06 220.06</span></span>
+<span id="cb3-64"><a href="#cb3-64"></a>m1_step &lt;-<span class="st"> </span><span class="kw">step</span>(m1.full, <span class="dt">trace =</span> T)</span>
+<span id="cb3-65"><a href="#cb3-65"></a><span class="co">#&gt; Start:  AIC=201</span></span>
+<span id="cb3-66"><a href="#cb3-66"></a><span class="co">#&gt; psat ~ Weight + Spine_factor + Color_factor</span></span>
+<span id="cb3-67"><a href="#cb3-67"></a><span class="co">#&gt; </span></span>
+<span id="cb3-68"><a href="#cb3-68"></a><span class="co">#&gt;                Df Deviance    AIC</span></span>
+<span id="cb3-69"><a href="#cb3-69"></a><span class="co">#&gt; - Spine_factor  2   188.54 198.54</span></span>
+<span id="cb3-70"><a href="#cb3-70"></a><span class="co">#&gt; &lt;none&gt;              187.00 201.00</span></span>
+<span id="cb3-71"><a href="#cb3-71"></a><span class="co">#&gt; - Color_factor  3   195.33 203.33</span></span>
+<span id="cb3-72"><a href="#cb3-72"></a><span class="co">#&gt; - Weight        1   208.83 220.83</span></span>
+<span id="cb3-73"><a href="#cb3-73"></a><span class="co">#&gt; </span></span>
+<span id="cb3-74"><a href="#cb3-74"></a><span class="co">#&gt; Step:  AIC=198.54</span></span>
+<span id="cb3-75"><a href="#cb3-75"></a><span class="co">#&gt; psat ~ Weight + Color_factor</span></span>
+<span id="cb3-76"><a href="#cb3-76"></a><span class="co">#&gt; </span></span>
+<span id="cb3-77"><a href="#cb3-77"></a><span class="co">#&gt;                Df Deviance    AIC</span></span>
+<span id="cb3-78"><a href="#cb3-78"></a><span class="co">#&gt; &lt;none&gt;              188.54 198.54</span></span>
+<span id="cb3-79"><a href="#cb3-79"></a><span class="co">#&gt; - Color_factor  3   195.74 199.74</span></span>
+<span id="cb3-80"><a href="#cb3-80"></a><span class="co">#&gt; - Weight        1   212.06 220.06</span></span>
+<span id="cb3-81"><a href="#cb3-81"></a><span class="kw">summary</span>(m1_step)</span>
+<span id="cb3-82"><a href="#cb3-82"></a><span class="co">#&gt; </span></span>
+<span id="cb3-83"><a href="#cb3-83"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb3-84"><a href="#cb3-84"></a><span class="co">#&gt; glm(formula = psat ~ Weight + Color_factor, family = binomial(), </span></span>
+<span id="cb3-85"><a href="#cb3-85"></a><span class="co">#&gt;     data = horseshoecrabs)</span></span>
+<span id="cb3-86"><a href="#cb3-86"></a><span class="co">#&gt; </span></span>
+<span id="cb3-87"><a href="#cb3-87"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb3-88"><a href="#cb3-88"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb3-89"><a href="#cb3-89"></a><span class="co">#&gt; -2.1908  -1.0144   0.5101   0.8683   2.0751  </span></span>
+<span id="cb3-90"><a href="#cb3-90"></a><span class="co">#&gt; </span></span>
+<span id="cb3-91"><a href="#cb3-91"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb3-92"><a href="#cb3-92"></a><span class="co">#&gt;               Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb3-93"><a href="#cb3-93"></a><span class="co">#&gt; (Intercept)    -4.5266     1.0038  -4.510 6.50e-06 ***</span></span>
+<span id="cb3-94"><a href="#cb3-94"></a><span class="co">#&gt; Weight          1.6928     0.3888   4.354 1.34e-05 ***</span></span>
+<span id="cb3-95"><a href="#cb3-95"></a><span class="co">#&gt; Color_factor3   1.0833     0.5884   1.841  0.06561 .  </span></span>
+<span id="cb3-96"><a href="#cb3-96"></a><span class="co">#&gt; Color_factor2   1.4143     0.5449   2.595  0.00945 ** </span></span>
+<span id="cb3-97"><a href="#cb3-97"></a><span class="co">#&gt; Color_factor1   1.2694     0.8488   1.495  0.13479    </span></span>
+<span id="cb3-98"><a href="#cb3-98"></a><span class="co">#&gt; ---</span></span>
+<span id="cb3-99"><a href="#cb3-99"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb3-100"><a href="#cb3-100"></a><span class="co">#&gt; </span></span>
+<span id="cb3-101"><a href="#cb3-101"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb3-102"><a href="#cb3-102"></a><span class="co">#&gt; </span></span>
+<span id="cb3-103"><a href="#cb3-103"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb3-104"><a href="#cb3-104"></a><span class="co">#&gt; Residual deviance: 188.54  on 168  degrees of freedom</span></span>
+<span id="cb3-105"><a href="#cb3-105"></a><span class="co">#&gt; AIC: 198.54</span></span>
+<span id="cb3-106"><a href="#cb3-106"></a><span class="co">#&gt; </span></span>
+<span id="cb3-107"><a href="#cb3-107"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
+<ul>
+<li>textbook5.6</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>(<span class="dv">1</span><span class="op">-</span><span class="st"> </span><span class="fl">0.092</span>)<span class="op">*</span><span class="fl">0.66+0.53</span><span class="op">*</span><span class="fl">0.092</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; [1] 0.64804</span></span></code></pre></div>
+<ul>
+<li><p>0.092 means the proportion of people who often drink in overall population is 0.092. versus, it means the proportion of people who rarely drink is 0.908. The sensitivity which equals to 0.53 means that 53% would be forecasted successfully in the prediction when he drinks often in fact. And the spectificity which equals to 0.66 means that 66% would be forecasted successfully in the prediction when he drinks rarely in fact.</p></li>
+<li><p><span class="math inline">\((1- 0.092)\times 0.66+0.53\times 0.092 = 0.64804\)</span></p></li>
+<li><ol style="list-style-type: lower-roman">
+<li>when maximize sample predictive power is important, I should choose the model with teh four main effects and the six interaction terms.(ii)when model parsimony is important, I should choose the model with only the four main effects.</li>
+</ol></li>
+</ul>
+<div id="textbook-5.10" class="section level2">
+<h2>textbook 5.10</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">library</span>(ResourceSelection)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; ResourceSelection 0.3-5   2019-07-22</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">data</span>(<span class="st">&quot;horseshoecrabs&quot;</span>)</span>
+<span id="cb5-4"><a href="#cb5-4"></a>horseshoecrabs<span class="op">$</span>psat &lt;-<span class="st"> </span><span class="kw">as.integer</span>(horseshoecrabs<span class="op">$</span>Satellites <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb5-5"><a href="#cb5-5"></a>m &lt;-<span class="st"> </span><span class="kw">glm</span>(psat<span class="op">~</span>Weight,<span class="dt">data =</span> horseshoecrabs,<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));<span class="kw">summary</span>(m)</span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; </span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; glm(formula = psat ~ Weight, family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt;     data = horseshoecrabs)</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt; </span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt; -2.1108  -1.0749   0.5426   0.9122   1.6285  </span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; </span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co">#&gt; (Intercept)  -3.6947     0.8802  -4.198 2.70e-05 ***</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">#&gt; Weight        1.8151     0.3767   4.819 1.45e-06 ***</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co">#&gt; ---</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="co">#&gt; </span></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="co">#&gt; </span></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="co">#&gt; Residual deviance: 195.74  on 171  degrees of freedom</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="co">#&gt; AIC: 199.74</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="co">#&gt; </span></span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a>pi0 &lt;-<span class="st"> </span><span class="fl">0.642</span> <span class="co"># cut-off value</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a>pred_prob &lt;-<span class="st"> </span><span class="kw">predict</span>(m, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb5-31"><a href="#cb5-31"></a>pred_type &lt;-<span class="st"> </span><span class="kw">cut</span>(</span>
+<span id="cb5-32"><a href="#cb5-32"></a>pred_prob, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, pi0, <span class="dv">1</span>), <span class="dt">labels =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>,</span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="dt">include.lowest =</span> <span class="ot">TRUE</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a>)</span>
+<span id="cb5-35"><a href="#cb5-35"></a>classification_table &lt;-<span class="st"> </span><span class="kw">table</span>(horseshoecrabs<span class="op">$</span>psat, pred_type)</span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="kw">addmargins</span>(classification_table)</span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="co">#&gt;      pred_type</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a><span class="co">#&gt;         0   1 Sum</span></span>
+<span id="cb5-39"><a href="#cb5-39"></a><span class="co">#&gt;   0    45  17  62</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a><span class="co">#&gt;   1    43  68 111</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="co">#&gt;   Sum  88  85 173</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a>sensitivity &lt;-<span class="st"> </span><span class="dv">45</span><span class="op">/</span><span class="dv">62</span>;sensitivity</span>
+<span id="cb5-43"><a href="#cb5-43"></a><span class="co">#&gt; [1] 0.7258065</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a>specificity &lt;-<span class="st"> </span><span class="dv">85</span><span class="op">/</span><span class="dv">173</span>;specificity</span>
+<span id="cb5-45"><a href="#cb5-45"></a><span class="co">#&gt; [1] 0.4913295</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a></span>
+<span id="cb5-47"><a href="#cb5-47"></a></span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="co">#Roc curve and AUC area</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a><span class="kw">library</span>(ROCR)</span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="co">#&gt; Loading required package: gplots</span></span>
+<span id="cb5-51"><a href="#cb5-51"></a><span class="co">#&gt; </span></span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="co">#&gt; Attaching package: &#39;gplots&#39;</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a><span class="co">#&gt; The following object is masked from &#39;package:stats&#39;:</span></span>
+<span id="cb5-54"><a href="#cb5-54"></a><span class="co">#&gt; </span></span>
+<span id="cb5-55"><a href="#cb5-55"></a><span class="co">#&gt;     lowess</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a><span class="kw">par</span>(<span class="dt">pty =</span> <span class="st">&quot;s&quot;</span>)</span>
+<span id="cb5-57"><a href="#cb5-57"></a>pred &lt;-<span class="st"> </span><span class="kw">prediction</span>(<span class="kw">fitted</span>(m), horseshoecrabs<span class="op">$</span>psat)</span>
+<span id="cb5-58"><a href="#cb5-58"></a>perf &lt;-<span class="st"> </span><span class="kw">performance</span>(pred, <span class="st">&quot;tpr&quot;</span>, <span class="st">&quot;fpr&quot;</span>)</span>
+<span id="cb5-59"><a href="#cb5-59"></a><span class="kw">plot</span>(perf, <span class="dt">asp =</span><span class="dv">1</span>, <span class="dt">xaxs=</span><span class="st">&quot;i&quot;</span>, <span class="dt">yaxs=</span><span class="st">&quot;i&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">performance</span>(pred,<span class="st">&quot;auc&quot;</span>)<span class="op">@</span>y.values[[<span class="dv">1</span>]]</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; [1] 0.7379396</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">hoslem.test</span>(m<span class="op">$</span>y, <span class="kw">fitted</span>(m))</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; </span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;  Hosmer and Lemeshow goodness of fit (GOF) test</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; </span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; data:  m$y, fitted(m)</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; X-squared = 7.8334, df = 8, p-value = 0.4499</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>a &lt;-<span class="st"> </span>horseshoecrabs<span class="op">$</span>Weight<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">##d </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>m2 &lt;-<span class="st"> </span><span class="kw">glm</span>(psat<span class="op">~</span><span class="kw">poly</span>(Weight,<span class="dv">2</span>),<span class="dt">data =</span> horseshoecrabs,<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));<span class="kw">summary</span>(m2)</span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; </span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; glm(formula = psat ~ poly(Weight, 2), family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt;     data = horseshoecrabs)</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; </span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt; -2.1825  -1.0739   0.5197   0.9391   1.5430  </span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt; </span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt;                  Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="co">#&gt; (Intercept)        0.7717     0.2035   3.792 0.000149 ***</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">#&gt; poly(Weight, 2)1  15.1986     4.1600   3.653 0.000259 ***</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co">#&gt; poly(Weight, 2)2   2.7228     5.2504   0.519 0.604044    </span></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="co">#&gt; ---</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="co">#&gt; </span></span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a><span class="co">#&gt; </span></span>
+<span id="cb6-32"><a href="#cb6-32"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a><span class="co">#&gt; Residual deviance: 195.46  on 170  degrees of freedom</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="co">#&gt; AIC: 201.46</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a><span class="co">#&gt; </span></span>
+<span id="cb6-36"><a href="#cb6-36"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 5</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a><span class="kw">summary</span>(m)</span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="co">#&gt; </span></span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="co">#&gt; glm(formula = psat ~ Weight, family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="co">#&gt;     data = horseshoecrabs)</span></span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="co">#&gt; </span></span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb6-45"><a href="#cb6-45"></a><span class="co">#&gt; -2.1108  -1.0749   0.5426   0.9122   1.6285  </span></span>
+<span id="cb6-46"><a href="#cb6-46"></a><span class="co">#&gt; </span></span>
+<span id="cb6-47"><a href="#cb6-47"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb6-48"><a href="#cb6-48"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb6-49"><a href="#cb6-49"></a><span class="co">#&gt; (Intercept)  -3.6947     0.8802  -4.198 2.70e-05 ***</span></span>
+<span id="cb6-50"><a href="#cb6-50"></a><span class="co">#&gt; Weight        1.8151     0.3767   4.819 1.45e-06 ***</span></span>
+<span id="cb6-51"><a href="#cb6-51"></a><span class="co">#&gt; ---</span></span>
+<span id="cb6-52"><a href="#cb6-52"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-53"><a href="#cb6-53"></a><span class="co">#&gt; </span></span>
+<span id="cb6-54"><a href="#cb6-54"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb6-55"><a href="#cb6-55"></a><span class="co">#&gt; </span></span>
+<span id="cb6-56"><a href="#cb6-56"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb6-57"><a href="#cb6-57"></a><span class="co">#&gt; Residual deviance: 195.74  on 171  degrees of freedom</span></span>
+<span id="cb6-58"><a href="#cb6-58"></a><span class="co">#&gt; AIC: 199.74</span></span>
+<span id="cb6-59"><a href="#cb6-59"></a><span class="co">#&gt; </span></span>
+<span id="cb6-60"><a href="#cb6-60"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
+<ul>
+<li><p>the sensitivity equals to 0.7258; specificity equals to 0.4913.</p></li>
+<li><p>the area under it equals to 0.7380. The closer AUC is to 1.0, the higher the authenticity of the detection method.</p></li>
+<li><p>the p_value of the Hosmer-Lemeshow statistic equals to 0.4499 showing that the model goodness-of-fit isn’t very good.</p></li>
+<li><p>when the predictors are x and x2, the coefficient of this model aren’t significant than the one before.</p></li>
+<li><p>the AIC of model with only one variable is 199.74, and the AIC of model with two variable is 201.46. It shows that the second is more complicated and is not able to add more information.</p></li>
+</ul>
+</div>
+<div id="textbook-5.18" class="section level2">
+<h2>textbook 5.18</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">library</span>(ResourceSelection)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">library</span>(cdabookfunc)</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; -- Attaching packages ---------------------------------------------------------------------------------- tidyverse 1.2.1 --</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; √ tibble  2.1.3     √ purrr   0.3.3</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; √ tidyr   1.0.0     √ stringr 1.4.0</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; √ tibble  2.1.3     √ forcats 0.4.0</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; -- Conflicts ------------------------------------------------------------------------------------- tidyverse_conflicts() --</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; x .GlobalEnv::filter() masks dplyr::filter(), stats::filter()</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; x dplyr::lag()         masks stats::lag()</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; x dplyr::select()      masks MASS::select()</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; x Hmisc::src()         masks dplyr::src()</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; x Hmisc::summarize()   masks dplyr::summarize()</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="kw">library</span>(cdabookdb)</span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="kw">data</span>(<span class="st">&#39;smoking_lungcancer_cn&#39;</span>)</span>
+<span id="cb7-16"><a href="#cb7-16"></a>slc &lt;-<span class="st"> </span><span class="kw">data.frame</span>(smoking_lungcancer_cn)</span>
+<span id="cb7-17"><a href="#cb7-17"></a>slc &lt;-<span class="st"> </span><span class="kw">spread</span>(slc,LungCancer,Freq)</span>
+<span id="cb7-18"><a href="#cb7-18"></a>m &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(Yes,No)<span class="op">~</span><span class="kw">factor</span>(Smoking)<span class="op">+</span><span class="kw">factor</span>(City),<span class="dt">data =</span> slc, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));<span class="kw">summary</span>(m)</span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt; </span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt; glm(formula = cbind(Yes, No) ~ factor(Smoking) + factor(City), </span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt;     family = binomial(link = &quot;logit&quot;), data = slc)</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt; </span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="co">#&gt;      Min        1Q    Median        3Q       Max  </span></span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="co">#&gt; -1.21781  -0.14842  -0.00012   0.16817   1.35470  </span></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="co">#&gt; </span></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="co">#&gt;                        Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="co">#&gt; (Intercept)            0.228380   0.113976   2.004   0.0451 *  </span></span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="co">#&gt; factor(Smoking)No     -0.777062   0.046775 -16.613  &lt; 2e-16 ***</span></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="co">#&gt; factor(City)Shanghai   0.055618   0.119570   0.465   0.6418    </span></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="co">#&gt; factor(City)Shenyang  -0.027739   0.120071  -0.231   0.8173    </span></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="co">#&gt; factor(City)Nanjing    0.005764   0.140911   0.041   0.9674    </span></span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="co">#&gt; factor(City)Harbin     0.018187   0.129473   0.140   0.8883    </span></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co">#&gt; factor(City)Zhengzhou  0.028782   0.144755   0.199   0.8424    </span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="co">#&gt; factor(City)Taiyuan   -0.745683   0.185519  -4.019 5.83e-05 ***</span></span>
+<span id="cb7-38"><a href="#cb7-38"></a><span class="co">#&gt; factor(City)Nanchang  -0.054906   0.170996  -0.321   0.7481    </span></span>
+<span id="cb7-39"><a href="#cb7-39"></a><span class="co">#&gt; ---</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a><span class="co">#&gt; </span></span>
+<span id="cb7-42"><a href="#cb7-42"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb7-43"><a href="#cb7-43"></a><span class="co">#&gt; </span></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="co">#&gt;     Null deviance: 310.8951  on 15  degrees of freedom</span></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="co">#&gt; Residual deviance:   5.1958  on  7  degrees of freedom</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="co">#&gt; AIC: 121.05</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a><span class="co">#&gt; </span></span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 3</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a><span class="co"># X2 test</span></span>
+<span id="cb7-50"><a href="#cb7-50"></a>df &lt;-<span class="st"> </span><span class="kw">nrow</span>(slc) <span class="op">-</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(m))</span>
+<span id="cb7-51"><a href="#cb7-51"></a>X2 &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">resid</span>(m, <span class="dt">type =</span> <span class="st">&quot;pearson&quot;</span>) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>);X2</span>
+<span id="cb7-52"><a href="#cb7-52"></a><span class="co">#&gt; [1] 5.199866</span></span>
+<span id="cb7-53"><a href="#cb7-53"></a>x2_pvalue &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(X2, df)</span>
+<span id="cb7-54"><a href="#cb7-54"></a><span class="kw">c</span>(<span class="dt">X2 =</span> X2, <span class="dt">pvalue =</span> x2_pvalue)</span>
+<span id="cb7-55"><a href="#cb7-55"></a><span class="co">#&gt;        X2    pvalue </span></span>
+<span id="cb7-56"><a href="#cb7-56"></a><span class="co">#&gt; 5.1998657 0.6355872</span></span>
+<span id="cb7-57"><a href="#cb7-57"></a></span>
+<span id="cb7-58"><a href="#cb7-58"></a><span class="co"># Check residuals to analyze further the quality of fit</span></span>
+<span id="cb7-59"><a href="#cb7-59"></a>res &lt;-<span class="st"> </span><span class="kw">resid</span>(m, <span class="dt">type =</span> <span class="st">&quot;pearson&quot;</span>)</span>
+<span id="cb7-60"><a href="#cb7-60"></a>res[<span class="kw">order</span>(res)]</span>
+<span id="cb7-61"><a href="#cb7-61"></a><span class="co">#&gt;             8            11            10            14             3 </span></span>
+<span id="cb7-62"><a href="#cb7-62"></a><span class="co">#&gt; -1.2067620236 -0.9445258372 -0.3902934956 -0.2040742691 -0.1294368396 </span></span>
+<span id="cb7-63"><a href="#cb7-63"></a><span class="co">#&gt;            15             2             6             5             1 </span></span>
+<span id="cb7-64"><a href="#cb7-64"></a><span class="co">#&gt; -0.1227104248 -0.0322738531 -0.0008511773  0.0006159253  0.0203993045 </span></span>
+<span id="cb7-65"><a href="#cb7-65"></a><span class="co">#&gt;            13             4            16             9             7 </span></span>
+<span id="cb7-66"><a href="#cb7-66"></a><span class="co">#&gt;  0.1010236316  0.1460958592  0.2352749248  0.2612895164  0.7769830112 </span></span>
+<span id="cb7-67"><a href="#cb7-67"></a><span class="co">#&gt;            12 </span></span>
+<span id="cb7-68"><a href="#cb7-68"></a><span class="co">#&gt;  1.3657735102</span></span></code></pre></div>
+<ul>
+<li><p>when smoking is no, it choose 1. And the coefficient is significant under the level of 0.0001, so obviously smoking is more likely to lead to cancer.</p></li>
+<li><p>the result of Pearson test of goodness of fit shows that it’s a good fit, the p-value is 0.0016.</p></li>
+<li><p>From the reside of the fit, I find that the sample 8,11,7,12 are significantly different from others. We can consider remove these two sample.</p></li>
+</ul>
+</div>
+<div id="textbook-5.22" class="section level2">
+<h2>textbook 5.22</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>d522 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>),<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">4</span>),<span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">40</span>,<span class="dv">10</span>),<span class="kw">seq</span>(<span class="dv">60</span>,<span class="dv">90</span>,<span class="dv">10</span>)),<span class="dt">nrow =</span> <span class="dv">8</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">plot</span>(d522[,<span class="dv">2</span>],d522[,<span class="dv">1</span>],<span class="dt">xlab =</span> <span class="st">&#39;variable&#39;</span>,<span class="dt">ylab =</span> <span class="st">&#39;y&#39;</span>,<span class="dt">col =</span> <span class="st">&#39;red&#39;</span>,<span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">type=</span><span class="st">&quot;o&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>m &lt;-<span class="st"> </span><span class="kw">glm</span>(d522[,<span class="dv">1</span>]<span class="op">~</span>d522[,<span class="dv">2</span>],<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));<span class="kw">summary</span>(m)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt; </span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; glm(formula = d522[, 1] ~ d522[, 2], family = binomial(link = &quot;logit&quot;))</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; </span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;        Min          1Q      Median          3Q         Max  </span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; -1.045e-05  -2.110e-08   0.000e+00   2.110e-08   1.045e-05  </span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; </span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt;               Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt; (Intercept)   -118.158 296046.187       0        1</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; d522[, 2]        2.363   5805.939       0        1</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt; </span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#&gt; </span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#&gt;     Null deviance: 1.1090e+01  on 7  degrees of freedom</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="co">#&gt; Residual deviance: 2.1827e-10  on 6  degrees of freedom</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt; AIC: 4</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt; </span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 25</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a></span>
+<span id="cb9-24"><a href="#cb9-24"></a>d522 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">5</span>),<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>),<span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">50</span>,<span class="dv">10</span>),<span class="kw">seq</span>(<span class="dv">50</span>,<span class="dv">90</span>,<span class="dv">10</span>)),<span class="dt">nrow =</span> <span class="dv">10</span>)</span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="kw">plot</span>(d522[,<span class="dv">2</span>],d522[,<span class="dv">1</span>],<span class="dt">xlab =</span> <span class="st">&#39;variable&#39;</span>,<span class="dt">ylab =</span> <span class="st">&#39;y&#39;</span>,<span class="dt">col =</span> <span class="st">&#39;red&#39;</span>,<span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">type=</span><span class="st">&quot;o&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>m &lt;-<span class="st"> </span><span class="kw">glm</span>(d522[,<span class="dv">1</span>]<span class="op">~</span>d522[,<span class="dv">2</span>],<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));<span class="kw">summary</span>(m)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; </span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; glm(formula = d522[, 1] ~ d522[, 2], family = binomial(link = &quot;logit&quot;))</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; </span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt;    Min      1Q  Median      3Q     Max  </span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; -1.177   0.000   0.000   0.000   1.177  </span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; </span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt;              Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt; (Intercept)   -98.158  39288.592  -0.002    0.998</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt; d522[, 2]       1.963    785.772   0.002    0.998</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt; </span></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; </span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt;     Null deviance: 13.8629  on 9  degrees of freedom</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; Residual deviance:  2.7726  on 8  degrees of freedom</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt; AIC: 6.7726</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt; </span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 21</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a></span>
+<span id="cb10-24"><a href="#cb10-24"></a>d522 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">5</span>),<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">5</span>),<span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">40</span>,<span class="dv">10</span>),<span class="fl">49.9</span>,<span class="fl">50.1</span>,<span class="kw">seq</span>(<span class="dv">60</span>,<span class="dv">90</span>,<span class="dv">10</span>)),<span class="dt">nrow =</span> <span class="dv">10</span>)</span>
+<span id="cb10-25"><a href="#cb10-25"></a><span class="kw">plot</span>(d522[,<span class="dv">2</span>],d522[,<span class="dv">1</span>],<span class="dt">xlab =</span> <span class="st">&#39;variable&#39;</span>,<span class="dt">ylab =</span> <span class="st">&#39;y&#39;</span>,<span class="dt">col =</span> <span class="st">&#39;red&#39;</span>,<span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">type=</span><span class="st">&quot;o&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAWlBMVEUAAAAAADoAAGYAOjoAOpAAZrY6AAA6ADo6kNtmAABmADpmZmZmkJBmtv+QOgCQZgCQkGaQ2/+2ZgC225C2/7a2///bkDrb////AAD/tmb/25D//7b//9v///8fjJdAAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAGSklEQVR4nO2djXLaOBgA3VzChd4lvXKti3F4/9c8S8IcbWqtGfxLdjtlMkIjwUb6bFlf7OIoWYq5P8DSURCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIUBCgIEBBgIKAgQUVq2EuQcM2F9nv9z2Krqx2R4L2p//5omur3Y+g/cVrd9HV1SYWdP3U7s0+zoohmUPQWM0dk6D1j6Cxmgvs479fioxBF3gUI95/y9tREKAgQEGAggAFAQoCRhK0K4qnt9dmRfEySHM9WY+g8vFH4+jpeKy3zwM015fVCHp7bbRUn74ek6pbm+vNagTV22ZmVQ/fj+3rbc31ZjWCHEHEOQZFVTc315f1CPIoNl2/16AgYI2CSo9i13U33kX7410IGqu5hIKAFQmKh/iGjgj04QWVxen8sCo8UfwNF+fPLjV+R1ysJlys/g5HEFG2azBjUAf1Nh3FOsaPgqZuLqEgQEGAggAFAQoCFAQoCFAQoCBAQcAdCPKi/UzNJRQEKAhQEKAgQEHAMgTV25AZNVm/17AMQeGSfNF1LX74fq9hKYKOAzi6d0FJUefO+4nDpisD794FVTH78O21Y1en3fTJpC/cs6Dw9ZOZrn3ldr/wY46gehsToPPU26DwYwrqya7RqKAcZfGsoCyHzR8KyvL22plor6CJm0usUZCJ5Fd25zXpeZpLKAhYkSATyfOYSJ7HNGDARHLAEUSYSE6YSD5Zv9egIEBBgIIABQEKAhQEKAhQEKAgQEHAHQjyov1MzSUUBCgIUBCgIEBBgIIABQEKAlYkyL35PO7N53FnFXBvHnAEEe7NE+7ND9Jvz8ej3fBktduZU1DPB+z1f+jeu0f4DcCMieTZZy/myzqq7UeYZTNek94fh37u5x0Iumxu+BH0rmwA7ioGjXEcm3Wx+nGPYjMtVsdgtqXGahhDUI/F6s0dzVJtqCZ6jKCbO1q1oB6L1Zs7WrcgXqze3NHKBY3fkYKWWG3kJgbtSEFLrDZyE4N29HEFrRUFAQoCFAQoCFAQoCBAQYCCAAUBCgIUBCgIGF1Q3GuMV7CrosjfLnYXr+Tmqx02Rbpzer5auOvzS69OibEFvb02n68M36lqfqhyH7aKl7rz1aqmSr3F1srwbjCEnSJjC0r3fS0fvqc9o133ffPrbRCUr5bexdbeXp/Su9gpM00Man6JZ1NddcrHL42gfLXDn6fBkK92FoSdMtMI2j18T9+te0e2eT/EoHy16uHbNkY0aK2dYtRpDyYRFPYZUyTojAdhMgRB+WplyCsJ4wNaa2MzVevBFIKqNkZnPmvYy+4h6NNpREBrzYhtphf+VvowgaC0T50f7fFdnmIpmjSRBVprQ88qplh5+aSArnhZnpJSXvLV0ldtvjZUawfOGoJ0m/DQ44i7w8N8SsCp6DCfvGC1Xox/HtTmgfA5245PFMvWYb5aG4NWcKJ4mjvhM5b9lhr5alW7cMlX2/Wr1gMXq4CCAAUBCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCAAUBixZ0cTeVNmXj19LRWbSgn1AQ8LEFnVKePn2NiSvNz/Xnf4qHb1HFqeSw+XsTc1qioLLNbxmbhQg6ZTY//gjZYCFVs97GnPqXlB8WSg6b+PIcS8vTz+OzEEExj7DePtefv6bh1Pycxsq5JPlo6jWl8d3bkjP7shRBwcUpV64KMyoOnjbaxJLzLGxKU81zVBqTpQgKMymk4DWx5eHfzaWgtiSl9DavQVCbFDv+51qMoCqG5DgoDpeCziXvR9AkLEZQvf2rCSkxrFSXU+xccopBjz9iDJrsSL8YQc3R/KkdPMXzzyMolsSjWOsu/k3CbopxtBxB8Q/gUtruLs6j/2NQLEnnQRel3TdMHZLlCFooCgIUBCgIUBCgIEBBgIIABQEKAhQEKAhQEKAgQEGAggAFAQoCFAQoCFAQoCBAQYCCgP8AwvoUnkCvRYIAAAAASUVORK5CYII=" /><!-- --></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>m &lt;-<span class="st"> </span><span class="kw">glm</span>(d522[,<span class="dv">1</span>]<span class="op">~</span>d522[,<span class="dv">2</span>],<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));<span class="kw">summary</span>(m)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; Warning: glm.fit: algorithm did not converge</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; </span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; glm(formula = d522[, 1] ~ d522[, 2], family = binomial(link = &quot;logit&quot;))</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; </span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt;        Min          1Q      Median          3Q         Max  </span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt; -2.002e-04  -2.100e-08   0.000e+00   2.100e-08   2.002e-04  </span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt; </span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="co">#&gt;              Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt; (Intercept)   -8862.7  1514780.3  -0.006    0.995</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; d522[, 2]       177.3    30295.5   0.006    0.995</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; </span></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; </span></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt;     Null deviance: 1.3863e+01  on 9  degrees of freedom</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt; Residual deviance: 8.0163e-08  on 8  degrees of freedom</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt; AIC: 4</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt; </span></span>
+<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 25</span></span></code></pre></div>
+<ul>
+<li><p>from the plot, we can know about the slope of the line, if we use logistic model to fit it, is infinite.</p></li>
+<li><p>the <span class="math inline">\(\beta\)</span> is 2.363, and the se of it is 5805.939 which is far greater than the estimation of <span class="math inline">\(\beta\)</span></p></li>
+<li><p>obviously, it isn’t correct, too.</p></li>
+<li><p>the se is significant greater than estimation. It isn’t rational.</p></li>
+</ul>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,294 @@
+---
+title: "cda作业4"
+author: "林振炜"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(cdabookdb)
+library(cdabookfunc)
+library(MASS)
+library(dplyr)
+```
+
+## 1 analysis the GDS503 data.
+
+```{r}
+description <- read.csv('GDS5037/description.csv')
+denote <- data.frame(ID = c('MMA','control','SA'),Y = c(1,0,1))
+data <- merge(description,denote,by = 'ID')
+head5 <- read.csv('GDS5037/head5.csv',header = T)[c(1,2,3,4,5),];
+head5 <- t(head5)
+d <- head5
+names <- rownames(d)
+rownames(d) <- NULL
+head5 <- cbind(names,d);
+colnames(head5) <- c('ID_REF','FAM174B','AP3S2','SV2B','RBPMS2','AVEN');
+data <- merge(data,head5,by = 'ID_REF');
+data <- data %>% mutate_at(c('FAM174B','AP3S2','SV2B','RBPMS2','AVEN'),as.character)
+data <- data%>% mutate_at(c('FAM174B','AP3S2','SV2B','RBPMS2','AVEN'),as.numeric)
+m <- glm(Y~FAM174B+AP3S2+SV2B+RBPMS2+AVEN,family = binomial(link = 'logit'),data = data);summary(m)
+
+```
+
+- under level 0.001, the indentifier SV2B is significant
+
+```{r}
+# choose other 5 indentifiers.
+other5 <- read.csv('GDS5037/other5.csv',header = T)[c(1,2,3,4,5),];
+class(other5[,2])
+col <- as.character(other5[,2])
+other5 <- t(other5)
+d <- other5
+names <- rownames(d)
+rownames(d) <- NULL
+other5 <- cbind(names,d);
+colnames(other5) <- c('ID_REF',col);
+data <- merge(data,other5,by = 'ID_REF');
+data <- data %>% mutate_at(col,as.character)
+data <- data%>% mutate_at(col,as.numeric)
+m <- glm(Y~	USP10+ZNF598+DECR2+NPRL3+ORC6,family = binomial(link = 'logit'),data = data);summary(m)
+```
+
+
+
+## textbook 4.2
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+data('cancer_remission')
+# a. Wald test for the LI effect
+intercept <- -3.7771
+beta <- 0.1449
+se <- 0.0593
+p_wald <- 1-pnorm(beta/se);p_wald
+
+# b. Construct a Wald confidence interval for the odds ratio corresponding to a 1-unit increase in LI
+# for instance, when pi = 0.5
+ci <- c(exp(intercept+beta-qnorm(0.975)*se),exp(intercept+beta+qnorm(0.975)*se));ci
+
+# c. LR test for the LI effect
+p_LR <- 0.0040;p_LR
+
+#d. Construct the likelihood-ratio confidence interval for the odds ratio.
+meanli <- weighted.mean(cancer_remission$LI,cancer_remission$No.Cases);meanli
+oddsratio_ci <- exp(-3.7771+ci*meanli)/(1+exp(-3.7771+ci*meanli));oddsratio_ci
+```
+
+- p value of wald test is 0.0072, so we reject null hypothesis.
+
+- Wald confidence interval for the odds ratio corresponding to a 1-unit increase in LI is[0.02355480, 0.02971884]
+
+- p value of wald test is 0.0040, so we reject null hypothesis.
+
+-  the likelihood-ratio confidence interval for the odds ratio is [0.03910957,0.81225962] based on the x = 20.07 which is near the mean li
+
+
+
+
+
+## textbook 4.5 For the 23 space shuttle flights before the Challenger mission disaster in 1986,Table 4.10 shows the temperature ( ◦ F) at the time of the flight and whether at least one primary O-ring suffered thermal distress.
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+#a. Use logistic regression to model the effect of temperature on the probability of thermal distress. Interpret the effect.
+data('temperature_distress')
+m1 <- glm(TD~Temperature,
+          data = temperature_distress,
+          family = binomial(link = 'logit'));
+summary(m1)
+
+
+#b. Estimate the probability of thermal distress at 31 ◦ F, the temperature at the time of the Challenger flight.
+x <- c(31);x
+pred <- predict(m1,data.frame(Temperature = x),type="response");pred
+
+#c. At what temperature does the estimated probability equal 0.50? At that temperature, give a linear approximation for the change in the estimated probability per degree increase in temperature.
+15.0429/0.2322
+0.25*15.0429
+
+#d. Interpret the effect of temperature on the odds of thermal distress.
+
+#e. Test the hypothesis that temperature has no effect, using (i) the Wald test,(ii) the likelihood-ratio test.
+
+#wald confidence interval
+library(car)
+Anova(m1,test = 'Wald')
+# LR confidencce interval
+
+Anova(m1) # likelihood-ratio test of temperature effect
+#confint(m1)# profile likelihood confidence interval
+
+```
+
+- $logit(\hat{\pi}) = 15.0429 - 0.02322\times temperature$according to the result of logistic model, under level 0.01, the effect of temperature is significant, and the correlaction is negaitve
+
+- so the estimation of the probability of thermal distress at 31 F is  0.9996
+
+- the temperature 64.78424 makes the estimated probability equal 0.5,a linear approximation for the change in the estimated probability per degree increase in temperature is 3.760725
+
+-  1 unit increase in temperature has  percent increase $e^{15.0429-0.02322\times Temperature}-1$ in the odds.
+
+- (i)wald test shows that under level 0.01, we can reject the null hypothesis.
+  (ii) LR test shows that under level 0.001, we can reject the null hypothesis.
+
+
+## textbook 4.9 For the horseshoe crab data, fit a logistic regression model for the probability of a satellite, using color alone as the predictor.
+
+```{r}
+#a. Treat color as nominal scale (qualitative). Report the prediction equation, and explain how to interpret the coefficient of the first indicator variable.
+data('horseshoecrabs')
+horseshoecrabs <- horseshoecrabs %>%mutate(
+  Color_factor = factor(Color, 4:1), # Convert Color to a factor and set the factor level
+  psat = as.integer(horseshoecrabs$Satellites > 0) # Psat for existing satellites
+)
+m2 <- glm(psat ~ Color_factor, 
+          data = horseshoecrabs, 
+          family = binomial(link = 'logit'));
+summary(m2)
+
+#b. For the model in (a), conduct a likelihood-ratio test of the hypothesis that color has no effect. Interpret.
+Anova(m2, test="LR")
+#c. Treating color in a quantitative manner, obtain a prediction equation.Interpret the coefficient of color.
+m3 <- glm(psat ~ Color, 
+          data = horseshoecrabs, 
+          family = binomial(link = 'logit'));
+summary(m3)
+
+#d. For the model in (c), test the hypothesis that color has no effect. Interpret.
+Anova(m3, test="LR")
+
+#e. When we treat color as quantitative instead of qualitative, state an advantage relating to power and a potential disadvantage relating to model lack of fit.
+
+```
+
+- $logit(\hat{\pi}) = -0.7621 + 1.1299\times Color\_factor3+1.7382\times Color\_factor2+1.8608\times Color\_factor1$,the coefficient of the first indicator variable shows that the difference between colorfactor4 and colorfactor3.
+
+- color_factor is significant under the level 0.001.
+
+- $logit(\hat{\pi}) = 2.3635 -0.7147\times Color$the coefficient of color is negative shows that the number of satellite will be decrease when the number of color increases.
+
+- the variable color is significant under the level 0.001.
+
+- an advantage relating to power: the color's degree may be showed in the quantity.
+  a potential disadvantage relating to model lack of fit: the model is simpler and easier to interpret, and tests of the effect of the ordinal predictor are generally more powerful when it has a single parameter rather than several parameters.
+  
+  
+## textbook 4.12
+```{r}
+# a. Based on the parameter estimates, which group is most likely to have the “yes” response? Estimate the probability in that case.
+a <- -3.5961 - 0.8678*0+2.4044*1
+a/(a+1)
+# b. Interpret the parameter estimate for victim’s race.
+
+# c. Using information shown, construct and interpret a 95%likelihood-ratio confidence interval for the conditional odds ratio between the death penalty verdict and victim’s race.
+def_estimation <- -0.8678
+intercept <- -3.5961
+vic_estimation <- 2.4044
+vic_estimation_se <- 0.6006
+# if defendant is white
+ci <- c(exp(intercept+def_estimation+vic_estimation-vic_estimation_se*1.96),exp(intercept+def_estimation+vic_estimation+vic_estimation_se*1.96));ci
+
+# if defendant is black
+ci <- c(exp(intercept+vic_estimation-vic_estimation_se*1.96),exp(intercept+vic_estimation+vic_estimation_se*1.96));ci
+# d. Test the effect of victim’s race, controlling for defendant’s race, using a Wald test or likelihood-ratio test. Interpret.
+
+```
+
+- $logit(\hat{\pi}) = -3.5961 - 0.8678\times def+2.4044\times vic$,obviously, when def = 0 meaning black and vic = 1 meaning white, is most likely to have the
+“yes” response, the probility in that case is 6.216484
+
+- the parameter estimate for victim's race is positive which shows that the white race among victim is more likely to lead to death penalty.
+
+- 95%likelihood-ratio confidence interval for the conditional odds ratio between the death penalty verdict and victim’s race is below.
+   when defendant is white, the ci is [0.03929429,0.41382008]
+   when defendant is black, the ci is [0.09358586,0.98558096] 
+
+- from the table, we can know that the pvalue using LR test is <.0001, so we reject the null hypothesis.
+
+
+
+## textbook 4.15 Table 4.12 refers to ratings of agricultural extension agents in North Carolina.In each of five districts, agents were classified by their race and by whether they qualified for a merit pay increase.
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(cdabookdb)
+library(tidyverse)
+library(cdabookfunc)
+data('merit_pay_race');
+
+cmh.test(cond = 'District',merit_pay_race)
+
+#Show how you could alternatively test the hypothesis in (a) using a test about a parameter in a logistic regression model.
+data <- data.frame(merit_pay_race)
+data <- spread(data,MeritPay,Freq)
+data$pro <- data$Yes/(data$Yes+data$No)
+m <- glm(pro~factor(Race)+factor(District),family = binomial(link = 'logit'),data = data);summary(m)
+```
+
+- p-value = 0.005182 shows that under the level 0.01,the merit pay decision is not independent of race, conditional on the district.
+
+- to construt a logistic regression model, to test whether the parameter of race is significant.
+
+- model-based analysis shows something about the categories of district effect to whether they qualified for a merit pay increase.
+
+## textbook 4.16
+
+```{r}
+data('MBtest1')
+mbtest <- data.frame(MBtest1)
+mbtest
+mbtest <- spread(mbtest,Drink,Freq)
+mbtest$pro <- mbtest$Often/(mbtest$Rarely+mbtest$Often)
+m <- glm(pro~factor(TF)+factor(JP)+factor(EI)+factor(SN),data = mbtest,family = binomial(link = 'probit'));summary(m)
+
+#ESTJ
+e <- exp(-1.1619 - 0.2432* 0 +0.1313* 0-0.3146* 0 + 0.1279* 0)
+pi_hat <- e/(e+1);pi_hat
+
+# Based on the model parameter estimates, explain why the personality type with the highest ˆ π is ENTP
+```
+
+- $logit(\hat{\pi}) = -1.1619 - 0.2432\times TF +0.1313\times JP-0.3146\times EI + 0.1279\times SN$,in this equation, TF equals 1 when TF is F, JP equals 1 when JP is P, EI equals 1 when EI is I and SN equal 1 when SN is N.
+
+- $\hat{\pi}$ for someone of personality type ESTJ is 0.2383222
+
+- obviously, from the equation when teh personality type is ENTP, means $logit(\hat{\pi})$ is highest, and the logit function is Monotonically increasing, so the $\hat{\pi}$ is highest.
+
+
+
+## textbook4.28
+```{r}
+ # logit[ ˆ P(Y = 1)] = −1.90 + 0.02x + 0.82m + 1.33f
+lowest <- -1.90 + 0.02*0.5
+highest <- -1.90 + 0.02*130 + 0.82 + 1.33
+lowestpi <- exp(lowest)/(1+exp(lowest));lowestpi
+highestpi <- exp(highest)/(1+exp(highest));highestpi
+```
+
+- the range of $\hat{\pi}$ values between their lowest levels (x = 0.5, m = 0, f = 0) and their highest levels (x = 130, m = 1, f = 1) is [0.1312445,0.9453187] 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

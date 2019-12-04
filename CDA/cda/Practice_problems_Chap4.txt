@@ -1,0 +1,45 @@
+##########################################################
+# Chapter 4
+##########################################################
+
+
+
+###############################################################
+# Example 1  Horseshoe crab grouped data 
+#            logistic regression with Width
+###############################################################
+
+# Question 1: Fit logistic regression with ungrouped data with Width only.
+
+# Question 2: Fit logistic regression with grouped data with width only.
+
+# Question 3: Repeart Question 1 and 2 on Weight only.
+
+# Question 4: Fit logistic regression with ungrouped data. 
+              # (1) width and color, color is dummy/indicator.
+              # (2) width and color, color is score.
+              # (3) width and color, color is binary(dark or not).
+              
+# Question 5: with interaction
+              # (1) width and color, color is dummy/indicator.
+              # (2) width and color, color is score.
+              # (3) width and color, color is dark or not.
+
+
+
+
+############################################################################
+#  Example 2: AZT  logsitc with categorical predictors
+############################################################################
+
+# Question 1: fit logistic regression with Y and Treat and Race, no interactoin.
+
+# Question 2: Use three-way table, analysis the conditional independence between Y and Treatment for two levels of Race, separately.
+
+# Question 3: Conduct CMH test for AZT data.
+
+
+
+
+
+

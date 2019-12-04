@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Summarize an elrm Object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for summary.elrm {elrm}"><tr><td>summary.elrm {elrm}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Summarize an elrm Object</h2>
+
+<h3>Description</h3>
+
+<p>Summary method for class <code>elrm</code> that formats and prints out the results of an <code>elrm</code> object.</p>
+
+
+<h3>Usage</h3>
+
+<pre>## S3 method for class 'elrm'
+summary(object, ...)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of class <code>elrm</code>, resulting from a call to <code>elrm()</code> or a previous call to <code>update()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to the summary function (currently unused).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The following results are formatted and printed to the screen: the matched call, coefficient estimates and confidence intervals for each model term of interest, estimated p-value for jointly testing that the parameters of interest are simultaneously equal to zero, full conditional p-values from separately testing each parameter equal to zero, length of the Markov chain that inference was based on, and the Monte Carlo standard error of each reported p-value.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Zamar, Jinko Graham, Brad McNeney</p>
+
+
+<h3>References</h3>
+
+<p>Zamar David. Monte Carlo Markov Chain Exact Inference for Binomial
+Regression Models. Master's thesis, Statistics and Actuarial
+Sciences, Simon Fraser University, 2006.
+</p>
+<p>Zamar D, McNeney B and Graham J. elrm: Software Implementing Exact-like Inference for Logistic Regression Models. Journal of Statistical Software 2007, 21(3).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="update.elrm.html">update.elrm</a></code>, <code><a href="plot.elrm.html">plot.elrm</a></code>, <code><a href="elrm.html">elrm</a></code>.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Drug dataset example with both sex and treatment as the variables of interest
+data(drugDat);
+drug.elrm = elrm(formula=recovered/n~sex+treatment, interest=~sex+treatment, r=4, 
+	iter=50000, burnIn=1000, dataset=drugDat); 
+
+# Summarize the results:
+summary(drug.elrm);
+
+
+# Urinary tract dataset example with dia as the variable of interst
+data(utiDat);
+uti.elrm = elrm(uti/n~age+current+dia+oc+pastyr+vi+vic+vicl+vis, interest=~dia, r=4, 
+	iter=30000, burnIn=100, dataset=utiDat);
+
+# Summarize the results:
+summary(uti.elrm);
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elrm</em> version 1.2.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

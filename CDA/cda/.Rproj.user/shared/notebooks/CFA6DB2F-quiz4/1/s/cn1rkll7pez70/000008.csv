@@ -1,0 +1,4 @@
+"0","library(tidyr)"
+"0","data(""AZT"")"
+"0","AZT_df <- spread(as.data.frame(AZT), Symptoms, Freq)"
+"0","AZT_df"

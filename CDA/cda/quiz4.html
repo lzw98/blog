@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="林振炜" />
+
+<meta name="date" content="2019-11-12" />
+
+<title>quiz4</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">quiz4</h1>
+<h4 class="author">林振炜</h4>
+<h4 class="date">2019-11-12</h4>
+
+
+
+<div id="chapter-4" class="section level1">
+<h1>Chapter 4</h1>
+<div id="example-1-horseshoe-crab-grouped-data-logistic-regression-with-width" class="section level2">
+<h2>Example 1 Horseshoe crab grouped data logistic regression with Width</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(cdabookdb)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(cdabookfunc)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">#&gt; </span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#&gt; Attaching package: &#39;MASS&#39;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">#&gt; The following object is masked from &#39;package:cdabookfunc&#39;:</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">#&gt; </span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt;     stdres</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt; </span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#&gt; Attaching package: &#39;dplyr&#39;</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#&gt; The following object is masked from &#39;package:MASS&#39;:</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">#&gt; </span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co">#&gt;     select</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co">#&gt; The following objects are masked from &#39;package:stats&#39;:</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="co">#&gt; </span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="co">#&gt;     filter, lag</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="co">#&gt; The following objects are masked from &#39;package:base&#39;:</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="co">#&gt; </span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="kw">data</span>(<span class="st">&quot;horseshoecrabs&quot;</span>)</span></code></pre></div>
+<div id="question-1-fit-logistic-regression-with-ungrouped-data-with-width-only." class="section level3">
+<h3>Question 1: Fit logistic regression with ungrouped data with Width only.</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>horseshoecrabs<span class="op">$</span>psat &lt;-<span class="st"> </span><span class="kw">as.integer</span>(horseshoecrabs<span class="op">$</span>Satellites <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>logit_model &lt;-<span class="st"> </span><span class="kw">glm</span>(psat<span class="op">~</span>Width,<span class="dt">data =</span> horseshoecrabs,<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));<span class="kw">summary</span>(logit_model)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt; </span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; glm(formula = psat ~ Width, family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt;     data = horseshoecrabs)</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt; </span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; -2.0281  -1.0458   0.5480   0.9066   1.6942  </span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; </span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; (Intercept) -12.3508     2.6287  -4.698 2.62e-06 ***</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; Width         0.4972     0.1017   4.887 1.02e-06 ***</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#&gt; ---</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#&gt; </span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#&gt; </span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="co">#&gt; Residual deviance: 194.45  on 171  degrees of freedom</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="co">#&gt; AIC: 198.45</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="co">#&gt; </span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
+</div>
+<div id="question-2-fit-logistic-regression-with-grouped-data-with-width-only." class="section level3">
+<h3>Question 2: Fit logistic regression with grouped data with width only.</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>horseshoecrabs<span class="op">$</span>width_group &lt;-<span class="st"> </span><span class="kw">cut</span>(horseshoecrabs<span class="op">$</span>Width,</span>
+<span id="cb3-2"><a href="#cb3-2"></a>                                  <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">23.25</span> <span class="op">+</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">6</span>, <span class="ot">Inf</span>),</span>
+<span id="cb3-3"><a href="#cb3-3"></a>                                  <span class="dt">dig.lab =</span> <span class="dv">4</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a>mean_width_vs_prop &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">levels</span>(horseshoecrabs<span class="op">$</span>width_group),<span class="cf">function</span>(x){</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="co"># Declare that is grouped by width_group</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  sub &lt;-<span class="st"> </span><span class="kw">subset</span>(horseshoecrabs,width_group<span class="op">==</span>x)</span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="kw">c</span>(<span class="kw">mean</span>(sub<span class="op">$</span>psat),<span class="kw">mean</span>(sub<span class="op">$</span>Width))</span>
+<span id="cb3-9"><a href="#cb3-9"></a>})</span>
+<span id="cb3-10"><a href="#cb3-10"></a>prop &lt;-<span class="st"> </span>mean_width_vs_prop[<span class="dv">1</span>,]</span>
+<span id="cb3-11"><a href="#cb3-11"></a>mean_width &lt;-<span class="st"> </span>mean_width_vs_prop[<span class="dv">2</span>,]</span>
+<span id="cb3-12"><a href="#cb3-12"></a>logit_model &lt;-<span class="st"> </span><span class="kw">glm</span>(prop<span class="op">~</span>mean_width,<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));<span class="kw">summary</span>(logit_model)</span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; </span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; glm(formula = prop ~ mean_width, family = binomial(link = &quot;logit&quot;))</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; </span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; -0.2208  -0.1230  -0.0201   0.1971   0.3542  </span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; </span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt; (Intercept) -11.9915    10.5383  -1.138    0.255</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt; mean_width    0.4844     0.4098   1.182    0.237</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt; </span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt; </span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt;     Null deviance: 2.16137  on 7  degrees of freedom</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="co">#&gt; Residual deviance: 0.31427  on 6  degrees of freedom</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="co">#&gt; AIC: 9.3894</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="co">#&gt; </span></span>
+<span id="cb3-32"><a href="#cb3-32"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
+</div>
+<div id="question-3-repeat-question-1-and-2-on-weight-only." class="section level3">
+<h3>Question 3: Repeat Question 1 and 2 on Weight only.</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">summary</span>(horseshoecrabs<span class="op">$</span>Weight)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt;   1.200   2.000   2.350   2.437   2.850   5.200</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>logit_model &lt;-<span class="st"> </span><span class="kw">glm</span>(psat<span class="op">~</span>Weight,<span class="dt">data =</span> horseshoecrabs,<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));<span class="kw">summary</span>(logit_model)</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; </span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; glm(formula = psat ~ Weight, family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt;     data = horseshoecrabs)</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; </span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; -2.1108  -1.0749   0.5426   0.9122   1.6285  </span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; </span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; (Intercept)  -3.6947     0.8802  -4.198 2.70e-05 ***</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; Weight        1.8151     0.3767   4.819 1.45e-06 ***</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt; ---</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt; </span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; </span></span>
+<span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt; Residual deviance: 195.74  on 171  degrees of freedom</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt; AIC: 199.74</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt; </span></span>
+<span id="cb4-27"><a href="#cb4-27"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span>
+<span id="cb4-28"><a href="#cb4-28"></a></span>
+<span id="cb4-29"><a href="#cb4-29"></a></span>
+<span id="cb4-30"><a href="#cb4-30"></a>horseshoecrabs<span class="op">$</span>Weight_group &lt;-<span class="st"> </span><span class="kw">cut</span>(horseshoecrabs<span class="op">$</span>Weight,</span>
+<span id="cb4-31"><a href="#cb4-31"></a>                                  <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">1.2</span> <span class="op">+</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">4</span>, <span class="ot">Inf</span>),</span>
+<span id="cb4-32"><a href="#cb4-32"></a>                                  <span class="dt">dig.lab =</span> <span class="dv">4</span>)<span class="co">#dig.lab是一个用于确认分割线精度的参数</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a></span>
+<span id="cb4-34"><a href="#cb4-34"></a></span>
+<span id="cb4-35"><a href="#cb4-35"></a>mean_Weight_vs_prop &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="kw">levels</span>(horseshoecrabs<span class="op">$</span>Weight_group),<span class="cf">function</span>(x){</span>
+<span id="cb4-36"><a href="#cb4-36"></a>  <span class="co"># Declare that is grouped by Weight_group</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a>  sub &lt;-<span class="st"> </span><span class="kw">subset</span>(horseshoecrabs,Weight_group<span class="op">==</span>x)</span>
+<span id="cb4-38"><a href="#cb4-38"></a>  <span class="kw">c</span>(<span class="kw">mean</span>(sub<span class="op">$</span>psat),<span class="kw">mean</span>(sub<span class="op">$</span>Weight))</span>
+<span id="cb4-39"><a href="#cb4-39"></a>})</span>
+<span id="cb4-40"><a href="#cb4-40"></a>prop &lt;-<span class="st"> </span>mean_Weight_vs_prop[<span class="dv">1</span>,]</span>
+<span id="cb4-41"><a href="#cb4-41"></a>mean_Weight &lt;-<span class="st"> </span>mean_Weight_vs_prop[<span class="dv">2</span>,]</span>
+<span id="cb4-42"><a href="#cb4-42"></a>logit_model &lt;-<span class="st"> </span><span class="kw">glm</span>(prop<span class="op">~</span>mean_Weight,<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));<span class="kw">summary</span>(logit_model)</span>
+<span id="cb4-43"><a href="#cb4-43"></a><span class="co">#&gt; </span></span>
+<span id="cb4-44"><a href="#cb4-44"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb4-45"><a href="#cb4-45"></a><span class="co">#&gt; glm(formula = prop ~ mean_Weight, family = binomial(link = &quot;logit&quot;))</span></span>
+<span id="cb4-46"><a href="#cb4-46"></a><span class="co">#&gt; </span></span>
+<span id="cb4-47"><a href="#cb4-47"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb4-48"><a href="#cb4-48"></a><span class="co">#&gt;   (0,1.2]  (1.2,2.2]  (2.2,3.2]  (3.2,4.2]  (4.2,5.2]  </span></span>
+<span id="cb4-49"><a href="#cb4-49"></a><span class="co">#&gt;  -0.34199    0.27068   -0.24096    0.21663    0.01529  </span></span>
+<span id="cb4-50"><a href="#cb4-50"></a><span class="co">#&gt; </span></span>
+<span id="cb4-51"><a href="#cb4-51"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb4-52"><a href="#cb4-52"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb4-53"><a href="#cb4-53"></a><span class="co">#&gt; (Intercept)   -6.369      5.960  -1.069    0.285</span></span>
+<span id="cb4-54"><a href="#cb4-54"></a><span class="co">#&gt; mean_Weight    2.966      2.687   1.104    0.270</span></span>
+<span id="cb4-55"><a href="#cb4-55"></a><span class="co">#&gt; </span></span>
+<span id="cb4-56"><a href="#cb4-56"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb4-57"><a href="#cb4-57"></a><span class="co">#&gt; </span></span>
+<span id="cb4-58"><a href="#cb4-58"></a><span class="co">#&gt;     Null deviance: 4.00825  on 4  degrees of freedom</span></span>
+<span id="cb4-59"><a href="#cb4-59"></a><span class="co">#&gt; Residual deviance: 0.29544  on 3  degrees of freedom</span></span>
+<span id="cb4-60"><a href="#cb4-60"></a><span class="co">#&gt;   (1 observation deleted due to missingness)</span></span>
+<span id="cb4-61"><a href="#cb4-61"></a><span class="co">#&gt; AIC: 5.3261</span></span>
+<span id="cb4-62"><a href="#cb4-62"></a><span class="co">#&gt; </span></span>
+<span id="cb4-63"><a href="#cb4-63"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 7</span></span></code></pre></div>
+</div>
+<div id="question-4-fit-logistic-regression-with-ungrouped-data." class="section level3">
+<h3>Question 4: Fit logistic regression with ungrouped data.</h3>
+<pre><code>          # (1) width and color, color is dummy/indicator.
+          # (2) width and color, color is score.
+          # (3) width and color, color is binary(dark or not).</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>horseshoecrabs &lt;-<span class="st"> </span>horseshoecrabs <span class="op">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="dt">Color_factor =</span> <span class="kw">factor</span>(Color, <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>) <span class="co"># Convert Color to a factor and set the factor level</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    )</span>
+<span id="cb6-5"><a href="#cb6-5"></a>m1 &lt;-<span class="st"> </span><span class="kw">glm</span>(psat <span class="op">~</span><span class="st"> </span>Width <span class="op">+</span><span class="st"> </span>Color_factor, <span class="dt">data =</span> horseshoecrabs, <span class="dt">family =</span> <span class="kw">binomial</span>());<span class="kw">summary</span>(m1)</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; </span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; glm(formula = psat ~ Width + Color_factor, family = binomial(), </span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;     data = horseshoecrabs)</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; </span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; -2.1124  -0.9848   0.5243   0.8513   2.1413  </span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; </span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt;               Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; (Intercept)   -12.7151     2.7617  -4.604 4.14e-06 ***</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; Width           0.4680     0.1055   4.434 9.26e-06 ***</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt; Color_factor3   1.1061     0.5921   1.868   0.0617 .  </span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt; Color_factor2   1.4023     0.5484   2.557   0.0106 *  </span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt; Color_factor1   1.3299     0.8525   1.560   0.1188    </span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt; ---</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="co">#&gt; </span></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co">#&gt; </span></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="co">#&gt; Residual deviance: 187.46  on 168  degrees of freedom</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="co">#&gt; AIC: 197.46</span></span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="co">#&gt; </span></span>
+<span id="cb6-31"><a href="#cb6-31"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a></span>
+<span id="cb6-33"><a href="#cb6-33"></a>m2 &lt;-<span class="st"> </span><span class="kw">glm</span>(psat<span class="op">~</span>Width<span class="op">+</span>Color,<span class="dt">data =</span> horseshoecrabs,<span class="dt">family =</span> <span class="kw">binomial</span>());<span class="kw">summary</span>(m2)</span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="co">#&gt; </span></span>
+<span id="cb6-35"><a href="#cb6-35"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb6-36"><a href="#cb6-36"></a><span class="co">#&gt; glm(formula = psat ~ Width + Color, family = binomial(), data = horseshoecrabs)</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a><span class="co">#&gt; </span></span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="co">#&gt; -2.1692  -0.9889   0.5429   0.8700   1.9742  </span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="co">#&gt; </span></span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="co">#&gt; (Intercept) -10.0708     2.8068  -3.588 0.000333 ***</span></span>
+<span id="cb6-45"><a href="#cb6-45"></a><span class="co">#&gt; Width         0.4583     0.1040   4.406 1.05e-05 ***</span></span>
+<span id="cb6-46"><a href="#cb6-46"></a><span class="co">#&gt; Color        -0.5090     0.2237  -2.276 0.022860 *  </span></span>
+<span id="cb6-47"><a href="#cb6-47"></a><span class="co">#&gt; ---</span></span>
+<span id="cb6-48"><a href="#cb6-48"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-49"><a href="#cb6-49"></a><span class="co">#&gt; </span></span>
+<span id="cb6-50"><a href="#cb6-50"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb6-51"><a href="#cb6-51"></a><span class="co">#&gt; </span></span>
+<span id="cb6-52"><a href="#cb6-52"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb6-53"><a href="#cb6-53"></a><span class="co">#&gt; Residual deviance: 189.12  on 170  degrees of freedom</span></span>
+<span id="cb6-54"><a href="#cb6-54"></a><span class="co">#&gt; AIC: 195.12</span></span>
+<span id="cb6-55"><a href="#cb6-55"></a><span class="co">#&gt; </span></span>
+<span id="cb6-56"><a href="#cb6-56"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span>
+<span id="cb6-57"><a href="#cb6-57"></a>horseshoecrabs<span class="op">$</span>is_dark &lt;-<span class="st"> </span><span class="kw">as.character</span>(horseshoecrabs<span class="op">$</span>Color <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>)</span>
+<span id="cb6-58"><a href="#cb6-58"></a>m3 &lt;-<span class="st"> </span><span class="kw">glm</span>(psat <span class="op">~</span><span class="st"> </span>is_dark <span class="op">+</span><span class="st"> </span>Width,</span>
+<span id="cb6-59"><a href="#cb6-59"></a>          <span class="dt">family =</span> <span class="kw">binomial</span>(),</span>
+<span id="cb6-60"><a href="#cb6-60"></a>          <span class="dt">data =</span> horseshoecrabs)</span>
+<span id="cb6-61"><a href="#cb6-61"></a><span class="kw">summary</span>(m3)</span>
+<span id="cb6-62"><a href="#cb6-62"></a><span class="co">#&gt; </span></span>
+<span id="cb6-63"><a href="#cb6-63"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb6-64"><a href="#cb6-64"></a><span class="co">#&gt; glm(formula = psat ~ is_dark + Width, family = binomial(), data = horseshoecrabs)</span></span>
+<span id="cb6-65"><a href="#cb6-65"></a><span class="co">#&gt; </span></span>
+<span id="cb6-66"><a href="#cb6-66"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb6-67"><a href="#cb6-67"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb6-68"><a href="#cb6-68"></a><span class="co">#&gt; -2.0821  -0.9932   0.5274   0.8606   2.1553  </span></span>
+<span id="cb6-69"><a href="#cb6-69"></a><span class="co">#&gt; </span></span>
+<span id="cb6-70"><a href="#cb6-70"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb6-71"><a href="#cb6-71"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb6-72"><a href="#cb6-72"></a><span class="co">#&gt; (Intercept) -12.9795     2.7272  -4.759 1.94e-06 ***</span></span>
+<span id="cb6-73"><a href="#cb6-73"></a><span class="co">#&gt; is_darkTRUE   1.3005     0.5259   2.473   0.0134 *  </span></span>
+<span id="cb6-74"><a href="#cb6-74"></a><span class="co">#&gt; Width         0.4782     0.1041   4.592 4.39e-06 ***</span></span>
+<span id="cb6-75"><a href="#cb6-75"></a><span class="co">#&gt; ---</span></span>
+<span id="cb6-76"><a href="#cb6-76"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-77"><a href="#cb6-77"></a><span class="co">#&gt; </span></span>
+<span id="cb6-78"><a href="#cb6-78"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb6-79"><a href="#cb6-79"></a><span class="co">#&gt; </span></span>
+<span id="cb6-80"><a href="#cb6-80"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb6-81"><a href="#cb6-81"></a><span class="co">#&gt; Residual deviance: 187.96  on 170  degrees of freedom</span></span>
+<span id="cb6-82"><a href="#cb6-82"></a><span class="co">#&gt; AIC: 193.96</span></span>
+<span id="cb6-83"><a href="#cb6-83"></a><span class="co">#&gt; </span></span>
+<span id="cb6-84"><a href="#cb6-84"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
+</div>
+<div id="question-5-with-interaction" class="section level3">
+<h3>Question 5: with interaction</h3>
+<pre><code>          # (1) width and color, color is dummy/indicator.
+          # (2) width and color, color is score.
+          # (3) width and color, color is dark or not.</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>m1 &lt;-<span class="st"> </span><span class="kw">glm</span>(psat <span class="op">~</span><span class="st"> </span>Width <span class="op">+</span><span class="st"> </span>Color_factor<span class="op">+</span>Width<span class="op">*</span>Color_factor, <span class="dt">data =</span> horseshoecrabs, <span class="dt">family =</span> <span class="kw">binomial</span>());<span class="kw">summary</span>(m1)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; </span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; glm(formula = psat ~ Width + Color_factor + Width * Color_factor, </span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;     family = binomial(), data = horseshoecrabs)</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; </span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; -2.0546  -0.9130   0.5285   0.8140   1.9657  </span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; </span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt;                      Estimate Std. Error z value Pr(&gt;|z|)  </span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; (Intercept)          -5.85383    6.69393  -0.874   0.3818  </span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt; Width                 0.20043    0.26166   0.766   0.4437  </span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; Color_factor3       -15.66423    9.56065  -1.638   0.1013  </span></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; Color_factor2        -4.18613    7.58093  -0.552   0.5808  </span></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt; Color_factor1         4.10122   13.27532   0.309   0.7574  </span></span>
+<span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt; Width:Color_factor3   0.65794    0.37533   1.753   0.0796 .</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="co">#&gt; Width:Color_factor2   0.21844    0.29524   0.740   0.4594  </span></span>
+<span id="cb8-20"><a href="#cb8-20"></a><span class="co">#&gt; Width:Color_factor1  -0.09443    0.50042  -0.189   0.8503  </span></span>
+<span id="cb8-21"><a href="#cb8-21"></a><span class="co">#&gt; ---</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a><span class="co">#&gt; </span></span>
+<span id="cb8-24"><a href="#cb8-24"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb8-25"><a href="#cb8-25"></a><span class="co">#&gt; </span></span>
+<span id="cb8-26"><a href="#cb8-26"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="co">#&gt; Residual deviance: 183.08  on 165  degrees of freedom</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a><span class="co">#&gt; AIC: 199.08</span></span>
+<span id="cb8-29"><a href="#cb8-29"></a><span class="co">#&gt; </span></span>
+<span id="cb8-30"><a href="#cb8-30"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 5</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a></span>
+<span id="cb8-32"><a href="#cb8-32"></a>m2 &lt;-<span class="st"> </span><span class="kw">glm</span>(psat<span class="op">~</span>Width<span class="op">+</span>Color<span class="op">+</span>Width<span class="op">*</span>Color,<span class="dt">data =</span> horseshoecrabs,<span class="dt">family =</span> <span class="kw">binomial</span>());<span class="kw">summary</span>(m2)</span>
+<span id="cb8-33"><a href="#cb8-33"></a><span class="co">#&gt; </span></span>
+<span id="cb8-34"><a href="#cb8-34"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb8-35"><a href="#cb8-35"></a><span class="co">#&gt; glm(formula = psat ~ Width + Color + Width * Color, family = binomial(), </span></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="co">#&gt;     data = horseshoecrabs)</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a><span class="co">#&gt; </span></span>
+<span id="cb8-38"><a href="#cb8-38"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb8-39"><a href="#cb8-39"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb8-40"><a href="#cb8-40"></a><span class="co">#&gt; -2.0827  -0.9970   0.5502   0.8517   2.1119  </span></span>
+<span id="cb8-41"><a href="#cb8-41"></a><span class="co">#&gt; </span></span>
+<span id="cb8-42"><a href="#cb8-42"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb8-43"><a href="#cb8-43"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb8-44"><a href="#cb8-44"></a><span class="co">#&gt; (Intercept) -5.82442    9.41857  -0.618    0.536</span></span>
+<span id="cb8-45"><a href="#cb8-45"></a><span class="co">#&gt; Width        0.29413    0.36243   0.812    0.417</span></span>
+<span id="cb8-46"><a href="#cb8-46"></a><span class="co">#&gt; Color       -2.21526    3.66028  -0.605    0.545</span></span>
+<span id="cb8-47"><a href="#cb8-47"></a><span class="co">#&gt; Width:Color  0.06612    0.14147   0.467    0.640</span></span>
+<span id="cb8-48"><a href="#cb8-48"></a><span class="co">#&gt; </span></span>
+<span id="cb8-49"><a href="#cb8-49"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb8-50"><a href="#cb8-50"></a><span class="co">#&gt; </span></span>
+<span id="cb8-51"><a href="#cb8-51"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb8-52"><a href="#cb8-52"></a><span class="co">#&gt; Residual deviance: 188.90  on 169  degrees of freedom</span></span>
+<span id="cb8-53"><a href="#cb8-53"></a><span class="co">#&gt; AIC: 196.9</span></span>
+<span id="cb8-54"><a href="#cb8-54"></a><span class="co">#&gt; </span></span>
+<span id="cb8-55"><a href="#cb8-55"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span>
+<span id="cb8-56"><a href="#cb8-56"></a>horseshoecrabs<span class="op">$</span>is_dark &lt;-<span class="st"> </span><span class="kw">as.character</span>(horseshoecrabs<span class="op">$</span>Color <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>)</span>
+<span id="cb8-57"><a href="#cb8-57"></a>m3 &lt;-<span class="st"> </span><span class="kw">glm</span>(psat <span class="op">~</span><span class="st"> </span>is_dark <span class="op">+</span><span class="st"> </span>Width<span class="op">+</span>is_dark <span class="op">*</span><span class="st"> </span>Width,</span>
+<span id="cb8-58"><a href="#cb8-58"></a>          <span class="dt">family =</span> <span class="kw">binomial</span>(),</span>
+<span id="cb8-59"><a href="#cb8-59"></a>          <span class="dt">data =</span> horseshoecrabs)</span>
+<span id="cb8-60"><a href="#cb8-60"></a><span class="kw">summary</span>(m3)</span>
+<span id="cb8-61"><a href="#cb8-61"></a><span class="co">#&gt; </span></span>
+<span id="cb8-62"><a href="#cb8-62"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb8-63"><a href="#cb8-63"></a><span class="co">#&gt; glm(formula = psat ~ is_dark + Width + is_dark * Width, family = binomial(), </span></span>
+<span id="cb8-64"><a href="#cb8-64"></a><span class="co">#&gt;     data = horseshoecrabs)</span></span>
+<span id="cb8-65"><a href="#cb8-65"></a><span class="co">#&gt; </span></span>
+<span id="cb8-66"><a href="#cb8-66"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb8-67"><a href="#cb8-67"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb8-68"><a href="#cb8-68"></a><span class="co">#&gt; -2.1366  -0.9344   0.4996   0.8554   1.7753  </span></span>
+<span id="cb8-69"><a href="#cb8-69"></a><span class="co">#&gt; </span></span>
+<span id="cb8-70"><a href="#cb8-70"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb8-71"><a href="#cb8-71"></a><span class="co">#&gt;                   Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb8-72"><a href="#cb8-72"></a><span class="co">#&gt; (Intercept)        -5.8538     6.6939  -0.874    0.382</span></span>
+<span id="cb8-73"><a href="#cb8-73"></a><span class="co">#&gt; is_darkTRUE        -6.9578     7.3182  -0.951    0.342</span></span>
+<span id="cb8-74"><a href="#cb8-74"></a><span class="co">#&gt; Width               0.2004     0.2617   0.766    0.444</span></span>
+<span id="cb8-75"><a href="#cb8-75"></a><span class="co">#&gt; is_darkTRUE:Width   0.3217     0.2857   1.126    0.260</span></span>
+<span id="cb8-76"><a href="#cb8-76"></a><span class="co">#&gt; </span></span>
+<span id="cb8-77"><a href="#cb8-77"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb8-78"><a href="#cb8-78"></a><span class="co">#&gt; </span></span>
+<span id="cb8-79"><a href="#cb8-79"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb8-80"><a href="#cb8-80"></a><span class="co">#&gt; Residual deviance: 186.79  on 169  degrees of freedom</span></span>
+<span id="cb8-81"><a href="#cb8-81"></a><span class="co">#&gt; AIC: 194.79</span></span>
+<span id="cb8-82"><a href="#cb8-82"></a><span class="co">#&gt; </span></span>
+<span id="cb8-83"><a href="#cb8-83"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
+</div>
+</div>
+<div id="example-2-azt-logsitc-with-categorical-predictors" class="section level2">
+<h2>Example 2: AZT logsitc with categorical predictors</h2>
+<div id="question-1-fit-logistic-regression-with-y-and-treat-and-race-no-interactoin." class="section level3">
+<h3>Question 1: fit logistic regression with Y and Treat and Race, no interactoin.</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">library</span>(tidyr)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">data</span>(<span class="st">&quot;AZT&quot;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>AZT_df &lt;-<span class="st"> </span><span class="kw">spread</span>(<span class="kw">as.data.frame</span>(AZT), Symptoms, Freq)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>AZT_df</span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt;    Race AZTUse Yes No</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; 1 White    Yes  14 93</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; 2 White     No  32 81</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; 3 Black    Yes  11 52</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; 4 Black     No  12 43</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>m &lt;-<span class="st"> </span><span class="kw">glm</span>(</span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="kw">cbind</span>(Yes, No) <span class="op">~</span><span class="st"> </span>(Race <span class="op">==</span><span class="st"> &quot;White&quot;</span>) <span class="op">+</span><span class="st"> </span>(AZTUse <span class="op">==</span><span class="st"> &quot;Yes&quot;</span>),</span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="dt">data =</span> AZT_df,</span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="dt">family =</span> <span class="kw">binomial</span>(<span class="st">&quot;logit&quot;</span>)</span>
+<span id="cb9-14"><a href="#cb9-14"></a>)</span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="kw">summary</span>(m)</span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt; </span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#&gt; glm(formula = cbind(Yes, No) ~ (Race == &quot;White&quot;) + (AZTUse == </span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="co">#&gt;     &quot;Yes&quot;), family = binomial(&quot;logit&quot;), data = AZT_df)</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt; </span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt;       1        2        3        4  </span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="co">#&gt; -0.5547   0.4253   0.7035  -0.6326  </span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="co">#&gt; </span></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="co">#&gt;                     Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="co">#&gt; (Intercept)         -1.07357    0.26294  -4.083 4.45e-05 ***</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="co">#&gt; Race == &quot;White&quot;TRUE  0.05548    0.28861   0.192  0.84755    </span></span>
+<span id="cb9-29"><a href="#cb9-29"></a><span class="co">#&gt; AZTUse == &quot;Yes&quot;TRUE -0.71946    0.27898  -2.579  0.00991 ** </span></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="co">#&gt; ---</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="co">#&gt; </span></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a><span class="co">#&gt; </span></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="co">#&gt;     Null deviance: 8.3499  on 3  degrees of freedom</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a><span class="co">#&gt; Residual deviance: 1.3835  on 1  degrees of freedom</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a><span class="co">#&gt; AIC: 24.86</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="co">#&gt; </span></span>
+<span id="cb9-39"><a href="#cb9-39"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
+</div>
+<div id="question-2-use-three-way-table-analysis-the-conditional-independence-between-y-and-treatment-for-two-levels-of-race-separately." class="section level3">
+<h3>Question 2: Use three-way table, analysis the conditional independence between Y and Treatment for two levels of Race, separately.</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>white&lt;-AZT[<span class="dv">1</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">independent_test_of_table</span>(white, <span class="st">&quot;X2&quot;</span>)</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; $method</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; [1] &quot;X2&quot;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; </span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; $statistic</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; [1] 6.819447</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; </span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; $df</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt; </span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; $p.value</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt; [1] 0.009017049</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>black&lt;-AZT[<span class="dv">2</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="kw">independent_test_of_table</span>(black,<span class="st">&#39;X2&#39;</span>)</span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; $method</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; [1] &quot;X2&quot;</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt; </span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; $statistic</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt; [1] 0.1319177</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt; </span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt; $df</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a><span class="co">#&gt; </span></span>
+<span id="cb10-25"><a href="#cb10-25"></a><span class="co">#&gt; $p.value</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a><span class="co">#&gt; [1] 0.716452</span></span></code></pre></div>
+</div>
+<div id="question-3-conduct-cmh-test-for-azt-data." class="section level3">
+<h3>Question 3: Conduct CMH test for AZT data.</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">library</span>(cdabookfunc)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">cmh.test</span>(<span class="dt">cond=</span><span class="st">&quot;Race&quot;</span>,<span class="dt">data=</span>AZT)</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; </span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt;  Mantel-Haenszel chi-squared test without continuity correction</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; </span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt; data:  treat</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; Mantel-Haenszel X-squared = 6.7624, df = 1, p-value = 0.00931</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; alternative hypothesis: true common odds ratio is not equal to 1</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt; 95 percent confidence interval:</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt;  0.2818621 0.8414208</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt; sample estimates:</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt; common odds ratio </span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt;         0.4869955</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="kw">help</span>(cmh.test)</span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt; starting httpd help server ... done</span></span></code></pre></div>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

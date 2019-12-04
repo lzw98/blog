@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Update Method for Objects of Class elrm.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for update.elrm {elrm}"><tr><td>update.elrm {elrm}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Update Method for Objects of Class elrm.</h2>
+
+<h3>Description</h3>
+
+<p>An update method for objects created by <code>elrm()</code>. Extends the Markov chain of an <code>elrm</code> object by a specified number of iterations.</p>
+
+
+<h3>Usage</h3>
+
+<pre>## S3 method for class 'elrm'
+update(object, iter, burnIn = 0, alpha = 0.05, ...)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object of class <code>elrm</code>, resulting from a call to <code>elrm()</code> or a previous call to <code>update()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>iter</code></td>
+<td>
+<p>an integer representing the number of Markov chain iterations to make.</p>
+</td></tr>
+<tr valign="top"><td><code>burnIn</code></td>
+<td>
+<p>the burn-in period to use when conducting inference. Values of the Markov chain in the burn-in period are discarded; default=0.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>determines the level used for confidence intervals; default=0.05.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to the update function (currently unused).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Extends the Markov chain of an <code>elrm</code> object by creating a new Markov chain of the specified length using the last sampled value as the starting point. The newly created chain is then appended to the original. Subsequent inference is based on the extended Markov chain.</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>elrm</code>.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Zamar, Jinko Graham, Brad McNeney</p>
+
+
+<h3>References</h3>
+
+<p>Zamar David. Monte Carlo Markov Chain Exact Inference for Binomial
+Regression Models. Master's thesis, Statistics and Actuarial
+Sciences, Simon Fraser University, 2006.
+</p>
+<p>Zamar D, McNeney B and Graham J. elrm: Software Implementing Exact-like Inference for Logistic Regression Models. Journal of Statistical Software 2007, 21(3).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="summary.elrm.html">summary.elrm</a></code>, <code><a href="plot.elrm.html">plot.elrm</a></code>, <code><a href="elrm.html">elrm</a></code>.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Drug dataset example with sex and treatment as the variables of interest
+data(drugDat);
+drug.elrm = elrm(formula=recovered/n~sex+treatment, interest=~sex+treatment, r=4, 
+	iter=10000, burnIn=0, dataset=drugDat); 
+
+# Summarize the results
+summary(drug.elrm);
+
+# Call update and extend the chain by 15000 iterations and set the burn-in 
+# period to 100 iterations
+drug.elrm = update(drug.elrm, iter=15000, burnIn=100);
+
+# Summarize the results
+summary(drug.elrm);
+
+# Now change the burn-in to 500
+drug.elrm = update(drug.elrm, iter=0, burnIn=500);
+
+# Summarize the results
+summary(drug.elrm);
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elrm</em> version 1.2.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

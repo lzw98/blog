@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="林振炜" />
+
+<meta name="date" content="2019-11-18" />
+
+<title>cda作业4</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">cda作业4</h1>
+<h4 class="author">林振炜</h4>
+<h4 class="date">2019-11-18</h4>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(cdabookdb)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(cdabookfunc)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+<div id="analysis-the-gds503-data." class="section level2">
+<h2>1 analysis the GDS503 data.</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>description &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;GDS5037/description.csv&#39;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>denote &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">c</span>(<span class="st">&#39;MMA&#39;</span>,<span class="st">&#39;control&#39;</span>,<span class="st">&#39;SA&#39;</span>),<span class="dt">Y =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb2-3"><a href="#cb2-3"></a>data &lt;-<span class="st"> </span><span class="kw">merge</span>(description,denote,<span class="dt">by =</span> <span class="st">&#39;ID&#39;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>head5 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;GDS5037/head5.csv&#39;</span>,<span class="dt">header =</span> T)[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),];</span>
+<span id="cb2-5"><a href="#cb2-5"></a>head5 &lt;-<span class="st"> </span><span class="kw">t</span>(head5)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>d &lt;-<span class="st"> </span>head5</span>
+<span id="cb2-7"><a href="#cb2-7"></a>names &lt;-<span class="st"> </span><span class="kw">rownames</span>(d)</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">rownames</span>(d) &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>head5 &lt;-<span class="st"> </span><span class="kw">cbind</span>(names,d);</span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="kw">colnames</span>(head5) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ID_REF&#39;</span>,<span class="st">&#39;FAM174B&#39;</span>,<span class="st">&#39;AP3S2&#39;</span>,<span class="st">&#39;SV2B&#39;</span>,<span class="st">&#39;RBPMS2&#39;</span>,<span class="st">&#39;AVEN&#39;</span>);</span>
+<span id="cb2-11"><a href="#cb2-11"></a>data &lt;-<span class="st"> </span><span class="kw">merge</span>(data,head5,<span class="dt">by =</span> <span class="st">&#39;ID_REF&#39;</span>);</span>
+<span id="cb2-12"><a href="#cb2-12"></a>data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&#39;FAM174B&#39;</span>,<span class="st">&#39;AP3S2&#39;</span>,<span class="st">&#39;SV2B&#39;</span>,<span class="st">&#39;RBPMS2&#39;</span>,<span class="st">&#39;AVEN&#39;</span>),as.character)</span>
+<span id="cb2-13"><a href="#cb2-13"></a>data &lt;-<span class="st"> </span>data<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&#39;FAM174B&#39;</span>,<span class="st">&#39;AP3S2&#39;</span>,<span class="st">&#39;SV2B&#39;</span>,<span class="st">&#39;RBPMS2&#39;</span>,<span class="st">&#39;AVEN&#39;</span>),as.numeric)</span>
+<span id="cb2-14"><a href="#cb2-14"></a>m &lt;-<span class="st"> </span><span class="kw">glm</span>(Y<span class="op">~</span>FAM174B<span class="op">+</span>AP3S2<span class="op">+</span>SV2B<span class="op">+</span>RBPMS2<span class="op">+</span>AVEN,<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>),<span class="dt">data =</span> data);<span class="kw">summary</span>(m)</span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; </span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co">#&gt; glm(formula = Y ~ FAM174B + AP3S2 + SV2B + RBPMS2 + AVEN, family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#&gt;     data = data)</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#&gt; </span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="co">#&gt; -2.6839   0.2519   0.4647   0.6943   1.1601  </span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="co">#&gt; </span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)   </span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="co">#&gt; (Intercept)   6.6542    11.1632   0.596  0.55112   </span></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="co">#&gt; FAM174B       0.4253     0.7433   0.572  0.56721   </span></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="co">#&gt; AP3S2        -0.1850     0.7052  -0.262  0.79311   </span></span>
+<span id="cb2-29"><a href="#cb2-29"></a><span class="co">#&gt; SV2B         -0.8273     0.3209  -2.578  0.00993 **</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a><span class="co">#&gt; RBPMS2        0.7259     0.9676   0.750  0.45317   </span></span>
+<span id="cb2-31"><a href="#cb2-31"></a><span class="co">#&gt; AVEN         -0.5608     1.0925  -0.513  0.60772   </span></span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="co">#&gt; ---</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a><span class="co">#&gt; </span></span>
+<span id="cb2-35"><a href="#cb2-35"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a><span class="co">#&gt; </span></span>
+<span id="cb2-37"><a href="#cb2-37"></a><span class="co">#&gt;     Null deviance: 103.500  on 107  degrees of freedom</span></span>
+<span id="cb2-38"><a href="#cb2-38"></a><span class="co">#&gt; Residual deviance:  92.674  on 102  degrees of freedom</span></span>
+<span id="cb2-39"><a href="#cb2-39"></a><span class="co">#&gt; AIC: 104.67</span></span>
+<span id="cb2-40"><a href="#cb2-40"></a><span class="co">#&gt; </span></span>
+<span id="cb2-41"><a href="#cb2-41"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
+<ul>
+<li>under level 0.001, the indentifier SV2B is significant</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># choose other 5 indentifiers.</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>other5 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;GDS5037/other5.csv&#39;</span>,<span class="dt">header =</span> T)[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),];</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">class</span>(other5[,<span class="dv">2</span>])</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; [1] &quot;factor&quot;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>col &lt;-<span class="st"> </span><span class="kw">as.character</span>(other5[,<span class="dv">2</span>])</span>
+<span id="cb3-6"><a href="#cb3-6"></a>other5 &lt;-<span class="st"> </span><span class="kw">t</span>(other5)</span>
+<span id="cb3-7"><a href="#cb3-7"></a>d &lt;-<span class="st"> </span>other5</span>
+<span id="cb3-8"><a href="#cb3-8"></a>names &lt;-<span class="st"> </span><span class="kw">rownames</span>(d)</span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="kw">rownames</span>(d) &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>other5 &lt;-<span class="st"> </span><span class="kw">cbind</span>(names,d);</span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="kw">colnames</span>(other5) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ID_REF&#39;</span>,col);</span>
+<span id="cb3-12"><a href="#cb3-12"></a>data &lt;-<span class="st"> </span><span class="kw">merge</span>(data,other5,<span class="dt">by =</span> <span class="st">&#39;ID_REF&#39;</span>);</span>
+<span id="cb3-13"><a href="#cb3-13"></a>data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(col,as.character)</span>
+<span id="cb3-14"><a href="#cb3-14"></a>data &lt;-<span class="st"> </span>data<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(col,as.numeric)</span>
+<span id="cb3-15"><a href="#cb3-15"></a>m &lt;-<span class="st"> </span><span class="kw">glm</span>(Y<span class="op">~</span><span class="st"> </span>USP10<span class="op">+</span>ZNF598<span class="op">+</span>DECR2<span class="op">+</span>NPRL3<span class="op">+</span>ORC6,<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>),<span class="dt">data =</span> data);<span class="kw">summary</span>(m)</span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; </span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; glm(formula = Y ~ USP10 + ZNF598 + DECR2 + NPRL3 + ORC6, family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt;     data = data)</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; </span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt; -2.0831   0.3800   0.5216   0.6853   1.1838  </span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt; </span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)  </span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt; (Intercept)  36.2578    18.6279   1.946   0.0516 .</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; USP10        -1.7037     0.8808  -1.934   0.0531 .</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="co">#&gt; ZNF598       -1.4959     1.2638  -1.184   0.2366  </span></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="co">#&gt; DECR2         0.6148     0.7083   0.868   0.3854  </span></span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="co">#&gt; NPRL3        -0.1830     0.6853  -0.267   0.7895  </span></span>
+<span id="cb3-32"><a href="#cb3-32"></a><span class="co">#&gt; ORC6         -0.2298     0.3712  -0.619   0.5358  </span></span>
+<span id="cb3-33"><a href="#cb3-33"></a><span class="co">#&gt; ---</span></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a><span class="co">#&gt; </span></span>
+<span id="cb3-36"><a href="#cb3-36"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb3-37"><a href="#cb3-37"></a><span class="co">#&gt; </span></span>
+<span id="cb3-38"><a href="#cb3-38"></a><span class="co">#&gt;     Null deviance: 103.500  on 107  degrees of freedom</span></span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="co">#&gt; Residual deviance:  97.653  on 102  degrees of freedom</span></span>
+<span id="cb3-40"><a href="#cb3-40"></a><span class="co">#&gt; AIC: 109.65</span></span>
+<span id="cb3-41"><a href="#cb3-41"></a><span class="co">#&gt; </span></span>
+<span id="cb3-42"><a href="#cb3-42"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
+</div>
+<div id="textbook-4.2" class="section level2">
+<h2>textbook 4.2</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">data</span>(<span class="st">&#39;cancer_remission&#39;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># a. Wald test for the LI effect</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>intercept &lt;-<span class="st"> </span><span class="fl">-3.7771</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>beta &lt;-<span class="st"> </span><span class="fl">0.1449</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>se &lt;-<span class="st"> </span><span class="fl">0.0593</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>p_wald &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">-</span><span class="kw">pnorm</span>(beta<span class="op">/</span>se);p_wald</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; [1] 0.007272632</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co"># b. Construct a Wald confidence interval for the odds ratio corresponding to a 1-unit increase in LI</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co"># for instance, when pi = 0.5</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>ci &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">exp</span>(intercept<span class="op">+</span>beta<span class="op">-</span><span class="kw">qnorm</span>(<span class="fl">0.975</span>)<span class="op">*</span>se),<span class="kw">exp</span>(intercept<span class="op">+</span>beta<span class="op">+</span><span class="kw">qnorm</span>(<span class="fl">0.975</span>)<span class="op">*</span>se));ci</span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; [1] 0.02355480 0.02971884</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co"># c. LR test for the LI effect</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>p_LR &lt;-<span class="st"> </span><span class="fl">0.0040</span>;p_LR</span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; [1] 0.004</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#d. Construct the likelihood-ratio confidence interval for the odds ratio.</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>meanli &lt;-<span class="st"> </span><span class="kw">weighted.mean</span>(cancer_remission<span class="op">$</span>LI,cancer_remission<span class="op">$</span>No.Cases);meanli</span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt; [1] 20.07407</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a>oddsratio_ci &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">3.7771</span><span class="op">+</span>ci<span class="op">*</span>meanli)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">3.7771</span><span class="op">+</span>ci<span class="op">*</span>meanli));oddsratio_ci</span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; [1] 0.03542536 0.03990534</span></span></code></pre></div>
+<ul>
+<li><p>p value of wald test is 0.0072, so we reject null hypothesis.</p></li>
+<li><p>Wald confidence interval for the odds ratio corresponding to a 1-unit increase in LI is[0.02355480, 0.02971884]</p></li>
+<li><p>p value of wald test is 0.0040, so we reject null hypothesis.</p></li>
+<li><p>the likelihood-ratio confidence interval for the odds ratio is [0.03910957,0.81225962] based on the x = 20.07 which is near the mean li</p></li>
+</ul>
+</div>
+<div id="textbook-4.5-for-the-23-space-shuttle-flights-before-the-challenger-mission-disaster-in-1986table-4.10-shows-the-temperature-f-at-the-time-of-the-flight-and-whether-at-least-one-primary-o-ring-suffered-thermal-distress." class="section level2">
+<h2>textbook 4.5 For the 23 space shuttle flights before the Challenger mission disaster in 1986,Table 4.10 shows the temperature ( ◦ F) at the time of the flight and whether at least one primary O-ring suffered thermal distress.</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">#a. Use logistic regression to model the effect of temperature on the probability of thermal distress. Interpret the effect.</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">data</span>(<span class="st">&#39;temperature_distress&#39;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>m1 &lt;-<span class="st"> </span><span class="kw">glm</span>(TD<span class="op">~</span>Temperature,</span>
+<span id="cb5-4"><a href="#cb5-4"></a>          <span class="dt">data =</span> temperature_distress,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>          <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));</span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">summary</span>(m1)</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; </span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; glm(formula = TD ~ Temperature, family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt;     data = temperature_distress)</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; </span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; -1.0611  -0.7613  -0.3783   0.4524   2.2175  </span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt; </span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)  </span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">#&gt; (Intercept)  15.0429     7.3786   2.039   0.0415 *</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co">#&gt; Temperature  -0.2322     0.1082  -2.145   0.0320 *</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="co">#&gt; ---</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="co">#&gt; </span></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="co">#&gt; </span></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="co">#&gt;     Null deviance: 28.267  on 22  degrees of freedom</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="co">#&gt; Residual deviance: 20.315  on 21  degrees of freedom</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="co">#&gt; AIC: 24.315</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="co">#&gt; </span></span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 5</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a></span>
+<span id="cb5-31"><a href="#cb5-31"></a></span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="co">#b. Estimate the probability of thermal distress at 31 ◦ F, the temperature at the time of the Challenger flight.</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">31</span>);x</span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="co">#&gt; [1] 31</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a>pred &lt;-<span class="st"> </span><span class="kw">predict</span>(m1,<span class="kw">data.frame</span>(<span class="dt">Temperature =</span> x),<span class="dt">type=</span><span class="st">&quot;response&quot;</span>);pred</span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="co">#&gt;         1 </span></span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="co">#&gt; 0.9996088</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a></span>
+<span id="cb5-39"><a href="#cb5-39"></a><span class="co">#c. At what temperature does the estimated probability equal 0.50? At that temperature, give a linear approximation for the change in the estimated probability per degree increase in temperature.</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a><span class="fl">15.0429</span><span class="op">/</span><span class="fl">0.2322</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="co">#&gt; [1] 64.78424</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a><span class="fl">0.25</span><span class="op">*</span><span class="fl">15.0429</span></span>
+<span id="cb5-43"><a href="#cb5-43"></a><span class="co">#&gt; [1] 3.760725</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a></span>
+<span id="cb5-45"><a href="#cb5-45"></a><span class="co">#d. Interpret the effect of temperature on the odds of thermal distress.</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a></span>
+<span id="cb5-47"><a href="#cb5-47"></a><span class="co">#e. Test the hypothesis that temperature has no effect, using (i) the Wald test,(ii) the likelihood-ratio test.</span></span>
+<span id="cb5-48"><a href="#cb5-48"></a></span>
+<span id="cb5-49"><a href="#cb5-49"></a><span class="co">#wald confidence interval</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="kw">library</span>(car)</span>
+<span id="cb5-51"><a href="#cb5-51"></a><span class="kw">Anova</span>(m1,<span class="dt">test =</span> <span class="st">&#39;Wald&#39;</span>)</span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="co">#&gt; Analysis of Deviance Table (Type II tests)</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a><span class="co">#&gt; </span></span>
+<span id="cb5-54"><a href="#cb5-54"></a><span class="co">#&gt; Response: TD</span></span>
+<span id="cb5-55"><a href="#cb5-55"></a><span class="co">#&gt;             Df  Chisq Pr(&gt;Chisq)  </span></span>
+<span id="cb5-56"><a href="#cb5-56"></a><span class="co">#&gt; Temperature  1 4.6009    0.03196 *</span></span>
+<span id="cb5-57"><a href="#cb5-57"></a><span class="co">#&gt; ---</span></span>
+<span id="cb5-58"><a href="#cb5-58"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb5-59"><a href="#cb5-59"></a><span class="co"># LR confidencce interval</span></span>
+<span id="cb5-60"><a href="#cb5-60"></a></span>
+<span id="cb5-61"><a href="#cb5-61"></a><span class="kw">Anova</span>(m1) <span class="co"># likelihood-ratio test of temperature effect</span></span>
+<span id="cb5-62"><a href="#cb5-62"></a><span class="co">#&gt; Analysis of Deviance Table (Type II tests)</span></span>
+<span id="cb5-63"><a href="#cb5-63"></a><span class="co">#&gt; </span></span>
+<span id="cb5-64"><a href="#cb5-64"></a><span class="co">#&gt; Response: TD</span></span>
+<span id="cb5-65"><a href="#cb5-65"></a><span class="co">#&gt;             LR Chisq Df Pr(&gt;Chisq)   </span></span>
+<span id="cb5-66"><a href="#cb5-66"></a><span class="co">#&gt; Temperature    7.952  1   0.004804 **</span></span>
+<span id="cb5-67"><a href="#cb5-67"></a><span class="co">#&gt; ---</span></span>
+<span id="cb5-68"><a href="#cb5-68"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb5-69"><a href="#cb5-69"></a><span class="co">#confint(m1)# profile likelihood confidence interval</span></span></code></pre></div>
+<ul>
+<li><p><span class="math inline">\(logit(\hat{\pi}) = 15.0429 - 0.02322\times temperature\)</span>according to the result of logistic model, under level 0.01, the effect of temperature is significant, and the correlaction is negaitve</p></li>
+<li><p>so the estimation of the probability of thermal distress at 31 F is 0.9996</p></li>
+<li><p>the temperature 64.78424 makes the estimated probability equal 0.5,a linear approximation for the change in the estimated probability per degree increase in temperature is 3.760725</p></li>
+<li><p>1 unit increase in temperature has percent increase <span class="math inline">\(e^{15.0429-0.02322\times Temperature}-1\)</span> in the odds.</p></li>
+<li><p>(i)wald test shows that under level 0.01, we can reject the null hypothesis.</p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>LR test shows that under level 0.001, we can reject the null hypothesis.</li>
+</ol></li>
+</ul>
+</div>
+<div id="textbook-4.9-for-the-horseshoe-crab-data-fit-a-logistic-regression-model-for-the-probability-of-a-satellite-using-color-alone-as-the-predictor." class="section level2">
+<h2>textbook 4.9 For the horseshoe crab data, fit a logistic regression model for the probability of a satellite, using color alone as the predictor.</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">#a. Treat color as nominal scale (qualitative). Report the prediction equation, and explain how to interpret the coefficient of the first indicator variable.</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">data</span>(<span class="st">&#39;horseshoecrabs&#39;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a>horseshoecrabs &lt;-<span class="st"> </span>horseshoecrabs <span class="op">%&gt;%</span><span class="kw">mutate</span>(</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="dt">Color_factor =</span> <span class="kw">factor</span>(Color, <span class="dv">4</span><span class="op">:</span><span class="dv">1</span>), <span class="co"># Convert Color to a factor and set the factor level</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="dt">psat =</span> <span class="kw">as.integer</span>(horseshoecrabs<span class="op">$</span>Satellites <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="co"># Psat for existing satellites</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>)</span>
+<span id="cb6-7"><a href="#cb6-7"></a>m2 &lt;-<span class="st"> </span><span class="kw">glm</span>(psat <span class="op">~</span><span class="st"> </span>Color_factor, </span>
+<span id="cb6-8"><a href="#cb6-8"></a>          <span class="dt">data =</span> horseshoecrabs, </span>
+<span id="cb6-9"><a href="#cb6-9"></a>          <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));</span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="kw">summary</span>(m2)</span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; glm(formula = psat ~ Color_factor, family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt;     data = horseshoecrabs)</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; </span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; -1.6651  -1.3370   0.7997   0.7997   1.5134  </span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt; </span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt;               Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt; (Intercept)    -0.7621     0.4577  -1.665 0.095910 .  </span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt; Color_factor3   1.1299     0.5509   2.051 0.040289 *  </span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="co">#&gt; Color_factor2   1.7382     0.5123   3.393 0.000692 ***</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">#&gt; Color_factor1   1.8608     0.8087   2.301 0.021393 *  </span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co">#&gt; ---</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="co">#&gt; </span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="co">#&gt; </span></span>
+<span id="cb6-31"><a href="#cb6-31"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a><span class="co">#&gt; Residual deviance: 212.06  on 169  degrees of freedom</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a><span class="co">#&gt; AIC: 220.06</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="co">#&gt; </span></span>
+<span id="cb6-35"><a href="#cb6-35"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span>
+<span id="cb6-36"><a href="#cb6-36"></a></span>
+<span id="cb6-37"><a href="#cb6-37"></a><span class="co">#b. For the model in (a), conduct a likelihood-ratio test of the hypothesis that color has no effect. Interpret.</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="kw">Anova</span>(m2, <span class="dt">test=</span><span class="st">&quot;LR&quot;</span>)</span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co">#&gt; Analysis of Deviance Table (Type II tests)</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="co">#&gt; </span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="co">#&gt; Response: psat</span></span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="co">#&gt;              LR Chisq Df Pr(&gt;Chisq)   </span></span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="co">#&gt; Color_factor   13.698  3   0.003347 **</span></span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="co">#&gt; ---</span></span>
+<span id="cb6-45"><a href="#cb6-45"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-46"><a href="#cb6-46"></a><span class="co">#c. Treating color in a quantitative manner, obtain a prediction equation.Interpret the coefficient of color.</span></span>
+<span id="cb6-47"><a href="#cb6-47"></a>m3 &lt;-<span class="st"> </span><span class="kw">glm</span>(psat <span class="op">~</span><span class="st"> </span>Color, </span>
+<span id="cb6-48"><a href="#cb6-48"></a>          <span class="dt">data =</span> horseshoecrabs, </span>
+<span id="cb6-49"><a href="#cb6-49"></a>          <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>));</span>
+<span id="cb6-50"><a href="#cb6-50"></a><span class="kw">summary</span>(m3)</span>
+<span id="cb6-51"><a href="#cb6-51"></a><span class="co">#&gt; </span></span>
+<span id="cb6-52"><a href="#cb6-52"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb6-53"><a href="#cb6-53"></a><span class="co">#&gt; glm(formula = psat ~ Color, family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb6-54"><a href="#cb6-54"></a><span class="co">#&gt;     data = horseshoecrabs)</span></span>
+<span id="cb6-55"><a href="#cb6-55"></a><span class="co">#&gt; </span></span>
+<span id="cb6-56"><a href="#cb6-56"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb6-57"><a href="#cb6-57"></a><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span id="cb6-58"><a href="#cb6-58"></a><span class="co">#&gt; -1.9103  -1.2719   0.8142   0.8142   1.3937  </span></span>
+<span id="cb6-59"><a href="#cb6-59"></a><span class="co">#&gt; </span></span>
+<span id="cb6-60"><a href="#cb6-60"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb6-61"><a href="#cb6-61"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb6-62"><a href="#cb6-62"></a><span class="co">#&gt; (Intercept)   2.3635     0.5551   4.257 2.07e-05 ***</span></span>
+<span id="cb6-63"><a href="#cb6-63"></a><span class="co">#&gt; Color        -0.7147     0.2095  -3.412 0.000645 ***</span></span>
+<span id="cb6-64"><a href="#cb6-64"></a><span class="co">#&gt; ---</span></span>
+<span id="cb6-65"><a href="#cb6-65"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-66"><a href="#cb6-66"></a><span class="co">#&gt; </span></span>
+<span id="cb6-67"><a href="#cb6-67"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb6-68"><a href="#cb6-68"></a><span class="co">#&gt; </span></span>
+<span id="cb6-69"><a href="#cb6-69"></a><span class="co">#&gt;     Null deviance: 225.76  on 172  degrees of freedom</span></span>
+<span id="cb6-70"><a href="#cb6-70"></a><span class="co">#&gt; Residual deviance: 213.30  on 171  degrees of freedom</span></span>
+<span id="cb6-71"><a href="#cb6-71"></a><span class="co">#&gt; AIC: 217.3</span></span>
+<span id="cb6-72"><a href="#cb6-72"></a><span class="co">#&gt; </span></span>
+<span id="cb6-73"><a href="#cb6-73"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span>
+<span id="cb6-74"><a href="#cb6-74"></a></span>
+<span id="cb6-75"><a href="#cb6-75"></a><span class="co">#d. For the model in (c), test the hypothesis that color has no effect. Interpret.</span></span>
+<span id="cb6-76"><a href="#cb6-76"></a><span class="kw">Anova</span>(m3, <span class="dt">test=</span><span class="st">&quot;LR&quot;</span>)</span>
+<span id="cb6-77"><a href="#cb6-77"></a><span class="co">#&gt; Analysis of Deviance Table (Type II tests)</span></span>
+<span id="cb6-78"><a href="#cb6-78"></a><span class="co">#&gt; </span></span>
+<span id="cb6-79"><a href="#cb6-79"></a><span class="co">#&gt; Response: psat</span></span>
+<span id="cb6-80"><a href="#cb6-80"></a><span class="co">#&gt;       LR Chisq Df Pr(&gt;Chisq)    </span></span>
+<span id="cb6-81"><a href="#cb6-81"></a><span class="co">#&gt; Color   12.461  1  0.0004156 ***</span></span>
+<span id="cb6-82"><a href="#cb6-82"></a><span class="co">#&gt; ---</span></span>
+<span id="cb6-83"><a href="#cb6-83"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-84"><a href="#cb6-84"></a></span>
+<span id="cb6-85"><a href="#cb6-85"></a><span class="co">#e. When we treat color as quantitative instead of qualitative, state an advantage relating to power and a potential disadvantage relating to model lack of fit.</span></span></code></pre></div>
+<ul>
+<li><p><span class="math inline">\(logit(\hat{\pi}) = -0.7621 + 1.1299\times Color\_factor3+1.7382\times Color\_factor2+1.8608\times Color\_factor1\)</span>,the coefficient of the first indicator variable shows that the difference between colorfactor4 and colorfactor3.</p></li>
+<li><p>color_factor is significant under the level 0.001.</p></li>
+<li><p><span class="math inline">\(logit(\hat{\pi}) = 2.3635 -0.7147\times Color\)</span>the coefficient of color is negative shows that the number of satellite will be decrease when the number of color increases.</p></li>
+<li><p>the variable color is significant under the level 0.001.</p></li>
+<li><p>an advantage relating to power: the color’s degree may be showed in the quantity. a potential disadvantage relating to model lack of fit: the model is simpler and easier to interpret, and tests of the effect of the ordinal predictor are generally more powerful when it has a single parameter rather than several parameters.</p></li>
+</ul>
+</div>
+<div id="textbook-4.12" class="section level2">
+<h2>textbook 4.12</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># a. Based on the parameter estimates, which group is most likely to have the “yes” response? Estimate the probability in that case.</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>a &lt;-<span class="st"> </span><span class="fl">-3.5961</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.8678</span><span class="op">*</span><span class="dv">0</span><span class="fl">+2.4044</span><span class="op">*</span><span class="dv">1</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>a<span class="op">/</span>(a<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; [1] 6.216484</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co"># b. Interpret the parameter estimate for victim’s race.</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co"># c. Using information shown, construct and interpret a 95%likelihood-ratio confidence interval for the conditional odds ratio between the death penalty verdict and victim’s race.</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>def_estimation &lt;-<span class="st"> </span><span class="fl">-0.8678</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>intercept &lt;-<span class="st"> </span><span class="fl">-3.5961</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>vic_estimation &lt;-<span class="st"> </span><span class="fl">2.4044</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>vic_estimation_se &lt;-<span class="st"> </span><span class="fl">0.6006</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co"># if defendant is white</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>ci &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">exp</span>(intercept<span class="op">+</span>def_estimation<span class="op">+</span>vic_estimation<span class="op">-</span>vic_estimation_se<span class="op">*</span><span class="fl">1.96</span>),<span class="kw">exp</span>(intercept<span class="op">+</span>def_estimation<span class="op">+</span>vic_estimation<span class="op">+</span>vic_estimation_se<span class="op">*</span><span class="fl">1.96</span>));ci</span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; [1] 0.03929429 0.41382008</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co"># if defendant is black</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>ci &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">exp</span>(intercept<span class="op">+</span>vic_estimation<span class="op">-</span>vic_estimation_se<span class="op">*</span><span class="fl">1.96</span>),<span class="kw">exp</span>(intercept<span class="op">+</span>vic_estimation<span class="op">+</span>vic_estimation_se<span class="op">*</span><span class="fl">1.96</span>));ci</span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt; [1] 0.09358586 0.98558096</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co"># d. Test the effect of victim’s race, controlling for defendant’s race, using a Wald test or likelihood-ratio test. Interpret.</span></span></code></pre></div>
+<ul>
+<li><p><span class="math inline">\(logit(\hat{\pi}) = -3.5961 - 0.8678\times def+2.4044\times vic\)</span>,obviously, when def = 0 meaning black and vic = 1 meaning white, is most likely to have the “yes” response, the probility in that case is 6.216484</p></li>
+<li><p>the parameter estimate for victim’s race is positive which shows that the white race among victim is more likely to lead to death penalty.</p></li>
+<li><p>95%likelihood-ratio confidence interval for the conditional odds ratio between the death penalty verdict and victim’s race is below. when defendant is white, the ci is [0.03929429,0.41382008] when defendant is black, the ci is [0.09358586,0.98558096]</p></li>
+<li><p>from the table, we can know that the pvalue using LR test is &lt;.0001, so we reject the null hypothesis.</p></li>
+</ul>
+</div>
+<div id="textbook-4.15-table-4.12-refers-to-ratings-of-agricultural-extension-agents-in-north-carolina.in-each-of-five-districts-agents-were-classified-by-their-race-and-by-whether-they-qualified-for-a-merit-pay-increase." class="section level2">
+<h2>textbook 4.15 Table 4.12 refers to ratings of agricultural extension agents in North Carolina.In each of five districts, agents were classified by their race and by whether they qualified for a merit pay increase.</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">library</span>(cdabookdb)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">library</span>(cdabookfunc)</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">data</span>(<span class="st">&#39;merit_pay_race&#39;</span>);</span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">cmh.test</span>(<span class="dt">cond =</span> <span class="st">&#39;District&#39;</span>,merit_pay_race)</span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; </span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;  Mantel-Haenszel chi-squared test without continuity correction</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; </span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; data:  treat</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; Mantel-Haenszel X-squared = 7.8149, df = 1, p-value = 0.005182</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; alternative hypothesis: true common odds ratio is not equal to 1</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; 95 percent confidence interval:</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt;  0.2652676 0.8036854</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; sample estimates:</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; common odds ratio </span></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt;         0.4617269</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="co">#Show how you could alternatively test the hypothesis in (a) using a test about a parameter in a logistic regression model.</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a>data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(merit_pay_race)</span>
+<span id="cb8-21"><a href="#cb8-21"></a>data &lt;-<span class="st"> </span><span class="kw">spread</span>(data,MeritPay,Freq)</span>
+<span id="cb8-22"><a href="#cb8-22"></a>data<span class="op">$</span>pro &lt;-<span class="st"> </span>data<span class="op">$</span>Yes<span class="op">/</span>(data<span class="op">$</span>Yes<span class="op">+</span>data<span class="op">$</span>No)</span>
+<span id="cb8-23"><a href="#cb8-23"></a>m &lt;-<span class="st"> </span><span class="kw">glm</span>(pro<span class="op">~</span><span class="kw">factor</span>(Race)<span class="op">+</span><span class="kw">factor</span>(District),<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>),<span class="dt">data =</span> data);<span class="kw">summary</span>(m)</span>
+<span id="cb8-24"><a href="#cb8-24"></a><span class="co">#&gt; </span></span>
+<span id="cb8-25"><a href="#cb8-25"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a><span class="co">#&gt; glm(formula = pro ~ factor(Race) + factor(District), family = binomial(link = &quot;logit&quot;), </span></span>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="co">#&gt;     data = data)</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a><span class="co">#&gt; </span></span>
+<span id="cb8-29"><a href="#cb8-29"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb8-30"><a href="#cb8-30"></a><span class="co">#&gt;         1          2          3          4          5          6  </span></span>
+<span id="cb8-31"><a href="#cb8-31"></a><span class="co">#&gt;  0.097165  -0.117939   0.062987  -0.080314  -0.129636   0.166337  </span></span>
+<span id="cb8-32"><a href="#cb8-32"></a><span class="co">#&gt;         7          8          9         10  </span></span>
+<span id="cb8-33"><a href="#cb8-33"></a><span class="co">#&gt;  0.007295  -0.009318  -0.024378   0.030597  </span></span>
+<span id="cb8-34"><a href="#cb8-34"></a><span class="co">#&gt; </span></span>
+<span id="cb8-35"><a href="#cb8-35"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb8-36"><a href="#cb8-36"></a><span class="co">#&gt;                    Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb8-37"><a href="#cb8-37"></a><span class="co">#&gt; (Intercept)          0.7660     1.7899   0.428    0.669</span></span>
+<span id="cb8-38"><a href="#cb8-38"></a><span class="co">#&gt; factor(Race)White    0.9013     1.5477   0.582    0.560</span></span>
+<span id="cb8-39"><a href="#cb8-39"></a><span class="co">#&gt; factor(District)NE   0.2904     2.4882   0.117    0.907</span></span>
+<span id="cb8-40"><a href="#cb8-40"></a><span class="co">#&gt; factor(District)NW  -0.2804     2.3202  -0.121    0.904</span></span>
+<span id="cb8-41"><a href="#cb8-41"></a><span class="co">#&gt; factor(District)SE   0.0448     2.4031   0.019    0.985</span></span>
+<span id="cb8-42"><a href="#cb8-42"></a><span class="co">#&gt; factor(District)SW  -0.1556     2.3483  -0.066    0.947</span></span>
+<span id="cb8-43"><a href="#cb8-43"></a><span class="co">#&gt; </span></span>
+<span id="cb8-44"><a href="#cb8-44"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb8-45"><a href="#cb8-45"></a><span class="co">#&gt; </span></span>
+<span id="cb8-46"><a href="#cb8-46"></a><span class="co">#&gt;     Null deviance: 0.497478  on 9  degrees of freedom</span></span>
+<span id="cb8-47"><a href="#cb8-47"></a><span class="co">#&gt; Residual deviance: 0.079913  on 4  degrees of freedom</span></span>
+<span id="cb8-48"><a href="#cb8-48"></a><span class="co">#&gt; AIC: 17.709</span></span>
+<span id="cb8-49"><a href="#cb8-49"></a><span class="co">#&gt; </span></span>
+<span id="cb8-50"><a href="#cb8-50"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 4</span></span></code></pre></div>
+<ul>
+<li><p>p-value = 0.005182 shows that under the level 0.01,the merit pay decision is not independent of race, conditional on the district.</p></li>
+<li><p>to construt a logistic regression model, to test whether the parameter of race is significant.</p></li>
+<li><p>model-based analysis shows something about the categories of district effect to whether they qualified for a merit pay increase.</p></li>
+</ul>
+</div>
+<div id="textbook-4.16" class="section level2">
+<h2>textbook 4.16</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">data</span>(<span class="st">&#39;MBtest1&#39;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>mbtest &lt;-<span class="st"> </span><span class="kw">data.frame</span>(MBtest1)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>mbtest &lt;-<span class="st"> </span><span class="kw">spread</span>(mbtest,Drink,Freq)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>mbtest<span class="op">$</span>pro &lt;-<span class="st"> </span>mbtest<span class="op">$</span>Often<span class="op">/</span>(mbtest<span class="op">$</span>Rarely<span class="op">+</span>mbtest<span class="op">$</span>Often)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>m &lt;-<span class="st"> </span><span class="kw">glm</span>(pro<span class="op">~</span><span class="kw">factor</span>(TF)<span class="op">+</span><span class="kw">factor</span>(JP)<span class="op">+</span><span class="kw">factor</span>(EI)<span class="op">+</span><span class="kw">factor</span>(SN),<span class="dt">data =</span> mbtest,<span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;probit&#39;</span>));<span class="kw">summary</span>(m)</span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; Warning in eval(family$initialize): non-integer #successes in a binomial</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; glm!</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; </span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; glm(formula = pro ~ factor(TF) + factor(JP) + factor(EI) + factor(SN), </span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;     family = binomial(link = &quot;probit&quot;), data = mbtest)</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; </span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt; Deviance Residuals: </span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt;      Min        1Q    Median        3Q       Max  </span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt; -0.19842  -0.09110  -0.01940   0.09162   0.18430  </span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt; </span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#&gt; Coefficients:</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="co">#&gt; (Intercept)  -1.1619     0.9449  -1.230    0.219</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt; factor(TF)F  -0.2432     0.8726  -0.279    0.780</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt; factor(JP)P   0.1313     0.8679   0.151    0.880</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt; factor(EI)I  -0.3146     0.8772  -0.359    0.720</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="co">#&gt; factor(SN)N   0.1279     0.8678   0.147    0.883</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="co">#&gt; </span></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="co">#&gt; </span></span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="co">#&gt;     Null deviance: 0.43765  on 15  degrees of freedom</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="co">#&gt; Residual deviance: 0.19023  on 11  degrees of freedom</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a><span class="co">#&gt; AIC: 13.405</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="co">#&gt; </span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="co">#&gt; Number of Fisher Scoring iterations: 6</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="co">#ESTJ</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a>e &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">1.1619</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.2432</span><span class="op">*</span><span class="st"> </span><span class="dv">0</span> <span class="fl">+0.1313</span><span class="op">*</span><span class="st"> </span><span class="dv">0</span><span class="fl">-0.3146</span><span class="op">*</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.1279</span><span class="op">*</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb9-35"><a href="#cb9-35"></a>pi_hat &lt;-<span class="st"> </span>e<span class="op">/</span>(e<span class="op">+</span><span class="dv">1</span>);pi_hat</span>
+<span id="cb9-36"><a href="#cb9-36"></a><span class="co">#&gt; [1] 0.2383222</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="co"># Based on the model parameter estimates, explain why the personality type with the highest ˆ π is ENTP</span></span></code></pre></div>
+<ul>
+<li><p><span class="math inline">\(logit(\hat{\pi}) = -1.1619 - 0.2432\times TF +0.1313\times JP-0.3146\times EI + 0.1279\times SN\)</span>,in this equation, TF equals 1 when TF is F, JP equals 1 when JP is P, EI equals 1 when EI is I and SN equal 1 when SN is N.</p></li>
+<li><p><span class="math inline">\(\hat{\pi}\)</span> for someone of personality type ESTJ is 0.2383222</p></li>
+<li><p>obviously, from the equation when teh personality type is ENTP, means <span class="math inline">\(logit(\hat{\pi})\)</span> is highest, and the logit function is Monotonically increasing, so the <span class="math inline">\(\hat{\pi}\)</span> is highest.</p></li>
+</ul>
+</div>
+<div id="textbook4.28" class="section level2">
+<h2>textbook4.28</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a> <span class="co"># logit[ ˆ P(Y = 1)] = −1.90 + 0.02x + 0.82m + 1.33f</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>lowest &lt;-<span class="st"> </span><span class="fl">-1.90</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.02</span><span class="op">*</span><span class="fl">0.5</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>highest &lt;-<span class="st"> </span><span class="fl">-1.90</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.02</span><span class="op">*</span><span class="dv">130</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.82</span> <span class="op">+</span><span class="st"> </span><span class="fl">1.33</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>lowestpi &lt;-<span class="st"> </span><span class="kw">exp</span>(lowest)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(lowest));lowestpi</span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; [1] 0.1312445</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>highestpi &lt;-<span class="st"> </span><span class="kw">exp</span>(highest)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(highest));highestpi</span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; [1] 0.9453187</span></span></code></pre></div>
+<ul>
+<li>the range of <span class="math inline">\(\hat{\pi}\)</span> values between their lowest levels (x = 0.5, m = 0, f = 0) and their highest levels (x = 130, m = 1, f = 1) is [0.1312445,0.9453187]</li>
+</ul>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

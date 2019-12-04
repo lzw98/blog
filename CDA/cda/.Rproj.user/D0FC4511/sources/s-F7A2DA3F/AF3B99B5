@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1569488128966.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "AF3B99B5",
+    "lastKnownWriteTime" : 1569513948,
+    "last_content_update" : 1569513948520,
+    "path" : "C:/Users/Administrator/Desktop/属性数据分析/cda/quiz1.R",
+    "project_path" : "quiz1.R",
+    "properties" : {
+        "cursorPosition" : "31,37",
+        "scrollLine" : "8",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

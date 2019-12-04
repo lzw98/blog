@@ -1,0 +1,187 @@
+---
+title: "cda第三次作业"
+author: "林振炜"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## 1 analysis the GDS5037 data.
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+library(dplyr)
+description <- read.csv('GDS5037/description.csv')
+denote <- data.frame(ID = c('MMA','control','SA'),value = c(1,0,1))
+
+data <- merge(description,denote,by = 'ID');
+ap3s2 <- read.csv('GDS5037/data_ap3s2.csv',header = T);
+#ap3s2 <- read.csv('GDS5037/data_table.csv',nrows = 2)[2,];
+ap3s2 <- t(ap3s2)
+d <- ap3s2
+names <- rownames(d)
+rownames(d) <- NULL
+ap3s2 <- cbind(names,d);
+colnames(ap3s2) <- c('ID_REF','ap3s2_value1','ap3s2_value2','ap3s2_value3');
+data <- merge(data,ap3s2,by = 'ID_REF');
+
+# build logistic regression model
+data2 <- data %>% mutate_at(c('ap3s2_value1','ap3s2_value2','ap3s2_value3'),as.character)
+data3 <- data2%>% mutate_at(c('ap3s2_value1','ap3s2_value2','ap3s2_value3'),as.numeric)
+gds_logistic <- glm(value ~ ap3s2_value1+ap3s2_value2+ap3s2_value3,data = data3,
+                    family = binomial(link = 'logit'));summary(gds_logistic)
+#由于value1不显著，我们考虑去掉他，则有
+gds_logistic <- glm(value ~ ap3s2_value2+ap3s2_value3,data = data3,
+                    family = binomial(link = 'logit'));
+summary(gds_logistic)
+gds_logistic <- glm(value ~ ap3s2_value2,data = data3,
+                    family = binomial(link = 'logit'));
+summary(gds_logistic)
+gds_logistic <- glm(value ~ ap3s2_value1,data = data3,
+                    family = binomial(link = 'logit'));
+summary(gds_logistic)
+gds_logistic <- glm(value ~ ap3s2_value1,data = data3,
+                    family = binomial(link = 'probit'));
+summary(gds_logistic)
+
+```
+- (1)(2)多次回归结果显示，其参数不显著,所以我们可以认为病人的状况与该基因的数值并没有logistic或probit线性关系。
+
+
+## textbook 3.3
+
+- 可以得出该模型的方程为 $\hat{\pi}(\mathrm{x})=\hat{\alpha}+\hat{\beta} x=0.00255+0.00109 x$截距为0.00255表明，当不喝酒时，仍然约有0.00255的概率婴儿有性器官缺陷，斜率0.00109为正，表明购买酒越多对婴儿器官缺陷是正影响，程度每增加1，其风险概率增加0.00109
+
+- 当level为0时，器官缺陷的风险为0.00255；当level为7时，器官风险的概率为0.01018，他们的relative risk为0.00255/0.01018=0.2504912
+
+## textbook 3.9
+- 可以得出该模型的方程为
+$logit(\hat{\pi}(\mathrm{x}))=\hat{\alpha}+\hat{\beta} x=-3.5561+0.0532 x$
+
+- $\beta>0$所以$\pi(x)$随x的增大而增大
+
+- 当$\pi=0$时，可以算出，income为3.5561/0.0532=66.86
+
+## textbook 3.10
+- $\operatorname{probit}(\hat{\pi}(x))=\hat{\alpha}+\hat{\beta} x=-2.31781+0.0878 x$所以解方程$\phi(0.5)=-2.3178+0.0878x$得到34.27406
+
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+(pnorm(0.5)+2.3178)/0.0878
+pnorm(-2.3178+0.0878*14)-pnorm(-2.3178+0.0878*28)
+label <- seq(6,40,0.1)
+remission <- pnorm(-2.3178+0.0878*label);
+plot(x = label,y = remission,type = 'l',lty = 1,col = 'black')
+```
+
+- the difference between the estimated probabilities of remission at the upper and lower quartiles of the labeling index,14 and 28 is 0.4177
+
+
+## textbook3.11
+
+- $\log {\mu_a}=\alpha+\beta x_a$
+$\log \mu_b=\alpha+\beta x_b$
+$\Rightarrow \log \frac{\mu_a}{\mu_b}=\beta\left(x_{A}-x_{B}\right)$
+$\quad \log \frac{\mu_{a}}{\mu_{b}}=-\beta$
+$\Rightarrow \beta=\log \frac{\mu_{b}}{\mu_{a}}$
+$\Rightarrow e^{\beta}=\mu_{b} / \mu_{a}$
+
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+library('cdabookdb')
+data('chip_imperfection')
+denote <- data.frame(Treatment = c('A','B'),value = c(0,1))
+chip_imperfection<- merge(chip_imperfection,denote,by = 'Treatment');
+chip_poi <- glm(Imperfections ~ value ,data = chip_imperfection,
+                family = poisson(link = 'log'));
+summary(chip_poi)
+```
+
+- $\log (\mu)=\hat{\alpha}+\hat{\beta} x=1.6094+0.5878 x$
+  $\beta=\log \frac{\mu_{b}}{\mu_{a}} = 0.5878$,$\beta>0$,则其均值随x的增大而增大
+  
+- p值为0.000861，所以在0.0001的显著性水平上，原假设不成立
+
+- $\beta$95%的置信区间为[0.5878-1.96*0.1764,0.5878+1.96*0.1764],即[0.242,0.9335],所以$\mu_a/\mu_b$的95%的置信区间为[1.273794,2.543396]
+
+
+## textbook3.18
+
+
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+data('football_arrest')
+poisson_model <- glm(Arrests~1,data = football_arrest, 
+                     family = poisson(link = 'log'),
+                     offset = log(football_arrest$Attendance));
+summary(poisson_model)
+
+
+```
+
+- 出场人数越多，现场由于各种原因被逮捕的人数会越多，故二者成正比。$E(Y) = \mu t \Rightarrow \mu  = E(Y)/t \Rightarrow \log (E(Y)/t ) = \alpha $,,所以得到其偏移方程为$E(Y)=t\times exp(\alpha)$
+
+- 可以得到其方程为$log(\hat{\mu}) = \hat{\alpha} = -0.91028$,$\hat{\mu}$在这里表示的意思每场逮捕人数的估计值与出场人数成比例关系。
+
+- 由以下代码给出答案
+
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+
+# Plot arrests against attendance,and overlay the prediction equation
+point_predict <- predict(
+poisson_model, data.frame(Attendance = football_arrest$Attendance), type = "response"
+)
+attendance_seq <- seq(100, 450, 1)
+pred_pos_seq <- predict(
+poisson_model, data.frame(Attendance = attendance_seq), type = "response"
+)
+plot(
+football_arrest$Arrests ~ football_arrest$Attendance, pch = 20, # Point type is solid dot
+xlim = c(100,450), ylim = c(15, 400), # Horizontal and vertical coordinate limits
+xlab = "attendance", ylab = "arrest" # axes' label
+)
+
+
+e_arrest <- exp(-0.91028)*football_arrest$Attendance
+e_arrest_seq <- exp(-0.91028)*attendance_seq
+points(football_arrest$Attendance, e_arrest, pch = 3) # Point type is plus sign
+points(attendance_seq,e_arrest_seq, type = "l", lty = 2) # Type is line, line type is dashed
+
+
+football_arrest$Team[football_arrest$Arrests-e_arrest>0]#teams that had a much larger than expected number of arrests.
+
+football_arrest$Team[football_arrest$Arrests-e_arrest<0]#teams that had a much smaller than expected number of arrests.
+
+
+```
+
+- 
+
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+
+library(MASS)
+binomial_model <- glm.nb(football_arrest$Arrests/football_arrest$Attendance~1,data = football_arrest);summary(binomial_model)
+```
+
+ - 得到的$\hat{\alpha}$为-0.9046，se为0.3278，在95%的显著性水平上仍显著，与a相比，其值更大一些，标准差更大，故poisson模型的标准差更小一些，可以认为泊松分布的前提假设更有合理性
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

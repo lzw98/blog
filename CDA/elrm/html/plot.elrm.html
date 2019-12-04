@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot Diagnostics for an elrm Object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.elrm {elrm}"><tr><td>plot.elrm {elrm}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot Diagnostics for an elrm Object</h2>
+
+<h3>Description</h3>
+
+<p>Produces both a trace plot and histogram of the sampled values of each sufficient statistic of interest. Sampled values within the burn-in period are also plotted.</p>
+
+
+<h3>Usage</h3>
+
+<pre>## S3 method for class 'elrm'
+plot(x, p = 1, breaks = "Sturges", ask=FALSE, ...)</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>an object of class <code>elrm</code>, resulting from a call to <code>elrm()</code> or a previous call to <code>update()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>the sampling fraction of points to be plotted. A random sample consisting of <var>p</var>*100% of all the observations in the Markov chain is plotted; default=1.</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>a vector giving the number of cells to use for the histogram of each sufficient statistic of interest or a single number giving the number of cells for each histogram or the character string naming an algorithm to compute the number of cells.</p>
+</td></tr>
+<tr valign="top"><td><code>ask</code></td>
+<td>
+<p>the graphics parameter <var>ask</var>: see <code><a href="../../graphics/html/par.html">par</a></code> for details. If set to TRUE will ask between plots corresponding to each sufficient statistic; default=FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments to the plot function (currently unused).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The default for <var>breaks</var> is &quot;Sturges&quot;: see <code><a href="../../grDevices/html/nclass.Sturges.html">nclass.Sturges</a></code>. Other names for which algorithms are supplied are &quot;Scott&quot; and &quot;FD&quot;.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>David Zamar, Jinko Graham, Brad McNeney</p>
+
+
+<h3>References</h3>
+
+<p>Zamar David. Monte Carlo Markov Chain Exact Inference for Binomial
+Regression Models. Master's thesis, Statistics and Actuarial
+Sciences, Simon Fraser University, 2006.
+</p>
+<p>Zamar D, McNeney B and Graham J. elrm: Software Implementing Exact-like Inference for Logistic Regression Models. Journal of Statistical Software 2007, 21(3).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="update.elrm.html">update.elrm</a></code>, <code><a href="summary.elrm.html">summary.elrm</a></code>, <code><a href="elrm.html">elrm</a></code>.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Drug dataset example with sex and treatment as the variables of interest
+data(drugDat);
+drug.elrm = elrm(formula=recovered/n~sex+treatment, interest=~sex+treatment, r=4, 
+	iter=40000, burnIn=1000, dataset=drugDat);
+
+# Plot the sampled values of the sufficient statistic for each parameter of 
+# interest (sex and treatment)
+plot(drug.elrm,p=0.10,ask=TRUE);
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>elrm</em> version 1.2.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,20 @@
+citHeader("To cite elrm in publications use:")
+
+citEntry(entry     ="Article",
+         title     = "elrm: Software Implementing Exact-like Inference for Logistic Regression Models",
+         author    = personList(person(given="David",family="Zamar"),
+                                person(given="Brad",family="McNeney"),
+                                person(given="Jinko",family="Graham")),
+         journal   = "Journal of Statistical Software",
+         volume    = "21",
+         number    = "3",
+         year      = "2007",
+         url       = "http://www.jstatsoft.org/",
+         
+         textVersion = paste("Zamar D, McNeney B and Graham J.",
+                             "elrm: Software Implementing Exact-like Inference for Logistic Regression Models.",
+                             "Journal of Statistical Software 2007, 21(3).")
+);
+
+citFooter("We have invested a lot of time and effort in creating the elrm package,",
+          "please cite it when using it for data analysis.")

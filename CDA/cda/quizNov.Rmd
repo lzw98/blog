@@ -1,0 +1,180 @@
+---
+title: "practice"
+author: "林振炜"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(cdabookdb)
+library(cdabookfunc)
+library(MASS)
+library(dplyr)
+```
+
+
+## E1Q1
+
+```{r}
+data('horseshoecrabs')
+horseshoecrabs$psat <- as.integer(horseshoecrabs$Satellites > 0)
+m.full <- glm(psat~Weight+factor(Color)+Spine+Width+ Width*Weight,family = binomial(link = 'logit'),data = horseshoecrabs)
+m.null <- glm(psat~1,family = binomial(link = 'logit'),data = horseshoecrabs)
+
+m.step <- step(m.null, direction = "forward", trace = T,scope = list(lower = formula(m.null),upper = formula(m.full)));m.step
+summary(m.step)
+```
+
+## E1Q2
+
+```{r}
+m2.full <- glm(psat~Weight+Color+Spine+Width,family = binomial(link = 'logit'),data = horseshoecrabs)
+m2.step <- step(m2.full,direction = 'backward');m2.step
+```
+
+
+## E1Q3
+ - the aic of question1's model is 197.5, deviance is 187.5
+ - the aic of question2's model is 195.1, deviance is 189.1
+ so the two model is almost the same.
+ 
+ 
+```{r}
+m1.last <- glm(formula = psat ~ Width + factor(Color), family = binomial(link = "logit"),data = horseshoecrabs)
+
+library(ROCR)
+par(pty = "s")
+pred <- prediction(fitted(m1.last), horseshoecrabs$psat)
+perf <- performance(pred, "tpr", "fpr")
+plot(perf, asp =1, xaxs="i", yaxs="i")
+```
+
+## E2
+```{r}
+
+pi0 <- sum(horseshoecrabs$psat)/length(horseshoecrabs$psat)
+pi0
+pred_prob <- predict(m1.last, type = "response")
+pred_type <- cut(
+pred_prob, breaks = c(0, pi0, 1), labels = 0:1,
+include.lowest = TRUE
+)
+t <- table(horseshoecrabs$psat, pred_type)
+addmargins(t)
+```
+- so the sensitivity is $75/111 = 0.6757$
+- so the specificity is $43/62 =0.6935 $
+
+
+
+
+
+
+
+
+
+## E3
+```{r}
+m2.last <- glm(formula = psat ~ Color + Width, family = binomial(link = "logit"),data = horseshoecrabs)
+res <- resid(m2.last, type = "pearson")
+res[order(res)]
+```
+- so we can find that sample 171,94,87,157,128 maybe outliers.
+
+## E4
+```{r}
+library(ResourceSelection)
+library(cdabookfunc)
+library(tidyverse)
+data('UFAdmissions')
+ufa<- data.frame(UFAdmissions)
+ufa <- spread(ufa,Decision,Freq)
+m <- glm(cbind(Admitted,Rejected)~factor(Dept),data = ufa, family = binomial(link = 'logit'));summary(m)
+m <- glm(cbind(Admitted,Rejected)~factor(Dept)+factor(Gender),data = ufa, family = binomial(link = 'logit'));summary(m)
+
+
+```
+
+
+
+
+
+
+## E5
+```{r}
+library(cdabookfunc)
+m <- glm(psat ~ Color + Width, family = binomial(), data = horseshoecrabs)
+i<- influence.measures(m)
+influence.measures(m)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## E6
+
+# Question 1: repeat the example of perfect estimation. Fit a logistic model and report the result. The data is 
+
+# Question 2: repeat the example of sparse data and report the result of logstic regression with Treatment and Center(factor) without interaction. The data is 
+
+
+
+
+
+```{r}
+y0<-c(0,0,0,0,1,1,1,1)
+x0<-c(10,20,30,40,60,70,80,90)
+d0<-cbind(y0,x0)
+da<-as.data.frame(d0)
+m <- glm(da$y0~da$x0,family = binomial(link = 'logit'));summary(m)
+```
+- the result is $logit(\hat{\pi}) = -118.158 + 2.363\times x$
+
+```{r}
+center<-c(rep(1,2),rep(2,2),rep(3,2),rep(4,2),rep(5,2))
+treat<-c(1,0,1,0,1,0,1,0,1,0)
+yes<-c(0,0,1,0,0,0,6,2,5,2)
+n<-c(5,9,13,10,7,5,9,8,14,14)
+clinical<-cbind(center,treat,yes,n,resp=yes/n)
+clic<-as.data.frame(clinical)
+m <- glm(cbind(yes,n)~treat+factor(center),family = binomial(link='logit'),data = clic);summary(m)
+```
+
+
+
+

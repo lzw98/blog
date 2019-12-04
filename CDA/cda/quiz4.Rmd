@@ -1,0 +1,155 @@
+---
+title: "quiz4"
+author: "林振炜"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# Chapter 4
+
+
+
+
+
+## Example 1  Horseshoe crab grouped data logistic regression with Width
+```{r warning=FALSE, paged.print=FALSE}
+library(cdabookdb)
+library(cdabookfunc)
+library(MASS)
+library(dplyr)
+data("horseshoecrabs")
+```
+
+
+### Question 1: Fit logistic regression with ungrouped data with Width only.
+```{r}
+horseshoecrabs$psat <- as.integer(horseshoecrabs$Satellites > 0)
+logit_model <- glm(psat~Width,data = horseshoecrabs,family = binomial(link = 'logit'));summary(logit_model)
+```
+
+
+### Question 2: Fit logistic regression with grouped data with width only.
+```{r warning=FALSE, paged.print=FALSE}
+horseshoecrabs$width_group <- cut(horseshoecrabs$Width,
+                                  breaks = c(0, 23.25 + 0:6, Inf),
+                                  dig.lab = 4)
+
+mean_width_vs_prop <- sapply(levels(horseshoecrabs$width_group),function(x){
+  # Declare that is grouped by width_group
+  sub <- subset(horseshoecrabs,width_group==x)
+  c(mean(sub$psat),mean(sub$Width))
+})
+prop <- mean_width_vs_prop[1,]
+mean_width <- mean_width_vs_prop[2,]
+logit_model <- glm(prop~mean_width,family = binomial(link = 'logit'));summary(logit_model)
+```
+
+### Question 3: Repeat Question 1 and 2 on Weight only.
+```{r,warning=F}
+summary(horseshoecrabs$Weight)
+logit_model <- glm(psat~Weight,data = horseshoecrabs,family = binomial(link = 'logit'));summary(logit_model)
+
+
+horseshoecrabs$Weight_group <- cut(horseshoecrabs$Weight,
+                                  breaks = c(0, 1.2 + 0:4, Inf),
+                                  dig.lab = 4)#dig.lab是一个用于确认分割线精度的参数
+
+
+mean_Weight_vs_prop <- sapply(levels(horseshoecrabs$Weight_group),function(x){
+  # Declare that is grouped by Weight_group
+  sub <- subset(horseshoecrabs,Weight_group==x)
+  c(mean(sub$psat),mean(sub$Weight))
+})
+prop <- mean_Weight_vs_prop[1,]
+mean_Weight <- mean_Weight_vs_prop[2,]
+logit_model <- glm(prop~mean_Weight,family = binomial(link = 'logit'));summary(logit_model)
+```
+
+### Question 4: Fit logistic regression with ungrouped data. 
+              # (1) width and color, color is dummy/indicator.
+              # (2) width and color, color is score.
+              # (3) width and color, color is binary(dark or not).
+
+
+```{r}
+horseshoecrabs <- horseshoecrabs %>%
+  mutate(
+    Color_factor = factor(Color, 4:1) # Convert Color to a factor and set the factor level
+    )
+m1 <- glm(psat ~ Width + Color_factor, data = horseshoecrabs, family = binomial());summary(m1)
+
+m2 <- glm(psat~Width+Color,data = horseshoecrabs,family = binomial());summary(m2)
+horseshoecrabs$is_dark <- as.character(horseshoecrabs$Color < 4)
+m3 <- glm(psat ~ is_dark + Width,
+          family = binomial(),
+          data = horseshoecrabs)
+summary(m3)
+```
+
+### Question 5: with interaction
+              # (1) width and color, color is dummy/indicator.
+              # (2) width and color, color is score.
+              # (3) width and color, color is dark or not.
+```{r}
+m1 <- glm(psat ~ Width + Color_factor+Width*Color_factor, data = horseshoecrabs, family = binomial());summary(m1)
+
+m2 <- glm(psat~Width+Color+Width*Color,data = horseshoecrabs,family = binomial());summary(m2)
+horseshoecrabs$is_dark <- as.character(horseshoecrabs$Color < 4)
+m3 <- glm(psat ~ is_dark + Width+is_dark * Width,
+          family = binomial(),
+          data = horseshoecrabs)
+summary(m3)
+```
+
+
+
+
+##  Example 2: AZT  logsitc with categorical predictors
+
+
+### Question 1: fit logistic regression with Y and Treat and Race, no interactoin.
+```{r}
+library(tidyr)
+data("AZT")
+AZT_df <- spread(as.data.frame(AZT), Symptoms, Freq)
+AZT_df
+m <- glm(
+cbind(Yes, No) ~ (Race == "White") + (AZTUse == "Yes"),
+data = AZT_df,
+family = binomial("logit")
+)
+summary(m)
+```
+
+
+### Question 2: Use three-way table, analysis the conditional independence between Y and Treatment for two levels of Race, separately.
+
+```{r}
+white<-AZT[1,1:2,1:2]
+independent_test_of_table(white, "X2")
+black<-AZT[2,1:2,1:2]
+independent_test_of_table(black,'X2')
+
+```
+
+### Question 3: Conduct CMH test for AZT data.
+
+```{r}
+library(cdabookfunc)
+cmh.test(cond="Race",data=AZT)
+```
+
+
+
+
+

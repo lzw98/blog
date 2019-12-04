@@ -1,0 +1,8 @@
+"0","# if defendant is black
+ci <- c(exp(intercept+vic_estimation-vic_estimation_se*1.96),exp(intercept+vic_estimation+vic_estimation_se*1.96));ci
+"
+"1","[1]"
+"1"," 0.09358586"
+"1"," 0.98558096"
+"1","
+"

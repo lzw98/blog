@@ -1,0 +1,37 @@
+##########################################################
+# Chapter 3
+##########################################################
+
+####################################################
+# Example 1  Snoring and Hear disease
+####################################################
+
+### Question 1: Fitting and comparing logistic regression models with different scores
+scores.a <- c(0,2,4,5)
+scores.b <- c(0,2,4,6)
+scores.c <- 0:3
+scores.d <- 1:4
+
+### Question 2: fitting linear probability model, logistic modle, and Probit model with score "a" . 
+    Plot the prediction curves in one figure.
+
+####################################################
+# Example 2  Horseshoe crab Example
+####################################################
+
+### Question 1: fit Poisson loglinear model with raw data
+
+### Question 2: group the data by width
+
+### Question 3: fit the grouped data with Poisson loglinear model
+
+### Question 4: fit the grouped/ungrouped data with Negative loglinear model
+
+#############################################################
+# Example 3 Train collision
+#############################################################
+
+### Question 1: rate data regression using Poission loglinear model
+
+### Question 2: rate data regression using Negative binomial loglinear model
+

@@ -1,0 +1,11 @@
+crashDat                Crash Dataset: Calibration of Crash Dummies in
+                        Automobile Safety Tests
+diabDat                 Simulated Diabetes Dataset
+drugDat                 Drug Dataset
+elrm                    elrm: exact-like inference in logistic
+                        regression models
+plot.elrm               Plot Diagnostics for an elrm Object
+summary.elrm            Summarize an elrm Object
+titanDat                Titanic Dataset
+update.elrm             Update Method for Objects of Class elrm.
+utiDat                  Urinary Tract Infection and Contraceptive Use

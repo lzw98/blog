@@ -1,0 +1,79 @@
+---
+title: "贝叶斯统计第二次作业"
+author: 林振炜
+date: 2019年3月19日
+documentclass: ctexart
+output:
+  rticles::ctex:
+    fig_caption: yes #表示图上的注释保留
+    number_sections: yes #表示每一节的数字保留
+    toc: no #是否要输出目录
+classoption: "hyperref," #允许超链接
+geometry: tmargin = 1.8cm, bmargin = 1.8cm, lmargin = 2.1cm, rmargin = 2.1cm #用于调节页边距
+fontsize : 12pt #用于调节字体大小
+---
+
+
+
+
+
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE,results='hide'}
+library(dplyr)
+description <- read.csv('GDS5037/description.csv')
+##calulate the frequency and percentage of each category and plot pie chart
+s <- description %>%group_by(ID)%>%summarise(Counts=n())#if"%>%" errors,maybe the reason is the function can't be found
+library(ggplot2)
+type <- s$ID
+nums <- s$Counts
+df <- data.frame(type = type, nums = nums)
+
+```
+
+
+
+
+- 第七题
+
+(1)$$\begin{aligned}
+p(\mu=1.2|y=2)&=\frac{p(y=2|\mu=1.2)p(\mu=1.2)}{\sum_{i} p(y=2|\mu_{i})p(\mu_{i})}\\
+&=\frac{\frac{1.2^2}{2}e^{-1.2}\cdot0.2}{\frac{1.2^2}{2}e^{-1.2}\cdot0.2+\frac{3.1^2}{2}e^{-3.1}\cdot0.3+\frac{2^2}{2}e^{-2}\cdot0.4+\frac{4.2^2}{2}e^{-4.2}\cdot0.1}\\
+&\approx0.1887
+\end{aligned}$$
+
+(2)
+
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE,results='hide'}
+library(showtext)
+library(sysfonts)
+library(BayesianStat)
+mu<-c(1.2,3.1,2.0,4.2)
+mu.prior<-c(0.2,0.3,0.4,0.1)
+Poisdiscrete(y.obs = 2,mu,mu.prior,plot = TRUE)
+```
+
+- 第八题
+
+设$x=(x_1,\cdots,x_n)$是来自分布$F(x|\theta)$ 的一个样本，$T=T(x)$是一个统计量。如果在给定$T(x)=t$ 的条件下,x的条件分布与无关,即$p(x|\theta,T(x)=t)=p(x|T(x)=t)$,则称该统计量为$\theta$的充分统计量
+
+参数的充分统计量$T=T(x）$包含了样本x所包含的有关该参数的全部信息,因此在利用样本进行该参数的统计推断时，就可以利用该参数的充分统计量代替样本来进行。即后验分布可用该统计量的分布代替样本分布算得，从而简化了后验分布的计算。因此充分统计量可以看成样本的不减信息量的压缩。
+
+
+
+
+- 第十题
+
+(1)$$\begin{aligned}
+p(x_1,\cdots,x_n,\theta)&=(2\pi)^{-\frac{n}{2}}\cdot e^{-\frac{\sum_{i=1}^{n}(x_i-\theta)^2}{2}}\\
+&=(2\pi)^{-\frac{n}{2}}\cdot e^{-\frac{\sum_{i=1}^{n}x_i^2}{2}}\cdot e^{\theta n\bar{x}-\frac{n\theta^2}{2}}\\
+&=g(T(\textbf{x})=\bar{x},\theta)h(\textbf{x})
+\end{aligned}$$
+其中$g(T(\textbf{x})=\bar{x},\theta)=e^{\theta n\bar{x}-\frac{n\theta^2}{2}}$,$h(\textbf{x})=(2\pi)^{-\frac{n}{2}}\cdot e^{-\frac{\sum_{i=1}^{n}x_i^2}{2}}$,所以由因子分解定理得，样本均值$\bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i$是$\theta$的充分统计量。
+
+(2)$$\begin{aligned}
+\pi(\theta|T(\textbf{x})=\bar{x})&=\frac{p(t|\theta)\pi(\theta)}{\int_{\Theta} p(t|\theta)\pi(\theta)\, d\theta}\\
+&=\frac{e^{-\frac{(\theta-B/A)^2}{2/A}}}{\int_{-\infty}^{+\infty}e^{-\frac{(\theta-B/A)^2}{2/A}}d\theta}\\
+&=(\frac{2\pi}{A})^{\frac{1}{2}}e^{-\frac{(\theta-B/A)^2}{2/A}}
+\end{aligned}$$
+其中记$t=\bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i$,$A=\frac{n\tau^2+1}{\tau^2}$,$B=nt$,显然后验分布服从均值为$\frac{B}{A}=\frac{nt\tau}{n\tau^2+1}$方差为$\frac{1}{A}=\frac{\tau^2}{n\tau^2+1}$的正态分布。
+
+

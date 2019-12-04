@@ -1,0 +1,536 @@
+\documentclass[12pt,hyperref,]{ctexart}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[tmargin = 1.8cm, bmargin = 1.8cm, lmargin = 2.1cm, rmargin = 2.1cm]{geometry}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\usepackage[usenames,dvipsnames]{color}
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={林振炜},
+            pdftitle={cda10月15日课堂},
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\RecustomVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},formatcom=\xeCJKVerbAddon}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+
+\title{cda10月15日课堂}
+\author{林振炜}
+\date{2019年3月19日}
+
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\begin{document}
+\maketitle
+
+\begin{itemize}
+\tightlist
+\item
+  1
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(cdabookdb)}
+\KeywordTok{data}\NormalTok{(}\StringTok{'afterlife1'}\NormalTok{)}
+\KeywordTok{addmargins}\NormalTok{(afterlife1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Belief
+## Gender     Yes No or Undecided  Sum
+##   Females  509             116  625
+##   Males    398             104  502
+##   Sum      907             220 1127
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{prop.table}\NormalTok{(afterlife1,}\DataTypeTok{margin =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Belief
+## Gender          Yes No or Undecided
+##   Females 0.8144000       0.1856000
+##   Males   0.7928287       0.2071713
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{prop.table}\NormalTok{(afterlife1,}\DataTypeTok{margin =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Belief
+## Gender          Yes No or Undecided
+##   Females 0.5611907       0.5272727
+##   Males   0.4388093       0.4727273
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{prop.test}\NormalTok{(afterlife1,}\DataTypeTok{alternative =} \StringTok{'less'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  2-sample test for equality of proportions with continuity
+##  correction
+## 
+## data:  afterlife1
+## X-squared = 0.69298, df = 1, p-value = 0.7974
+## alternative hypothesis: less
+## 95 percent confidence interval:
+##  -1.00000000  0.06260453
+## sample estimates:
+##    prop 1    prop 2 
+## 0.8144000 0.7928287
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  2
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(cdabookfunc)}
+\KeywordTok{data}\NormalTok{(}\StringTok{'aspirin'}\NormalTok{)}
+\NormalTok{aspirin}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          MI
+## Group         Y     N
+##   Placebo   189 10845
+##   Aspirin   104 10933
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{theta <-}\StringTok{ }\KeywordTok{oddsratio}\NormalTok{(aspirin);theta}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.832054
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{theta <-}\StringTok{ }\KeywordTok{log}\NormalTok{(theta);theta}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6054377
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{se <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{189}\OperatorTok{+}\DecValTok{1}\OperatorTok{/}\DecValTok{104}\OperatorTok{+}\DecValTok{1}\OperatorTok{/}\DecValTok{10845}\OperatorTok{+}\DecValTok{1}\OperatorTok{/}\DecValTok{10933}\NormalTok{)}
+\NormalTok{interval <-}\StringTok{ }\KeywordTok{c}\NormalTok{(theta}\FloatTok{-1.96}\OperatorTok{*}\NormalTok{se,theta}\FloatTok{+1.96}\OperatorTok{*}\NormalTok{se)}
+\NormalTok{interval}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3646681 0.8462073
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  3
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{'gender_party'}\NormalTok{)}
+\NormalTok{gender_party}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Party
+## Gender    Democrat Independent Republican
+##   Females      762         327        468
+##   Males        484         239        477
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x2 <-}\StringTok{ }\KeywordTok{chisq.test}\NormalTok{(gender_party);x2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's Chi-squared test
+## 
+## data:  gender_party
+## X-squared = 30.07, df = 2, p-value = 2.954e-07
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gender_party_expected <-}\StringTok{ }\NormalTok{x2}\OperatorTok{$}\NormalTok{expected }\CommentTok{# obtaining the mean under the independence hypothesis}
+\NormalTok{gender_party_expected}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Party
+## Gender    Democrat Independent Republican
+##   Females 703.6714    319.6453   533.6834
+##   Males   542.3286    246.3547   411.3166
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Gsq <-}\StringTok{ }\DecValTok{2} \OperatorTok{*}\StringTok{ }\KeywordTok{sum}\NormalTok{(gender_party }\OperatorTok{*}\StringTok{ }\KeywordTok{log}\NormalTok{(gender_party }\OperatorTok{/}\StringTok{ }\NormalTok{gender_party_expected))}
+\NormalTok{pvalue <-}\StringTok{ }\DecValTok{1} \OperatorTok{-}\StringTok{ }\KeywordTok{pchisq}\NormalTok{(Gsq, }\DecValTok{2}\NormalTok{)}
+\NormalTok{Gsq; pvalue}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 30.01669
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 3.033598e-07
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#residuals}
+\NormalTok{residual <-}\StringTok{ }\NormalTok{gender_party }\OperatorTok{-}\StringTok{ }\NormalTok{gender_party_expected;residual}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Party
+## Gender      Democrat Independent Republican
+##   Females  58.328618    7.354733 -65.683351
+##   Males   -58.328618   -7.354733  65.683351
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  4
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(cdabookdb)}
+\KeywordTok{library}\NormalTok{(cdabookfunc)}
+\KeywordTok{data}\NormalTok{(}\StringTok{'malformation'}\NormalTok{);malformation}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        Malformation
+## Alcohol Absent Present
+##     0    17066      48
+##     <1   14464      38
+##     1-2    788       5
+##     3-5    126       1
+##     >=6     37       1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x2 <-}\StringTok{ }\KeywordTok{chisq.test}\NormalTok{(malformation);x2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's Chi-squared test
+## 
+## data:  malformation
+## X-squared = 12.082, df = 4, p-value = 0.01675
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{independent_test_of_table}\NormalTok{(malformation,}\StringTok{'X2'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $method
+## [1] "X2"
+## 
+## $statistic
+## [1] 12.08205
+## 
+## $df
+## [1] 4
+## 
+## $p.value
+## [1] 0.0167514
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{independent_test_of_table}\NormalTok{(malformation,}\StringTok{'G2'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $method
+## [1] "G2"
+## 
+## $statistic
+## [1] 6.201998
+## 
+## $df
+## [1] 4
+## 
+## $p.value
+## [1] 0.1845623
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{independent_test_of_table}\NormalTok{(malformation,}\StringTok{"all"}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{1.5}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{7}\NormalTok{),}\DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      method statistic df p.value   
+## [1,] "X2"   12.08205  4  0.0167514 
+## [2,] "G2"   6.201998  4  0.1845623 
+## [3,] "M2"   6.569932  1  0.01037159
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{independent_test_of_table}\NormalTok{(malformation,}\StringTok{"all"}\NormalTok{,}\KeywordTok{c}\NormalTok{((}\DecValTok{1}\OperatorTok{+}\DecValTok{17114}\NormalTok{)}\OperatorTok{/}\DecValTok{2}\NormalTok{,(}\DecValTok{17115}\OperatorTok{+}\DecValTok{14502}\NormalTok{)}\OperatorTok{/}\DecValTok{2}\NormalTok{,(}\DecValTok{17114}\OperatorTok{+}\DecValTok{14502}\OperatorTok{+}\DecValTok{1}\OperatorTok{+}\DecValTok{793}\NormalTok{)}\OperatorTok{/}\DecValTok{2}\NormalTok{,(}\DecValTok{17114}\OperatorTok{+}\DecValTok{14502}\OperatorTok{+}\DecValTok{793}\OperatorTok{+}\DecValTok{1}\OperatorTok{+}\DecValTok{127}\NormalTok{)}\OperatorTok{/}\DecValTok{2}\NormalTok{,(}\DecValTok{17114}\OperatorTok{+}\DecValTok{14502}\OperatorTok{+}\DecValTok{793}\OperatorTok{+}\DecValTok{127}\OperatorTok{+}\DecValTok{1}\OperatorTok{+}\DecValTok{38}\NormalTok{)}\OperatorTok{/}\DecValTok{2}\NormalTok{),}\DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{)}\CommentTok{#mid rank}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      method statistic  df p.value  
+## [1,] "X2"   12.08205   4  0.0167514
+## [2,] "G2"   6.201998   4  0.1845623
+## [3,] "M2"   0.05289788 1  0.8180954
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{independent_test_of_table}\NormalTok{(malformation,}\StringTok{"all"}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      method statistic df p.value  
+## [1,] "X2"   12.08205  4  0.0167514
+## [2,] "G2"   6.201998  4  0.1845623
+## [3,] "M2"   1.82776   1  0.1763924
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{independent_test_of_table}\NormalTok{(malformation,}\StringTok{"all"}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{),}\DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      method statistic df p.value  
+## [1,] "X2"   12.08205  4  0.0167514
+## [2,] "G2"   6.201998  4  0.1845623
+## [3,] "M2"   1.82776   1  0.1763924
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{independent_test_of_table}\NormalTok{(malformation,}\StringTok{"all"}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{),}\DecValTok{1}\OperatorTok{:}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      method statistic df p.value  
+## [1,] "X2"   12.08205  4  0.0167514
+## [2,] "G2"   6.201998  4  0.1845623
+## [3,] "M2"   1.82776   1  0.1763924
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{independent_test_of_table}\NormalTok{(malformation,}\StringTok{"all"}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{10}\NormalTok{),}\DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      method statistic df p.value  
+## [1,] "X2"   12.08205  4  0.0167514
+## [2,] "G2"   6.201998  4  0.1845623
+## [3,] "M2"   1.82776   1  0.1763924
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{independent_test_of_table}\NormalTok{(malformation,}\StringTok{"all"}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{10}\NormalTok{),}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      method statistic df p.value  
+## [1,] "X2"   12.08205  4  0.0167514
+## [2,] "G2"   6.201998  4  0.1845623
+## [3,] "M2"   1.82776   1  0.1763924
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{independent_test_of_table}\NormalTok{(malformation,}\StringTok{"all"}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{10}\NormalTok{),}\DecValTok{3}\OperatorTok{:}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      method statistic df p.value  
+## [1,] "X2"   12.08205  4  0.0167514
+## [2,] "G2"   6.201998  4  0.1845623
+## [3,] "M2"   1.82776   1  0.1763924
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  5
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tea_tasting <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{fisher.test}\NormalTok{(tea_tasting,}\DataTypeTok{alternative =}\StringTok{'g'}\NormalTok{)}\CommentTok{#alternative greater}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Fisher's Exact Test for Count Data
+## 
+## data:  tea_tasting
+## p-value = 0.7778
+## alternative hypothesis: true odds ratio is greater than 1
+## 95 percent confidence interval:
+##  0.02087826        Inf
+## sample estimates:
+## odds ratio 
+##          1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{fisher.test}\NormalTok{(tea_tasting,}\DataTypeTok{alternative =} \StringTok{'t'}\NormalTok{)}\CommentTok{#alternative not equal}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Fisher's Exact Test for Count Data
+## 
+## data:  tea_tasting
+## p-value = 1
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##   0.01022439 97.80533740
+## sample estimates:
+## odds ratio 
+##          1
+\end{verbatim}
+
+\end{document}

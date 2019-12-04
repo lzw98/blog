@@ -1,0 +1,161 @@
+---
+title: "cda10月29日课堂"
+author: 林振炜
+date: 2019年10月29日
+documentclass: ctexart
+output:
+  rticles::ctex:
+    fig_caption: yes #表示图上的注释保留
+    number_sections: yes #表示每一节的数字保留
+    toc: no #是否要输出目录
+classoption: "hyperref," #允许超链接
+geometry: tmargin = 1.8cm, bmargin = 1.8cm, lmargin = 2.1cm, rmargin = 2.1cm #用于调节页边距
+fontsize : 12pt #用于调节字体大小
+---
+## 1 snoring and heart disease
+- question1
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+
+library(cdabookdb)
+data('snoring_heartdisease')
+snoring_heartdisease
+scores.a <- c(0,2,4,5)
+scores.b <- c(0,2,4,6)
+scores.c <- 0:3
+scores.d <- 1:4
+
+snoring_logit <- glm(
+  snoring_heartdisease ~ scores.a, family = binomial(link = 'logit' )
+)
+snoring_logit
+
+snoring_logit <- glm(
+  snoring_heartdisease ~ scores.b, family = binomial(link = 'logit' )
+)
+snoring_logit
+
+snoring_linger <- glm(
+  snoring_heartdisease ~ scores.c, family = binomial(link = 'logit' )
+)
+snoring_logit
+
+snoring_logit <- glm(
+  snoring_heartdisease ~ scores.d, family = binomial(link = 'logit' )
+)
+snoring_logit
+```
+
+
+- question2
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+snoring_linear <- glm(
+snoring_heartdisease ~ scores.a, family = binomial(link = "identity")
+)
+snoring_logistics <- glm(
+snoring_heartdisease ~ scores.a, family = binomial(link = "logit")
+)
+snoring_probit <- glm(
+snoring_heartdisease ~ scores.a, family = binomial(link = "probit")
+)
+model_list <- list(snoring_linear, snoring_logistics, snoring_probit)
+
+estimated_coef <- sapply(model_list, coef)
+colnames(estimated_coef) <- c("linear", "logit", "probit")
+round(estimated_coef, digits = 3)
+
+pred_prob <- sapply(model_list, predict, type = "response")
+colnames(pred_prob) <- c("linear", "logit", "probit")
+round(pred_prob, digits = 3)
+
+snoring_new <- seq(0,5,0.01)
+plot(
+NULL,
+xlim = c(0, 5), ylim = c(0, 0.2),
+xlab = "Snoring", ylab = "Predicted Probability"
+)
+
+line_col <- c(identity = 2, logit = 3, probit = 5)
+sapply(model_list, function(m) {
+pred_result <- predict(m, data.frame(scores.a = snoring_new), type = "response");pred_result
+lines(
+snoring_new, pred_result, type = "l",
+lty = 1, col = line_col[m$family$link]
+)
+}
+)
+legend(1, 0.15, names(line_col), col = line_col, lty = 1)
+
+```
+## 2
+- q1
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+data('horseshoecrabs')
+m1 <- glm(Satellites ~ Width, family = poisson(), data = horseshoecrabs);summary(m1)
+```
+
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+#group by width first, calculate the average width and number of satellites
+width_group <- cut(horseshoecrabs$Width,
+                   breaks = c(0, 23.25 + 0:6, Inf),
+                   dig.lab = 4)
+mean_width_vs_sat <- sapply(levels(width_group),
+                            function(x){
+                              # Declare that is grouped by width_group
+                              sub <- subset(horseshoecrabs,width_group==x)
+                              c(mean(sub$Satellites),mean(sub$Width))
+}
+)
+
+mean_satellite <- mean_width_vs_sat[1,] # average satellite of Each group
+mean_width <- mean_width_vs_sat[2,] # average width of each group
+
+plot(
+mean_satellite ~ mean_width,
+pch = 20, # set type of points as solid ball
+xlab = "Width", ylab = "Number of Satellites" # labels of axes
+)
+x <- seq(22, 32, 0.1)
+y_m1 <- predict(m1, data.frame(Width = x), type = "response")
+
+lines(x, y_m1, type = "l", col = 2)
+
+# grouped data with poisson loglinear model
+po_log_m <- glm(
+  mean_satellite ~ mean_width,
+  family = poisson(link = 'log'),
+  data = data.frame(mean_satellite,mean_width),
+  start = coef(m1)
+);summary(po_log_m)
+
+#fit the grouped/ungrouped data with Negative loglinear model
+library(MASS)
+m1 <- glm(
+  Satellites ~ Width,
+  family = negative.binomial(theta = 1 / 1.1),
+  data = horseshoecrabs
+);summary(m1)
+
+m2 <- glm.nb(Satellites~Width,data = horseshoecrabs)
+
+grouped_m <- glm.nb(mean_satellite~mean_width,data = data.frame(mean_satellite,mean_width));summary(grouped_m)
+
+```
+
+
+
+
+## 3
+- q1
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+data('traincollisions')
+traincollisions$year0 <- traincollisions$Year-1975
+m_poisson <- glm(
+  TrRd ~ year0,
+  data = traincollisions,family = poisson(),
+  offset = log(traincollisions$KM)
+);summary(m_poisson)
+
+m_nb <- glm(
+  TrRd~year0,data = traincollisions,offset = log(traincollisions$KM)
+);summary(m_nb)
+```

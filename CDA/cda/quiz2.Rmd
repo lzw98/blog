@@ -1,0 +1,84 @@
+---
+title: "cda10月15日课堂"
+author: 林振炜
+date: 2019年3月19日
+documentclass: ctexart
+output:
+  rticles::ctex:
+    fig_caption: yes #表示图上的注释保留
+    number_sections: yes #表示每一节的数字保留
+    toc: no #是否要输出目录
+classoption: "hyperref," #允许超链接
+geometry: tmargin = 1.8cm, bmargin = 1.8cm, lmargin = 2.1cm, rmargin = 2.1cm #用于调节页边距
+fontsize : 12pt #用于调节字体大小
+---
+- 1 
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+
+library(cdabookdb)
+data('afterlife1')
+addmargins(afterlife1)
+prop.table(afterlife1,margin = 1)
+prop.table(afterlife1,margin = 2)
+prop.test(afterlife1,alternative = 'less')
+
+```
+
+
+- 2 
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+library(cdabookfunc)
+data('aspirin')
+aspirin
+theta <- oddsratio(aspirin);theta
+theta <- log(theta);theta
+
+se <- sqrt(1/189+1/104+1/10845+1/10933)
+interval <- c(theta-1.96*se,theta+1.96*se)
+interval
+```
+
+- 3 
+ 
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+data('gender_party')
+gender_party
+x2 <- chisq.test(gender_party);x2
+gender_party_expected <- x2$expected # obtaining the mean under the independence hypothesis
+gender_party_expected
+Gsq <- 2 * sum(gender_party * log(gender_party / gender_party_expected))
+pvalue <- 1 - pchisq(Gsq, 2)
+Gsq; pvalue
+
+
+#residuals
+residual <- gender_party - gender_party_expected;residual
+```
+
+
+- 4
+
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+library(cdabookdb)
+library(cdabookfunc)
+data('malformation');malformation
+x2 <- chisq.test(malformation);x2
+independent_test_of_table(malformation,'X2')
+independent_test_of_table(malformation,'G2')
+independent_test_of_table(malformation,"all",c(0,0.5,1.5,4,7),0:1)
+independent_test_of_table(malformation,"all",c((1+17114)/2,(17115+14502)/2,(17114+14502+1+793)/2,(17114+14502+793+1+127)/2,(17114+14502+793+127+1+38)/2),0:1)#mid rank
+independent_test_of_table(malformation,"all",c(0,1,2,3,4),0:1)
+independent_test_of_table(malformation,"all",c(1,2,3,4,5),0:1)
+independent_test_of_table(malformation,"all",c(0,1,2,3,4),1:0)
+independent_test_of_table(malformation,"all",c(2,4,6,8,10),0:1)
+independent_test_of_table(malformation,"all",c(2,4,6,8,10),1:2)
+independent_test_of_table(malformation,"all",c(2,4,6,8,10),3:4)
+```
+
+- 5 
+```{r fig.showtext=TRUE,message=FALSE, warning=FALSE, paged.print=FALSE}
+tea_tasting <- matrix(c(4,1,4,1),nrow = 2)
+fisher.test(tea_tasting,alternative ='g')#alternative greater
+fisher.test(tea_tasting,alternative = 't')#alternative not equal
+```
+

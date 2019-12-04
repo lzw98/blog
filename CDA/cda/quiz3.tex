@@ -1,0 +1,584 @@
+\documentclass[12pt,hyperref,]{ctexart}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[tmargin = 1.8cm, bmargin = 1.8cm, lmargin = 2.1cm, rmargin = 2.1cm]{geometry}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\usepackage[usenames,dvipsnames]{color}
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={林振炜},
+            pdftitle={cda10月29日课堂},
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\RecustomVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},formatcom=\xeCJKVerbAddon}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+
+\title{cda10月29日课堂}
+\author{林振炜}
+\date{2019年10月29日}
+
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\begin{document}
+\maketitle
+
+\hypertarget{snoring-and-heart-disease}{%
+\subsection{1 snoring and heart
+disease}\label{snoring-and-heart-disease}}
+
+\begin{itemize}
+\tightlist
+\item
+  question1
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(cdabookdb)}
+\KeywordTok{data}\NormalTok{(}\StringTok{'snoring_heartdisease'}\NormalTok{)}
+\NormalTok{snoring_heartdisease}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                     Heartdisease
+## Snoring               Yes   No
+##   Never                24 1355
+##   Occasional           35  603
+##   Nearly every night   21  192
+##   Every night          30  224
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{scores.a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\NormalTok{scores.b <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{)}
+\NormalTok{scores.c <-}\StringTok{ }\DecValTok{0}\OperatorTok{:}\DecValTok{3}
+\NormalTok{scores.d <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{4}
+
+\NormalTok{snoring_logit <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{  snoring_heartdisease }\OperatorTok{~}\StringTok{ }\NormalTok{scores.a, }\DataTypeTok{family =} \KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link =} \StringTok{'logit'}\NormalTok{ )}
+\NormalTok{)}
+\NormalTok{snoring_logit}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:  glm(formula = snoring_heartdisease ~ scores.a, family = binomial(link = "logit"))
+## 
+## Coefficients:
+## (Intercept)     scores.a  
+##     -3.8662       0.3973  
+## 
+## Degrees of Freedom: 3 Total (i.e. Null);  2 Residual
+## Null Deviance:       65.9 
+## Residual Deviance: 2.809     AIC: 27.06
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{snoring_logit <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{  snoring_heartdisease }\OperatorTok{~}\StringTok{ }\NormalTok{scores.b, }\DataTypeTok{family =} \KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link =} \StringTok{'logit'}\NormalTok{ )}
+\NormalTok{)}
+\NormalTok{snoring_logit}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:  glm(formula = snoring_heartdisease ~ scores.b, family = binomial(link = "logit"))
+## 
+## Coefficients:
+## (Intercept)     scores.b  
+##     -3.7774       0.3273  
+## 
+## Degrees of Freedom: 3 Total (i.e. Null);  2 Residual
+## Null Deviance:       65.9 
+## Residual Deviance: 6.24  AIC: 30.49
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{snoring_linger <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{  snoring_heartdisease }\OperatorTok{~}\StringTok{ }\NormalTok{scores.c, }\DataTypeTok{family =} \KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link =} \StringTok{'logit'}\NormalTok{ )}
+\NormalTok{)}
+\NormalTok{snoring_logit}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:  glm(formula = snoring_heartdisease ~ scores.b, family = binomial(link = "logit"))
+## 
+## Coefficients:
+## (Intercept)     scores.b  
+##     -3.7774       0.3273  
+## 
+## Degrees of Freedom: 3 Total (i.e. Null);  2 Residual
+## Null Deviance:       65.9 
+## Residual Deviance: 6.24  AIC: 30.49
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{snoring_logit <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{  snoring_heartdisease }\OperatorTok{~}\StringTok{ }\NormalTok{scores.d, }\DataTypeTok{family =} \KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link =} \StringTok{'logit'}\NormalTok{ )}
+\NormalTok{)}
+\NormalTok{snoring_logit}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:  glm(formula = snoring_heartdisease ~ scores.d, family = binomial(link = "logit"))
+## 
+## Coefficients:
+## (Intercept)     scores.d  
+##     -4.4319       0.6545  
+## 
+## Degrees of Freedom: 3 Total (i.e. Null);  2 Residual
+## Null Deviance:       65.9 
+## Residual Deviance: 6.24  AIC: 30.49
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  question2
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{snoring_linear <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{snoring_heartdisease }\OperatorTok{~}\StringTok{ }\NormalTok{scores.a, }\DataTypeTok{family =} \KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link =} \StringTok{"identity"}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{snoring_logistics <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{snoring_heartdisease }\OperatorTok{~}\StringTok{ }\NormalTok{scores.a, }\DataTypeTok{family =} \KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link =} \StringTok{"logit"}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{snoring_probit <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{snoring_heartdisease }\OperatorTok{~}\StringTok{ }\NormalTok{scores.a, }\DataTypeTok{family =} \KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link =} \StringTok{"probit"}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{model_list <-}\StringTok{ }\KeywordTok{list}\NormalTok{(snoring_linear, snoring_logistics, snoring_probit)}
+
+\NormalTok{estimated_coef <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(model_list, coef)}
+\KeywordTok{colnames}\NormalTok{(estimated_coef) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"linear"}\NormalTok{, }\StringTok{"logit"}\NormalTok{, }\StringTok{"probit"}\NormalTok{)}
+\KeywordTok{round}\NormalTok{(estimated_coef, }\DataTypeTok{digits =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             linear  logit probit
+## (Intercept)  0.017 -3.866 -2.061
+## scores.a     0.020  0.397  0.188
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred_prob <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(model_list, predict, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(pred_prob) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"linear"}\NormalTok{, }\StringTok{"logit"}\NormalTok{, }\StringTok{"probit"}\NormalTok{)}
+\KeywordTok{round}\NormalTok{(pred_prob, }\DataTypeTok{digits =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    linear logit probit
+## Never               0.017 0.021  0.020
+## Occasional          0.057 0.044  0.046
+## Nearly every night  0.096 0.093  0.095
+## Every night         0.116 0.132  0.131
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{snoring_new <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{,}\FloatTok{0.01}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(}
+\OtherTok{NULL}\NormalTok{,}
+\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{), }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{0.2}\NormalTok{),}
+\DataTypeTok{xlab =} \StringTok{"Snoring"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Predicted Probability"}
+\NormalTok{)}
+
+\NormalTok{line_col <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DataTypeTok{identity =} \DecValTok{2}\NormalTok{, }\DataTypeTok{logit =} \DecValTok{3}\NormalTok{, }\DataTypeTok{probit =} \DecValTok{5}\NormalTok{)}
+\KeywordTok{sapply}\NormalTok{(model_list, }\ControlFlowTok{function}\NormalTok{(m) \{}
+\NormalTok{pred_result <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(m, }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{scores.a =}\NormalTok{ snoring_new), }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{);pred_result}
+\KeywordTok{lines}\NormalTok{(}
+\NormalTok{snoring_new, pred_result, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{,}
+\DataTypeTok{lty =} \DecValTok{1}\NormalTok{, }\DataTypeTok{col =}\NormalTok{ line_col[m}\OperatorTok{$}\NormalTok{family}\OperatorTok{$}\NormalTok{link]}
+\NormalTok{)}
+\NormalTok{\}}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## NULL
+## 
+## [[2]]
+## NULL
+## 
+## [[3]]
+## NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{legend}\NormalTok{(}\DecValTok{1}\NormalTok{, }\FloatTok{0.15}\NormalTok{, }\KeywordTok{names}\NormalTok{(line_col), }\DataTypeTok{col =}\NormalTok{ line_col, }\DataTypeTok{lty =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{quiz3_files/figure-latex/unnamed-chunk-2-1.pdf} \#\# 2
+- q1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{'horseshoecrabs'}\NormalTok{)}
+\NormalTok{m1 <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(Satellites }\OperatorTok{~}\StringTok{ }\NormalTok{Width, }\DataTypeTok{family =} \KeywordTok{poisson}\NormalTok{(), }\DataTypeTok{data =}\NormalTok{ horseshoecrabs);}\KeywordTok{summary}\NormalTok{(m1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = Satellites ~ Width, family = poisson(), data = horseshoecrabs)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.8526  -1.9884  -0.4933   1.0970   4.9221  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) -3.30476    0.54224  -6.095  1.1e-09 ***
+## Width        0.16405    0.01997   8.216  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 632.79  on 172  degrees of freedom
+## Residual deviance: 567.88  on 171  degrees of freedom
+## AIC: 927.18
+## 
+## Number of Fisher Scoring iterations: 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#group by width first, calculate the average width and number of satellites}
+\NormalTok{width_group <-}\StringTok{ }\KeywordTok{cut}\NormalTok{(horseshoecrabs}\OperatorTok{$}\NormalTok{Width,}
+                   \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{23.25} \OperatorTok{+}\StringTok{ }\DecValTok{0}\OperatorTok{:}\DecValTok{6}\NormalTok{, }\OtherTok{Inf}\NormalTok{),}
+                   \DataTypeTok{dig.lab =} \DecValTok{4}\NormalTok{)}
+\NormalTok{mean_width_vs_sat <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(}\KeywordTok{levels}\NormalTok{(width_group),}
+                            \ControlFlowTok{function}\NormalTok{(x)\{}
+                              \CommentTok{# Declare that is grouped by width_group}
+\NormalTok{                              sub <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(horseshoecrabs,width_group}\OperatorTok{==}\NormalTok{x)}
+                              \KeywordTok{c}\NormalTok{(}\KeywordTok{mean}\NormalTok{(sub}\OperatorTok{$}\NormalTok{Satellites),}\KeywordTok{mean}\NormalTok{(sub}\OperatorTok{$}\NormalTok{Width))}
+\NormalTok{\}}
+\NormalTok{)}
+
+\NormalTok{mean_satellite <-}\StringTok{ }\NormalTok{mean_width_vs_sat[}\DecValTok{1}\NormalTok{,] }\CommentTok{# average satellite of Each group}
+\NormalTok{mean_width <-}\StringTok{ }\NormalTok{mean_width_vs_sat[}\DecValTok{2}\NormalTok{,] }\CommentTok{# average width of each group}
+
+\KeywordTok{plot}\NormalTok{(}
+\NormalTok{mean_satellite }\OperatorTok{~}\StringTok{ }\NormalTok{mean_width,}
+\DataTypeTok{pch =} \DecValTok{20}\NormalTok{, }\CommentTok{# set type of points as solid ball}
+\DataTypeTok{xlab =} \StringTok{"Width"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"Number of Satellites"} \CommentTok{# labels of axes}
+\NormalTok{)}
+\NormalTok{x <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{22}\NormalTok{, }\DecValTok{32}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+\NormalTok{y_m1 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(m1, }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{Width =}\NormalTok{ x), }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
+
+\KeywordTok{lines}\NormalTok{(x, y_m1, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }\DataTypeTok{col =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{quiz3_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# grouped data with poisson loglinear model}
+\NormalTok{po_log_m <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{  mean_satellite }\OperatorTok{~}\StringTok{ }\NormalTok{mean_width,}
+  \DataTypeTok{family =} \KeywordTok{poisson}\NormalTok{(}\DataTypeTok{link =} \StringTok{'log'}\NormalTok{),}
+  \DataTypeTok{data =} \KeywordTok{data.frame}\NormalTok{(mean_satellite,mean_width),}
+  \DataTypeTok{start =} \KeywordTok{coef}\NormalTok{(m1)}
+\NormalTok{);}\KeywordTok{summary}\NormalTok{(po_log_m)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = mean_satellite ~ mean_width, family = poisson(link = "log"), 
+##     data = data.frame(mean_satellite, mean_width), start = coef(m1))
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -0.32971  -0.17962  -0.02783   0.19032   0.27335  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)  
+## (Intercept) -3.80578    2.41755  -1.574   0.1154  
+## mean_width   0.18148    0.08794   2.064   0.0391 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 4.74059  on 7  degrees of freedom
+## Residual deviance: 0.34557  on 6  degrees of freedom
+## AIC: Inf
+## 
+## Number of Fisher Scoring iterations: 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#fit the grouped/ungrouped data with Negative loglinear model}
+\KeywordTok{library}\NormalTok{(MASS)}
+\NormalTok{m1 <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{  Satellites }\OperatorTok{~}\StringTok{ }\NormalTok{Width,}
+  \DataTypeTok{family =} \KeywordTok{negative.binomial}\NormalTok{(}\DataTypeTok{theta =} \DecValTok{1} \OperatorTok{/}\StringTok{ }\FloatTok{1.1}\NormalTok{),}
+  \DataTypeTok{data =}\NormalTok{ horseshoecrabs}
+\NormalTok{);}\KeywordTok{summary}\NormalTok{(m1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = Satellites ~ Width, family = negative.binomial(theta = 1/1.1), 
+##     data = horseshoecrabs)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.7821  -1.4124  -0.2507   0.4780   2.0218  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -4.05144    1.07767  -3.759 0.000234 ***
+## Width        0.19203    0.04053   4.738 4.52e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for Negative Binomial(0.9091) family taken to be 0.8495001)
+## 
+##     Null deviance: 213.63  on 172  degrees of freedom
+## Residual deviance: 196.33  on 171  degrees of freedom
+## AIC: 755.29
+## 
+## Number of Fisher Scoring iterations: 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m2 <-}\StringTok{ }\KeywordTok{glm.nb}\NormalTok{(Satellites}\OperatorTok{~}\NormalTok{Width,}\DataTypeTok{data =}\NormalTok{ horseshoecrabs)}
+
+\NormalTok{grouped_m <-}\StringTok{ }\KeywordTok{glm.nb}\NormalTok{(mean_satellite}\OperatorTok{~}\NormalTok{mean_width,}\DataTypeTok{data =} \KeywordTok{data.frame}\NormalTok{(mean_satellite,mean_width));}\KeywordTok{summary}\NormalTok{(grouped_m)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm.nb(formula = mean_satellite ~ mean_width, data = data.frame(mean_satellite, 
+##     mean_width), init.theta = 809199.3517, link = log)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -0.32971  -0.17962  -0.02783   0.19032   0.27335  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)  
+## (Intercept) -3.80578    2.41756  -1.574   0.1154  
+## mean_width   0.18148    0.08794   2.064   0.0391 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for Negative Binomial(809199.4) family taken to be 1)
+## 
+##     Null deviance: 4.74057  on 7  degrees of freedom
+## Residual deviance: 0.34557  on 6  degrees of freedom
+## AIC: 29.268
+## 
+## Number of Fisher Scoring iterations: 1
+## 
+## 
+##               Theta:  809199 
+##           Std. Err.:  83480518 
+## Warning while fitting theta: iteration limit reached 
+## 
+##  2 x log-likelihood:  -23.268
+\end{verbatim}
+
+\hypertarget{section}{%
+\subsection{3}\label{section}}
+
+\begin{itemize}
+\tightlist
+\item
+  q1
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{'traincollisions'}\NormalTok{)}
+\NormalTok{traincollisions}\OperatorTok{$}\NormalTok{year0 <-}\StringTok{ }\NormalTok{traincollisions}\OperatorTok{$}\NormalTok{Year}\DecValTok{-1975}
+\NormalTok{m_poisson <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{  TrRd }\OperatorTok{~}\StringTok{ }\NormalTok{year0,}
+  \DataTypeTok{data =}\NormalTok{ traincollisions,}\DataTypeTok{family =} \KeywordTok{poisson}\NormalTok{(),}
+  \DataTypeTok{offset =} \KeywordTok{log}\NormalTok{(traincollisions}\OperatorTok{$}\NormalTok{KM)}
+\NormalTok{);}\KeywordTok{summary}\NormalTok{(m_poisson)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = TrRd ~ year0, family = poisson(), data = traincollisions, 
+##     offset = log(traincollisions$KM))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.0580  -0.7825  -0.0826   0.3775   3.3873  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) -4.21142    0.15892  -26.50  < 2e-16 ***
+## year0       -0.03292    0.01076   -3.06  0.00222 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 47.376  on 28  degrees of freedom
+## Residual deviance: 37.853  on 27  degrees of freedom
+## AIC: 133.52
+## 
+## Number of Fisher Scoring iterations: 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m_nb <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(}
+\NormalTok{  TrRd}\OperatorTok{~}\NormalTok{year0,}\DataTypeTok{data =}\NormalTok{ traincollisions,}\DataTypeTok{offset =} \KeywordTok{log}\NormalTok{(traincollisions}\OperatorTok{$}\NormalTok{KM)}
+\NormalTok{);}\KeywordTok{summary}\NormalTok{(m_nb)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = TrRd ~ year0, data = traincollisions, offset = log(traincollisions$KM))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -3.8673  -1.6823  -0.0354   0.7589   8.4934  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)  
+## (Intercept) -0.21039    0.97446  -0.216   0.8307  
+## year0       -0.11899    0.05975  -1.992   0.0566 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 7.246704)
+## 
+##     Null deviance: 224.40  on 28  degrees of freedom
+## Residual deviance: 195.66  on 27  degrees of freedom
+## AIC: 143.66
+## 
+## Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\end{document}
