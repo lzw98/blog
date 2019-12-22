@@ -1,0 +1,209 @@
+##########################################################
+# Chapter 6
+##########################################################
+
+
+############################################################################
+# Example 1: Alligator Example by Baseline-category logit models
+############################################################################
+
+# Question 1: Building baseline-category logit model with Food ~ Length
+
+
+library(VGAM)
+library(nnet)
+library(VGAMdata)
+library(icda)
+
+data(alligators1) 
+
+attach(alligators1)
+
+# baseline is "F"
+
+fitm1<- vglm(Food ~ Length,family=multinomial, data=alligators1)
+summary(fitm1) 
+
+# baseline is "O"
+fFood<-factor(Food,level=c("O","I","F"))
+
+alligators1$fFood <- fFood
+
+fitm2<- vglm(fFood ~ Length, family=multinomial, data=alligators1)
+summary(fitm2)
+
+# Question 2: Baseline is "I"
+fFood<-factor(Food,level=c("I","F","O"))
+
+alligators1$fFood_I <- fFood
+
+fitm3<- vglm(fFood_I ~ Length, family=multinomial, data=alligators1)
+summary(fitm3)
+
+fitm4<- vglm(fFood_I ~ Length, family=multinomial, data=alligators1)
+summary(fitm4)
+
+############################################################################
+# Example 2: Belief in Afterlife Example by Baseline-category logit models Table 6.4
+############################################################################
+
+# Question 1: Fit baseline-category logit model  Believe ~ Gender + Race 
+data(afterlife) 
+
+attach(afterlife)
+
+fitm5<- vglm(Believe ~ Gender+Race,weights=Freq,family = multinomial, data=afterlife)
+summary(fitm5)
+
+# Question 2: "No" is baseline, and Female = 1, White =1 
+
+# "No" is baseline
+fBelieve<- factor(Believe, level=c("No","Yes","Undecided"))
+
+# Female =1
+fGender <- factor(Gender, level=c("Male","Female"))
+
+# White =1 
+fRace <- factor(Race, level=c("Black","White"))
+
+afterlife$fRace <- fRace
+afterlife$fGender <- fGender
+afterlife$fBelieve <- fBelieve
+
+fitm6<- vglm(fBelieve ~ fGender+fRace,family= multinomial, weights=Freq,data=afterlife)
+summary(fitm6)
+fitted(fitm6)
+
+############################################################################
+# Example 3: Political Ideology and Party Affiliation Example 
+############################################################################
+
+# Question 1: Fit this data by Cumulative Logit Models with Proportional Odds Property
+
+data(ideology) 
+
+attach(ideology)
+
+ideology
+
+#proportional odds model
+
+orderIdeology <- ordered(Ideology,  levels = c("VCon","SCon","Mod","SLib","VLib"))
+
+fit.order <- vglm(orderIdeology~ Party + Gender,weights=Freq,
+                  family=cumulative(parallel=TRUE), data=ideology)
+summary(fit.order)
+
+# Question 2: Male =1, Rep = 1
+
+fit.order2 <- vglm(orderIdeology~ (Party=="Rep") + (Gender=="Male"),weights=Freq,
+                  family=cumulative(parallel=TRUE), data=ideology)
+summary(fit.order2)
+
+############################################################################
+# Example 4: Mental Health Data
+############################################################################
+library(cdabookdb)
+data("impairment")
+attach(impairment)
+
+# Question 1: Fit this data by Cumulative logit model with ungrouped data with proportional odds
+
+fit7 <- vglm(Impairment ~ SES + LifeEvents,
+            family=cumulative(parallel=TRUE), data=impairment)
+summary(fit7)
+
+# Question 2: Fit this data by Cumulative logit model with ungrouped data with non-proportional odds
+
+fit8 <- vglm(Impairment ~ SES + LifeEvents,
+             family=cumulative, data=impairment)
+summary(fit8)
+
+# Question 3: Compare models in Question 1 and 2, which one is better, why?
+
+# residual deviance fit7  99.0979 on 115 
+# residual deviance fit8  96.7486 on 111
+
+pchisq(deviance(fit7)-deviance(fit8),df=df.residual(fit7)-df.residual(fit8),lower.tail=FALSE)
+# can not reject H0, so fit7 is better.
+
+############################################################################
+# Example 5: Ideology by  Adjacent-Categories Logits
+############################################################################
+
+# Question 1: Fit the data by Adjacent-Categories Logits with proportional odds
+data(ideology) 
+
+attach(ideology)
+
+ideology
+
+#proportional odds model
+
+orderIdeology <- ordered(Ideology,  levels = c("VCon","SCon","Mod","SLib","VLib"))
+
+# Female =1
+fGender <- factor(Gender, level=c("Male","Female"))
+
+# Dem =1 
+fParty <- factor(Party, level=c("Rep","Dem"))
+
+fitideo1.acat <- vglm(orderIdeology~ fParty + fGender,weights=Freq,
+                      family=acat(reverse=TRUE, parallel=TRUE), data=ideology)
+summary(fitideo1.acat)
+
+# Question 2: Fit the data by Adjacent-Categories Logits with non-proportional odds
+fitideo2.acat <- vglm(orderIdeology~ fParty + fGender,weights=Freq,
+                      family=acat(reverse=TRUE), data=ideology)
+summary(fitideo2.acat)
+
+
+############################################################################
+# Example 6: Mental Health by  Continuation-Ratio Logits
+############################################################################
+
+# Question 1: Fit this data by Continuation-Ratio Logits
+data("impairment")
+attach(impairment)
+orderImpairment<- ordered(Impairment,  levels = c("Well","Mild","Moderate","Impaired"))
+
+fit9.cratio <- vglm(orderImpairment ~ SES + LifeEvents,
+                    family=cratio(reverse=FALSE, parallel=TRUE), data=impairment)
+summary(fit9.cratio)
+
+############################################################################
+# Example 7: Jobsatisfaction Example
+############################################################################
+data(jobsatisfaction) 
+
+attach(jobsatisfaction)
+
+jobsatisfaction
+
+# Question 1: Build Cumulative logit model with Job~ Gender + Income
+orderJob <- ordered(JobSat,  levels = c(1,3,4,5))
+
+fitJob.order <- vglm(orderJob~ Gender + Income,weights=(Freq+0.1),
+                     family=cumulative(parallel=TRUE), data=jobsatisfaction)
+
+summary(fitJob.order)
+
+
+# Question 2: Analysis the effect of Income according to the output
+
+abs(coef(fitJob.order)[5]/0.018)>1.96
+# reject H0, so Income has effect given gender
+
+
+# Question 3: Build Baseline category logit model with Job~ Gender + Income
+
+fitJob.cum <- vglm(JobSat~ Gender + Income,weights=(Freq+0.1),
+                     family=multinomial, data=jobsatisfaction)
+
+summary(fitJob.cum)
+
+# Question 4: Compare models in question 1 and 3, which one is better, why?
+pchisq(deviance(fitJob.order)-deviance(fitJob.cum),df=df.residual(fitJob.order)-df.residual(fitJob.cum),lower.tail=FALSE)
+
+# can not reject H0. So, cumulative is better.
+

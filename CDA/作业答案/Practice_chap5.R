@@ -1,0 +1,179 @@
+##########################################################
+# Chapter 5
+##########################################################
+
+###############################################################
+# Example 1  Horseshoe crab data Stepwise Model Selection
+#            for Logistic regression
+###############################################################
+
+# Question 1: Fit logistic regression using Wight, Color(Factor),Spine, and Width together with one 2nd order interaction by foreward stepwise selection
+
+library(icda)
+
+data(horseshoecrabs) 
+
+attach(horseshoecrabs)
+
+
+#logistic regression
+
+horseshoecrabs$psat <- horseshoecrabs$Satellites > 0
+horseshoecrabs$fcolor <- factor(horseshoecrabs$Color, level=c(4,3,2,1))
+fit.full<-glm(psat~Weight+fcolor+Spine+Width+Width*fcolor, family=binomial(link=logit), data=horseshoecrabs)
+summary(fit.full) 
+fit.null<-glm(psat~1,family=binomial(link=logit), data=horseshoecrabs)
+summary(fit.null)
+
+##stepwise
+fit.forwards_factor<-step(fit.null, scope=list(lower=formula(fit.null),upper=formula(fit.full)), direction="forward")
+summary(fit.forwards_factor)
+
+# Question 2: Fit logistic regression using Wight, Color(score),Spine, and Width without interaction by backward stepwise selection
+fit.full2<-glm(psat~Weight+Color+Spine+Width, family=binomial(link=logit), data=horseshoecrabs)
+summary(fit.full)
+
+# backward elimination
+fit.backwards_2 <- step(fit.full2) # Backwards selection is the default
+summary(fit.backwards_2)
+
+# Question 3: Report the AIC for the final model in Question 1 and 2. And compare these two models by deviance.Which one is better?
+AIC(fit.forwards_factor)
+# Deviance is  Residual deviance: 187.46  on 168  degrees of freedom
+
+AIC(fit.backwards_2)
+# Deviance is  Residual deviance: 189.12  on 170  degrees of freedom
+# Use difference of deviance, the larger model is better, that is the one with Color(factor)
+
+############################################################################
+#  Example 2: ROC curve for horseshoe crab data 
+############################################################################
+
+# Question 1: Plot the ROC curve for the final model in Question 1 of Example 1
+library(ROCR)
+
+pred.step <- prediction(fitted(fit.forwards_factor),horseshoecrabs$psat)
+perf.step <- performance(pred.step, "tpr", "fpr") 
+plot(perf.step)
+performance(pred.step,"auc")
+
+# Question 2: Report sensitivity and specificity corresponding to one chosen cutoff
+
+cutoffpi0 <- perf.step@alpha.values[[1]]
+sen <- perf.step@y.values[[1]]
+spe <- 1 - perf.step@x.values[[1]]
+
+
+ind <-50
+pi0 <- as.vector(cutoffpi0)[ind]
+senpi0 <- as.vector(sen)[ind]
+spepi0 <- as.vector(spe)[ind]
+
+pi0
+senpi0
+spepi0
+
+# Question 3: write a code to get cross classification table for given cutoff
+# at each cutoff the tpr value(same as sensitivity)
+pihat <- as.vector(pred.step@predictions[[1]])
+
+pi0 <- 0.5
+yhat <- (pihat > 0.5)*1
+
+a <- sum((horseshoecrabs$psat)*yhat)
+b <- sum((horseshoecrabs$psat)*(1-yhat))
+c <- sum((1-horseshoecrabs$psat)*(yhat))
+d <- sum((1-horseshoecrabs$psat)*(1-yhat))
+
+cctable <- matrix(c(a,b,c,d),nrow=2,byrow=TRUE)
+dimnames(cctable) <- list(c("y1","y0"),c("yhat1","yhat0"))
+names(dimnames(cctable)) <- c("Y","Yhat")
+cctable
+
+
+############################################################################
+#  Example 3: Residuals for Logistic Regression
+############################################################################
+
+# Question 1: report the residuals/standardized residuals of the final model in Question 2 of Example 1
+summary(fit.backwards_2)
+
+residuals(fit.backwards_2)
+
+rstandard(fit.backwards_2)  #
+
+rstudent(fit.backwards_2)
+
+
+############################################################################
+# Example 4: Adimission of Florida University Data
+############################################################################
+
+# Question 1: Fit logistic regression for Adimission of Florida University data without gender
+
+data(UFAdmissions) 
+
+attach(UFAdmissions)
+
+UFAdmissions
+
+dept <- UFAdmissions$Dept[seq(1,92,2)]
+gender <- UFAdmissions$Gender[seq(1,92,2)]
+yesfreq <- UFAdmissions$Freq[seq(1,92,2)]
+nfreq <- UFAdmissions$Freq[seq(1,92,2)] + UFAdmissions$Freq[seq(2,92,2)]
+
+fdept <- factor(dept)
+fgender <- factor(gender)
+ufadmissions <- data.frame(dept,gender,yesfreq,nfreq,fdept, fgender)
+
+fit.ufa_dep <- glm(yesfreq/nfreq ~ fdept , weights=nfreq, family=binomial(link=logit))
+summary(fit.ufa_dep)
+
+# Question 2: Fit logistic regression for Adimission of Florida University data with gender and department
+fit.ufa <- glm(yesfreq/nfreq ~ fdept + fgender, weights=nfreq, family=binomial(link=logit))
+summary(fit.ufa)
+
+
+#############################################################################
+# Example 5: Influence check 
+#############################################################################
+
+# Question 1: report influence analysis for the the final model in Question 2 of Example 1
+summary(fit.backwards_2)
+influence.measures(fit.backwards_2)
+dfbeta(fit.backwards_2)
+
+
+##########################################
+# Example 6: Infinity Effect 
+###########################################
+
+# Question 1: repeat the example of perfect estimation. Fit a logistic model and report the result. The data is 
+
+y0<-c(0,0,0,0,1,1,1,1)
+x0<-c(10,20,30,40,60,70,80,90)
+d0<-cbind(y0,x0)
+da<-as.data.frame(d0)
+
+f0 <- glm(y0 ~ x0, family=binomial(link=logit),data=da)
+summary(f0)
+
+# Question 2: repeat the example of sparse data and report the result of logstic regression with Treatment and Center(factor) without interaction. The data is 
+
+
+#Table 5.7
+
+center<-c(rep(1,2),rep(2,2),rep(3,2),rep(4,2),rep(5,2))
+treat<-c(1,0,1,0,1,0,1,0,1,0)
+yes<-c(0,0,1,0,0,0,6,2,5,2)
+n<-c(5,9,13,10,7,5,9,8,14,14)
+clinical<-cbind(center,treat,yes,n,resp=yes/n)
+clic<-as.data.frame(clinical)
+
+fit.fc<-glm(yes/n ~ treat+factor(center), weights=n,family=binomial(link=logit),data=clic)
+summary(fit.fc)
+
+fc2<-factor(center,level=c(5,1,2,3,4))
+
+fit.fc2<-glm(yes/n ~ treat+fc2, weights=n,family=binomial(link=logit),data=clic)
+summary(fit.fc2)

@@ -1,0 +1,86 @@
+##########################################################
+# Chapter 6
+##########################################################
+
+
+############################################################################
+# Example 1: Alligator Example by Baseline-category logit models
+############################################################################
+
+# Question 1: Building baseline-category logit model with Food ~ Length
+
+# Question 2: Baseline is "I"
+
+
+
+
+############################################################################
+# Example 2: Belief in Afterlife Example by Baseline-category logit models Table 6.4
+############################################################################
+
+# Question 1: Fit baseline-category logit model  Believe ~ Gender + Race 
+
+# Question 2: "No" is baseline, and Female = 1, White =1 
+
+
+
+
+############################################################################
+# Example 3: Political Ideology and Party Affiliation Example 
+############################################################################
+
+# Question 1: Fit this data by Cumulative Logit Models with Proportional Odds Property
+
+# Question 2: Male =1, Rep = 1
+
+
+
+############################################################################
+# Example 4: Mental Health Data
+############################################################################
+
+# Question 1: Fit this data by Cumulative logit model with ungrouped data with proportional odds
+
+# Question 2: Fit this data by Cumulative logit model with ungrouped data with non-proportional odds
+
+# Question 3: Compare models in Question 1 and 2, which one is better, why?
+
+
+
+
+############################################################################
+# Example 5: Ideology by  Adjacent-Categories Logits
+############################################################################
+
+# Question 1: Fit the data by Adjacent-Categories Logits with proportional odds
+
+# Question 2: Fit the data by Adjacent-Categories Logits with non-proportional odds
+
+
+
+############################################################################
+# Example 6: Mental Health by  Continuation-Ratio Logits
+############################################################################
+
+# Question 1: Fit this data by Continuation-Ratio Logits
+
+
+
+
+############################################################################
+# Example 7: Jobsatisfaction Example
+############################################################################
+
+
+# Question 1: Build Cumulative logit model with Job~ Gender + Income
+
+# Question 2: Analysis the effect of Income according to the output
+
+# Question 3: Build Baseline category logit model with Job~ Gender + Income
+
+# Question 4: Compare models in question 1 and 3, which one is better, why?
+
+
+
+
+

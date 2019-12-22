@@ -1,0 +1,28 @@
+"0","library(cdabookdb)
+"
+"2","
+载入程辑包：‘cdabookdb’
+
+"
+"2","The following objects are masked _by_ ‘.GlobalEnv’:
+
+    alligators1, alligators2, ideology
+
+"
+"0","library(cdabookfunc)"
+"0","library(VGAM)"
+"2","载入需要的程辑包：stats4
+"
+"2","载入需要的程辑包：splines
+"
+"0","library(tidyr)"
+"2","
+载入程辑包：‘tidyr’
+
+"
+"2","The following object is masked from ‘package:VGAM’:
+
+    fill
+
+"
+"0","library(cdabookdb)"

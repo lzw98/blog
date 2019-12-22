@@ -1,0 +1,11 @@
+"0","data('lungcancer_treatment')"
+"2","没有‘lungcancer_treatment’这个数据集"
+"0","lung_treat <- as.data.frame(lungcancer_treatment)"
+"0","# with proportional odds."
+"0","model1 <- vglm(Response~Gender+Therapy,"
+"0","              family = cumulative(parallel = TRUE),"
+"0","              weights = Freq,"
+"0","              data = lung_treat);summary(model1)"
+"2","Error in vglm(Response ~ Gender + Therapy, family = cumulative(parallel = TRUE),  : 
+  娌℃湁""vglm""杩欎釜鍑芥暟
+"

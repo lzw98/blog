@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1575943681775.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "268456703",
+    "id" : "7B58AE31",
+    "lastKnownWriteTime" : 1576544549,
+    "last_content_update" : 1576544549423,
+    "path" : "D:/GitHub/blog/CDA/cda/test_vglm.R",
+    "project_path" : "test_vglm.R",
+    "properties" : {
+        "cursorPosition" : "12,38",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

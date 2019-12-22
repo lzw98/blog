@@ -1,0 +1,267 @@
+---
+title: "quiz12-10"
+author: "林振炜"
+date: "2019/12/10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r warning = FALSE,message=FALSE}
+library(cdabookdb)
+library(cdabookfunc)
+library(VGAM)
+library(tidyr)
+library(cdabookdb)
+```
+
+##########################################################
+# Chapter 6
+##########################################################
+
+
+############################################################################
+## Example 1: Alligator Example by Baseline-category logit models
+############################################################################
+
+### Question 1: Building baseline-category logit model with Food ~ Length
+
+### Question 2: Baseline is "I"
+
+
+```{r}
+data("alligators1")
+attach(alligators1)
+# Building baseline-category logit model with Food ~ Length
+alligators.fit1 <- vglm(
+  Food ~ Length,
+  family = multinomial,
+  data=alligators1
+)
+summary(alligators.fit1)
+
+# Baseline is "I"
+fFood <- factor(Food,levels = c('F','O','I'))
+alligators1$fFood <- fFood
+alligators.fit2 <- vglm(fFood~Length,family = multinomial,data = alligators1)
+summary(alligators.fit2)
+```
+
+
+
+############################################################################
+# Example 2: Belief in Afterlife Example by Baseline-category logit models Table 6.4
+############################################################################
+
+# Question 1: Fit baseline-category logit model  Believe ~ Gender + Race 
+
+# Question 2: "No" is baseline, and Female = 1, White =1 
+
+```{r}
+data("afterlife2")
+ftable(afterlife2)
+afterlife2_df <- spread(as.data.frame(afterlife2), Believe, Freq)
+# Fit baseline-category logit model  Believe ~ Gender + Race 
+afterlife2.fit1 <- vglm(
+  cbind(Yes, Undecided, No) ~ Gender + Race,
+  data = afterlife2_df, family = multinomial()
+)
+summary(afterlife2.fit1)
+# Question 2: "No" is baseline, and Female = 1, White =1 
+afterlife2.fit2 <- vglm(
+  cbind(Yes, Undecided, No) ~ (Gender == "Female") + (Race == "White"),
+  data = afterlife2_df, family = multinomial()
+)
+summary(afterlife2.fit2)
+```
+
+
+
+############################################################################
+# Example 3: Political Ideology and Party Affiliation Example 
+############################################################################
+
+# Question 1: Fit this data by Cumulative Logit Models with Proportional Odds Property
+
+# Question 2: Male =1, Rep = 1
+```{r}
+data("ideology")
+ftable(ideology)
+ide_margin <- margin.table(ideology,c(2,3))
+ide_margin_df <- spread(as.data.frame(ide_margin), Ideology, Freq)
+ideology <- as.data.frame(ideology)
+# Question 1: Fit this data by Cumulative Logit Models with Proportional Odds Property
+ide_m <- vglm(
+  cbind(VLib, SLib, Mod, SCon, VCon) ~ Party == "Dem",
+  data = ide_margin_df,
+  family = cumulative(parallel = TRUE)
+  # cumulative probability and the effect of x is identical for all cumulative logits
+)
+summary(ide_m)
+# Question 2: Male =1, Rep = 1
+ideology$fideology = factor(ideology$Ideology,levels = c('VLib', 'SLib', 'Mod', 'SCon', 'VCon'))
+ide_m2 <- vglm(
+  fideology ~ (Party == "Rep")+(Gender == 'Male'),
+  weights = Freq,
+  data = ideology,
+  family = cumulative(parallel = TRUE)
+  # cumulative probability and the effect of x is identical for all cumulative logits
+)
+summary(ide_m2)
+
+```
+
+
+
+############################################################################
+# Example 4: Mental Health Data
+############################################################################
+
+# Question 1: Fit this data by Cumulative logit model with ungrouped data with proportional odds
+
+# Question 2: Fit this data by Cumulative logit model with ungrouped data with non-proportional odds
+
+```{r}
+data("impairment")
+# Question 1: Fit this data by Cumulative logit model with ungrouped data with proportional odds
+impairment_m1 <- vglm(
+  Impairment ~ LifeEvents + SES,
+  family = cumulative(parallel = TRUE),
+  # cumulative probability and the effect of x is identical for all cumulative logits
+  data = impairment
+)
+summary(impairment_m1)
+
+# Question 2: Fit this data by Cumulative logit model with ungrouped data with non-proportional odds
+impairment_m2 <- vglm(
+  Impairment ~ LifeEvents + SES,
+  family = cumulative(parallel = FALSE),
+  # cumulative probability and the effect of x is identical for all cumulative logits
+  data = impairment
+)
+summary(impairment_m2)
+
+```
+### Question 3: Compare models in Question 1 and 2, which one is better, why?
+```{r}
+anova(impairment_m1, impairment_m2, test = "LRT",type = 'I')
+```
+- the two models have no big difference, but the first is a little better than the second one from the deviance.
+
+############################################################################
+# Example 5: Ideology by  Adjacent-Categories Logits
+############################################################################
+
+
+
+```{r}
+# Question 1: Fit the data by Adjacent-Categories Logits with proportional odds
+data("ideology")
+ftable(ideology)
+ideology_df <- spread(as.data.frame(ideology), Ideology, Freq)
+ide_margin <- margin.table(ideology,c(2,3))
+ide_margin_df <- spread(as.data.frame(ide_margin), Ideology, Freq)
+ide_m <- vglm(
+  cbind(VLib, SLib, Mod, SCon, VCon) ~ Party == "Dem",
+  data = ide_margin_df,
+  # Adjacent-Categories Logits
+  # The effects of x on the odds of making the higher instead of the lower response
+  # are identical for each pair of adjacent response categories
+  family = acat(reverse = TRUE, parallel = TRUE)
+)
+summary(ide_m)
+
+# Question 2: Fit the data by Adjacent-Categories Logits with non-proportional odds
+ide_m <- vglm(
+  cbind(VLib, SLib, Mod, SCon, VCon) ~ Party == "Dem",
+  data = ide_margin_df,
+  # Adjacent-Categories Logits
+  # The effects of x on the odds of making the higher instead of the lower response
+  # are identical for each pair of adjacent response categories
+  family = acat(reverse = TRUE, parallel = FALSE)
+)
+summary(ide_m)
+```
+
+
+
+############################################################################
+# Example 6: Mental Health by  Continuation-Ratio Logits
+############################################################################
+
+# Question 1: Fit this data by Continuation-Ratio Logits
+
+```{r}
+data("impairment")
+m3 <- vglm(
+  factor(Impairment) ~ SES + LifeEvents,
+  family=cratio(reverse = TRUE, parallel = TRUE),
+  data = impairment
+  )
+summary(m3)
+```
+
+
+
+############################################################################
+# Example 7: Jobsatisfaction Example
+############################################################################
+
+
+# Question 1: Build Cumulative logit model with Job~ Gender + Income
+
+```{r}
+data("job_satisfaction2")
+job_df <- spread(as.data.frame(job_satisfaction2),JobSatisfaction,Freq)
+job_df$Income <- rep(c(3,10,20,35),2)
+# Question 1: Build Cumulative logit model with Job~ Gender + Income
+m1 <- vglm(
+  cbind(`Very Dissatisfied`,`A Little Satisfied`,`Moderately Satisfied`,`Very Satisfied`) ~ factor(Income) + factor(Gender == 'Female'),
+  family = cumulative(parallel = TRUE),
+  data = job_df
+)
+summary(m1)
+```
+
+# Question 2: Analysis the effect of Income according to the output
+- for any fixed j, the estimated odds that a Income 10's response is in the satisfied direction rather than the dissatified direction equal 0.9052 times the estimated odds for Income 3. 
+- And the estimated odds that a Income 20's response is in the satisfied direction rather than the dissatified direction equal 1.14 times the estimated odds for Income 3.
+- And the estimated odds that a Income 35's response is in the satisfied direction rather than the dissatified direction equal 1.432 times the estimated odds for Income 3.
+
+
+# Question 3: Build Baseline category logit model with Job~ Gender + Income
+```{r}
+m2 <- vglm(
+  cbind(`Very Dissatisfied`,`A Little Satisfied`,`Moderately Satisfied`,`Very Satisfied`) ~ factor(Income) + factor(Gender == 'Female'),
+  family = multinomial,
+  data = job_df
+)
+summary(m2)
+```
+
+# Question 4: Compare models in question 1 and 3, which one is better, why?
+
+```{r}
+anova(m1,m2,type = 'I',test = "LRT")
+```
+
+- the two models have no big difference, but the first is a little better than the second one from the deviance.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

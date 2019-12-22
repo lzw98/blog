@@ -1,0 +1,38 @@
+"0","description <- read.csv('GDS5037/description.csv')
+denote <- data.frame(ID = c('MMA','control','SA'),Y = c('M','S','C'))
+data <- merge(description,denote,by = 'ID')
+head5 <- read.csv('GDS5037/head5.csv',header = T)[c(1,2,3,4,5),];
+head5 <- t(head5)
+d <- head5
+names <- rownames(d)
+rownames(d) <- NULL
+head5 <- cbind(names,d);
+colnames(head5) <- c('ID_REF','FAM174B','AP3S2','SV2B','RBPMS2','AVEN');
+data <- merge(data,head5,by = 'ID_REF');
+data <- data %>% mutate_at(c('FAM174B','AP3S2','SV2B','RBPMS2','AVEN'),as.character)
+data <- data%>% mutate_at(c('FAM174B','AP3S2','SV2B','RBPMS2','AVEN'),as.numeric)
+attach(data)
+"
+"2","The following object is masked _by_ .GlobalEnv:
+
+    Y
+
+"
+"2","The following objects are masked from data (pos = 3):
+
+    AP3S2, AVEN, des, FAM174B, ID, ID_REF, RBPMS2, SV2B, Y
+
+"
+"2","The following objects are masked from data (pos = 4):
+
+    AP3S2, AVEN, des, FAM174B, ID, ID_REF, RBPMS2, SV2B, Y
+
+"
+"2","The following objects are masked from data (pos = 5):
+
+    AP3S2, AVEN, des, FAM174B, ID, ID_REF, RBPMS2, SV2B, Y
+
+"
+"0","## Create a formula for a model with a large number of variables:"
+"0","data = data[-c(1,2,3)]"
+"0","xnam <- paste0(colnames(data)[-c(1)])"

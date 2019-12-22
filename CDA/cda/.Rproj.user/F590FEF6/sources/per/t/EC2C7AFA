@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1576031039855.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "EC2C7AFA",
+    "lastKnownWriteTime" : 8241994560065767977,
+    "last_content_update" : 1576031039855,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "FD378454",
+        "caption" : "marital_happiness",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=marital_happiness&cache_key=FD378454",
+        "displayedObservations" : "9",
+        "environment" : "",
+        "expression" : "marital_happiness",
+        "object" : "marital_happiness",
+        "preview" : "0",
+        "totalObservations" : "9",
+        "variables" : "3"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

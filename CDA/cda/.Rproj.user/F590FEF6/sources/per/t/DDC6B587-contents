@@ -1,0 +1,200 @@
+---
+title: "homework6"
+author: "林振炜"
+date: "2019/12/10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r warning = FALSE,message=FALSE}
+library(cdabookdb)
+library(cdabookfunc)
+library(VGAM)
+library(tidyr)
+library(cdabookdb)
+library(MASS)
+library(dplyr)
+```
+
+## Analysis the GDS5037 data. Suppose the samples are randomly chosen. Let Y denote patient's status, Y = M for mild asthma(MMA),Y=S for severe asthma(SA), and Y = C for control.
+```{r}
+# Q1: build a baseline-categorial logit model use Y = C as baseline with any 5 identifiers without interaction.
+description <- read.csv('GDS5037/description.csv')
+denote <- data.frame(ID = c('MMA','control','SA'),Y = c('M','S','C'))
+data <- merge(description,denote,by = 'ID')
+head5 <- read.csv('GDS5037/head5.csv',header = T)[c(1,2,3,4,5),];
+head5 <- t(head5)
+d <- head5
+names <- rownames(d)
+rownames(d) <- NULL
+head5 <- cbind(names,d);
+colnames(head5) <- c('ID_REF','FAM174B','AP3S2','SV2B','RBPMS2','AVEN');
+data <- merge(data,head5,by = 'ID_REF');
+data <- data %>% mutate_at(c('FAM174B','AP3S2','SV2B','RBPMS2','AVEN'),as.character)
+data <- data%>% mutate_at(c('FAM174B','AP3S2','SV2B','RBPMS2','AVEN'),as.numeric)
+attach(data)
+## Create a formula for a model with a large number of variables:
+data = data[-c(1,2,3)]
+xnam <- paste0(colnames(data)[-c(1)])
+Y = factor(Y,levels = c('S','M','C'))
+(fmla <- as.formula(paste("Y ~ ", paste(xnam, collapse= "+"))))
+m1 <- vglm(fmla,family = multinomial,data = data)
+summary(m1)
+```
+- coefficients of the model are not significant mostly, the coefficient of variable SV2B is significant under the level 0.0001. So the equation is $\log (\frac{{{{\hat \pi }_M}}}{{{{\hat \pi }_C}}}) = 12.5942 - 1.23602 \times SV2B$ and the other equation is $\log (\frac{{{{\hat \pi }_S}}}{{{{\hat \pi }_C}}}) =  - 1.8488 - 0.59783 \times SV2B$ 
+
+```{r error= TRUE}
+Y = factor(Y,levels = c('S','M','C'))
+fmla <- as.formula(paste("Y ~ ", paste(xnam, collapse= "+")))
+m2.para <- vglm(fmla,family = cumulative(parallel = TRUE),data = data)
+summary(m2.para)
+m2.para <- vglm(fmla,family = cumulative(parallel = FALSE),data = data)
+```
+
+- when the parameter parallel is FALSE, the result can't even converge. So the first model is better.
+
+## textbook 6.5
+### a. Summarize each partial effect by indicating whether subjects tend to be more satisfied, or less satisfied, as (i) x 1 , (ii) x 2 , (iii) x 3 , increases.
+- $logit(P(Y \le j)) = \hat{\alpha_{j}} - 0.54x_{1} + 0.60x_{2} + 1.19x_{3}$
+
+- For any fixed j, when x1 increase, job satisfaction will increase, too.
+- For any fixed j, when x2 increase, job satisfaction will decrease.
+- For any fixed j, when x3 increase, job satisfaction will decrease.
+
+### b. Report the settings for x 1 ,x 2 ,x 3 at which a subject is most likely to have highest job satisfaction.
+
+- From a, when x1=4,x2=1 and x3=1, the subject is most likely to have highest job satisfaction.
+
+
+
+## textbook 6.6
+```{r}
+data('marital_happiness')
+marital_happiness <- as.data.frame(marital_happiness)
+attach(marital_happiness)
+income_levle <- ifelse(marital_happiness$Income=='Below average income',1,
+                       ifelse(marital_happiness$Income=='Average income',2,3))
+Happniess <- factor('Not happy','Pretty happy','Very happy')
+model <- vglm(Happniess~income_levle,data = marital_happiness,weights = Freq,family = multinomial)
+summary(model)
+```
+
+
+### a. Report the prediction equations from this table.
+- the basic equation are the two. One is $\log (\frac{{{{\hat \pi }_1}}}{{{{\hat \pi }_3}}}) =  - 2.5551 - 0.2275income$,the other is $\log (\frac{{{{\hat \pi }_2}}}{{{{\hat \pi }_3}}}) =  - 0.3513 - 0.0962income$. So we can conclude the results are ${\hat \pi _1} = \frac{{{e^{ - 2.5551 - 0.2275income}}}}{{1 + {e^{ - 2.5551 - 0.2275income}} + {e^{ - 0.3513 - 0.0962income}}}}$ ,${{\hat{\pi }}_{2}}=\frac{{{e}^{-0.3513-0.0962income}}}{1+{{e}^{-2.5551-0.2275income}}+{{e}^{-0.3513-0.0962income}}}$ and ${{\hat{\pi }}_{3}}=\frac{1}{1+{{e}^{-2.5551-0.2275income}}+{{e}^{-0.3513-0.0962income}}}$
+
+### b. Interpret the income effect in the first equation.
+- the coefficient of income is negative, so when income increases, $\pi_{1}$ and $\pi_{2}$ would decrease, and $\pi_{3}$ would increase.The estimated odds of response “not” rather than “very” in terms of marital happiness equals the estimated odds in one score lower income multiplied by exp(-0.22)=0.80 with one score increase in income.
+
+### c. Report the Wald test statistic and P-value for testing that marital happiness is independent of family income. Interpret.
+
+- Chi-Square value is 0.9432, degree freedom is 2, and the p_value is 0.6240. So under the level 0.05, we can't reject null hypothesis $\beta = 0$, so the marital happiness is independent of family income.
+
+### d. Does the model fit adequately? Justify your answer.
+- From the table of Deviance and Pearson Goodness-of-Fit Statistics, the fitness isn't very good. The p_value is too large.
+
+### e. Estimate the probability that a person with average family income reports a very happy marriage.
+- the average family income means the income equals to 2, so we can get the results
+ $${{\hat{\pi }}_{3}}=\frac{1}{1+{{e}^{-2.5551-0.2275\times 2}}+{{e}^{-0.3513-0.0962\times 2}}} = 0.6135$$
+```{r}
+pi1 <- exp(-2.5551-0.2275*2)
+pi2 <- exp(-0.3513-0.0962*2)
+e_pi1 <- pi1/(1+pi1+pi2);e_pi1
+e_pi2 <- pi2/(1+pi1+pi2);e_pi2
+e_pi3 <- 1/(1+pi1+pi2);e_pi3
+```
+- so the probability of a very happy marriage is 0.613541.
+## textbook 6.7
+```{r}
+data('marital_happiness')
+marital_happiness <- as.data.frame(marital_happiness)
+attach(marital_happiness)
+income_levle <- ifelse(marital_happiness$Income=='Below average income',1,
+                       ifelse(marital_happiness$Income=='Average income',2,3))
+Happniess <- factor('Not happy','Pretty happy','Very happy')
+model <- vglm(Happniess~income_levle,data = marital_happiness,weights = Freq,family = cumulative(parallel = TRUE))
+summary(model)
+```
+
+### a. Explain why the output reports two intercepts but one income effect.
+- Because the model of this question is with proportional odds, so the two models use the same $\beta$，we assume that the effect of income is identical for both 2 cumulative logits.
+
+### b. Interpret the income effect.
+- The happiness degree would increase when income_level increase.The estimated odds of family happiness level below level j ranther than above level j equals that in one score lower income multiplied by exp(-0.1117)=0.89 with one score increase in income.
+
+### c. Report a test statistic and P-value for testing that marital happiness is independent of family income. Interpret.
+```{r}
+anova(model,type="I",test = "LRT")
+```
+
+- the p_value for testing that marital happiness is independent of family income is 0.3461, so I can't reject null hypothesis that they are independent under level 0.05.
+
+### d. Does the model fit adequately? Justify your answer.
+- From the table of Deviance and Pearson Goodness-of-Fit Statistics, the fitness isn't very good. The p_value is too large.
+
+### e. Estimate the probability that a person with average family income reports a very happy marriage.
+
+- the average family income means the income equals to 2, so we can get the results
+$$p(Y = 3) = 1 - p(Y \leqslant 2) = 1 - \frac{{1}}{{1 + {e^{ - 0.2378 - 0.1117\times2}}}}=0.3867$$
+```{r}
+pi_2 <- exp(-0.2378-0.1117*2)
+pi3 <- 1-(1/(1+pi_2));pi3
+
+```
+- so the probability of a very happy marriage is 0.3867.
+
+
+## textbook 6.8
+
+### a. Fit a cumulative logit model with main effects for treatment and gender.Interpret the estimated treatment effect.
+```{r}
+data('lungcancer_treatment')
+lung_treat <- as.data.frame(lungcancer_treatment)
+# with proportional odds.
+model1 <- vglm(Response~Gender+Therapy,
+              family = cumulative(parallel = TRUE),
+              weights = Freq,
+              data = lung_treat);summary(model1)
+# # without proportional odds.
+# model2 <- vglm(Response~Gender+Therapy,
+#               family = cumulative(parallel = FALSE),
+#               weights = Freq,
+#               data = lung_treat);summary(model2)
+
+```
+
+- From the table, the estimated treatment effect is better when the gender is male (versus female) and the therapy is clinical trial(versus the other three different combinations).
+
+### b. Fit the model that also contains an interaction term between treatment and gender. Interpret the interaction term by showing how the estimated treatment effect varies by gender.
+```{r}
+model2 <- vglm(Response~Gender+Therapy+Gender*Therapy,
+              family = cumulative(parallel = TRUE),
+              weights = Freq,
+              data = lung_treat);summary(model2)
+```
+
+- The interaction term in this equation shows that the alternating therapy makes the the estimated treatment effect worse when gender is female than that when gender is male.
+
+### c. Does the interaction model give a significantly better fit?
+```{r}
+anova(model2,test = 'LRT')
+```
+
+- No, the interaction is significant under level 0.05.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
