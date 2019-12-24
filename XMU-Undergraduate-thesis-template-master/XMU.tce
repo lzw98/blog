@@ -1,0 +1,27 @@
+\contentsline {chapter}{\rmfamily \bfseries \makebox [5em][l]{Chapter 1}Introduction}{1}{chapter.1}
+\contentsline {chapter}{\rmfamily \bfseries \makebox [5em][l]{Chapter 2}Literature Review}{3}{chapter.2}
+\contentsline {section}{\rmfamily \bfseries \makebox [2.8em][l]{2.1}Summary of Financial Fraud Reasons}{3}{section.2.1}
+\contentsline {section}{\rmfamily \bfseries \makebox [2.8em][l]{2.2}Review of Research on Financial Fraud Identification}{4}{section.2.2}
+\contentsline {section}{\rmfamily \bfseries \makebox [2.8em][l]{2.3}Research Review}{5}{section.2.3}
+\contentsline {chapter}{\rmfamily \bfseries \makebox [5em][l]{Chapter 3}Sample Selection and Variable Selection}{7}{chapter.3}
+\contentsline {section}{\rmfamily \bfseries \makebox [2.8em][l]{3.1}Data Sources}{7}{section.3.1}
+\contentsline {section}{\rmfamily \bfseries \makebox [2.8em][l]{3.2}Sample Selection}{7}{section.3.2}
+\contentsline {section}{\rmfamily \bfseries \makebox [2.8em][l]{3.3}Variable Selection}{8}{section.3.3}
+\contentsline {subsection}{\makebox [3em][l]{3.3.1}Preliminary Variable Selection}{8}{subsection.3.3.1}
+\contentsline {subsection}{\makebox [3em][l]{3.3.2}Data Preprocessing and Data Description}{8}{subsection.3.3.2}
+\contentsline {subsection}{\makebox [3em][l]{3.3.3}Multicollinearity Analysis}{9}{subsection.3.3.3}
+\contentsline {chapter}{\rmfamily \bfseries \makebox [5em][l]{Chapter 4}Analysis of Model Empirical Results}{13}{chapter.4}
+\contentsline {section}{\rmfamily \bfseries \makebox [2.8em][l]{4.1}Data Balance and Sample Reconstruction}{13}{section.4.1}
+\contentsline {section}{\rmfamily \bfseries \makebox [2.8em][l]{4.2}Logistic Model Empirical Analysis}{13}{section.4.2}
+\contentsline {subsection}{\makebox [3em][l]{4.2.1}Logistic Model}{13}{subsection.4.2.1}
+\contentsline {subsection}{\makebox [3em][l]{4.2.2}Logistic Model Construction and Empirical Analysis}{13}{subsection.4.2.2}
+\contentsline {subsection}{\makebox [3em][l]{4.2.3}Logistic Model Evaluation}{15}{subsection.4.2.3}
+\contentsline {section}{\rmfamily \bfseries \makebox [2.8em][l]{4.3}Random Forest Model Analysis}{16}{section.4.3}
+\contentsline {subsection}{\makebox [3em][l]{4.3.1}Random Forest Model}{17}{subsection.4.3.1}
+\contentsline {subsection}{\makebox [3em][l]{4.3.2}Selection and Construction of Random Forest Model}{18}{subsection.4.3.2}
+\contentsline {subsection}{\makebox [3em][l]{4.3.3}Random Forest Model Evaluation}{18}{subsection.4.3.3}
+\contentsline {chapter}{\rmfamily \bfseries \makebox [5em][l]{Chapter 5}Conclusion and Limitation}{21}{chapter.5}
+\contentsline {section}{\rmfamily \bfseries \makebox [2.8em][l]{5.1}Conclusions}{21}{section.5.1}
+\contentsline {section}{\rmfamily \bfseries \makebox [2.8em][l]{5.2}Limitation}{21}{section.5.2}
+\contentsline {chapter}{\rmfamily \bfseries Reference}{23}{section*.16}
+\contentsline {chapter}{\rmfamily \bfseries \makebox [0em][l]{}Appendix A}{27}{chapter*.18}

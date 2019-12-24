@@ -1,0 +1,104 @@
+% !TeX root = ../XMU.tex
+\chapter{结论与局限性}{Conclusion and Limitation}
+%就说方法本身有什么缺点
+%基于模型的机制的调整
+%进一步做可以做什么
+
+% \section{算法}{Algorithm}
+
+% 这是算法的插入示例，可能软件学院、信息科学学院这类的同学用得上吧。
+% \begin{algorithm}
+% 	\caption{My algorithm}\label{euclid}
+% 	\begin{algorithmic}[1]
+% 		\Procedure{MyProcedure}{}
+% 		\State $\textit{stringlen} \gets \text{length of }\textit{string}$
+% 		\State $i \gets \textit{patlen}$
+% 		\BState \emph{top}:
+% 		\If {$i > \textit{stringlen}$} \Return false
+% 		\EndIf
+% 		\State $j \gets \textit{patlen}$
+% 		\BState \emph{loop}:
+% 		\If {$\textit{string}(i) = \textit{path}(j)$}
+% 		\State $j \gets j-1$.
+% 		\State $i \gets i-1$.
+% 		\State \textbf{goto} \emph{loop}.
+% 		\State \textbf{close};
+% 		\EndIf
+% 		\State $i \gets i+\max(\textit{delta}_1(\textit{string}(i)),\textit{delta}_2(j))$.
+% 		\State \textbf{goto} \emph{top}.
+% 		\EndProcedure
+% 	\end{algorithmic}
+% \end{algorithm}
+
+本文以2018年上市公司财务报表结合违规内容以及会计师审计意见的数据，考察了当前财务造假的财务表现，建造一个财务造假的预测模型。
+
+\section{结论}{Conclusions}
+
+logistic模型研究结果显示：中国的上市公司往往会选择通过营业成本进行改动来达到自己美化财务报表的目的；发展前景较好的公司往往具有较低的财务造假的可能；在偿债能力越强的公司，其财务主管领取薪酬会更加减少财务造假的可能。从对logistic模型的评价中我们可以发现，logistic模型对财务造假的预测效果总体来说并不是非常的好，尤其是甄别造假公司的确造假的准确率(sensitivity)并不是特别高。鉴于此，logistic模型对于统计解释有着较大的意义，但是对财务造假模型的预测仍然需要进一步的改进。
+
+随机森林模型研究结果显示：机器学习算法对于财务造假的分类问题十分有效。其不论是在specificity和sensitivity两方面都表现的非常好。且该模型对于变量的选择也与logistic模型具有十分大的区别，认为利润总额增长率和可持续增长率是判别一个公司是否产生财务造假的最重要的两个指标。
+
+\section{局限性}{Limitation}
+会计账目中存在一些如人力资本、知识产权及专利技术等无形资产难以用货币衡量。会计报表遵循谨慎性原则，并没有包括未来企业价值和报表外的信息，如企业的社会责任的衡量。这些问题可能会影响控制变量的计算结果，进而影响模型分类的准确率与解释性。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \section{参看文献与引用}{Reference and citation}
+
+% 一下是一些参考文献的引用。应该能有合适的。不合适可以修改。
+
+
+% \cite{liuhaiyang2013latex,CTEX}
+
+% \cite{XMU}
+
+% \citet{liuhaiyang2013latex}
+
+% \citep{liuhaiyang2013latex}
+% %用这个引用格式，英文只能出现姓和年如：Borgja(2003),中文的就是全名
+% %两个人
+% %是这篇论文干了什么事，而不是这人干了什么事
+% %研究这个问题的还有很多，见
+
+% \citealt{liuhaiyang2013latex}
+
+% \citeauthor{liuhaiyang2013latex}
+
+% \citeyearpar{liuhaiyang2013latex}

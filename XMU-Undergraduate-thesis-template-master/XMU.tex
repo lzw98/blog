@@ -1,0 +1,77 @@
+% !TeX TXS-program:compile = txs:///latexmk/{}[-pdfxe -synctex=1 -interaction=nonstopmode -silent -outdir=Temp %.tex] 
+%
+\documentclass[bibstyle=super,font=empty]{Settings/XMUthesis}
+%\documentclass[bibstyle=super,font=advance]{Settings/XMUthesis}
+\input{Settings/Information}
+\usepackage{Settings/XMU-logo}
+\usepackage{booktabs}
+\usepackage[figuresright]{rotating}%这样才能保证奇数页偶数页都朝向右边
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\listfiles
+\begin{document}
+
+\frontmatter\xiaosi
+\maketitle
+%\input{Settings/Titlepage}
+\input{Settings/Promise}
+\input{Body/Thanks}
+\input{Body/Abstract}
+\xmutableofcontents
+\mainmatter%
+\pagestyle{fancy}
+\input{Body/Chapter1}
+\input{Body/Chapter2}
+\input{Body/Chapter3}
+\input{Body/Chapter4}
+\input{Body/Chapter5}
+\backmatter
+\nocite{*}
+
+
+%\bibliographystyle{IEEEtran}
+% \clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{参考文献}
+%总算找到怎么加英文的了是tce
+\addcontentsline{tce}{chapter}{\rmfamily\bfseries Reference}
+
+
+% \newcommand\Echapter[1]{
+% 	\markboth{#1}
+% 	\addcontentsline{tce}{chapter}{Reference}%
+% }
+
+
+
+\bibliography{Body/Reference}
+
+\chapter{附录A}{Appendix A}
+\input{Body/Appendix}
+% \chapter{附录B}{Appendix B}
+
+
+
+% \chapter{附录 C}{Appendix C}
+% \begin{figure}[htbp!]
+% \centering
+% \caption{厦大校徽}
+% \xmulogo[0.75]
+% \end{figure}
+% \begin{figure}[htbp!]
+% \centering
+% \caption{厦门大学}
+% \xmulogon[0.75]
+% \end{figure}
+
+
+
+
+
+
+
+
+\end{document}

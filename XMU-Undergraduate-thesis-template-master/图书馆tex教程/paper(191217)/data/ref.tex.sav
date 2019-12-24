@@ -1,0 +1,7 @@
+%# -*- coding:utf-8 -*-
+\begin{xmuref}
+ %\bibliographystyle{unsrt}
+ %\bibliography{ref/refs}
+ \bibliographystyle{XMU}
+ \bibliography{ref/paper}
+\end{xmuref}

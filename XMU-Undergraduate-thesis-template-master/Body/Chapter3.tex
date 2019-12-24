@@ -1,0 +1,185 @@
+% !TeX root = ../XMU.tex
+\chapter{样本选取和变量选择}{Sample Selection and Variable Selection}
+
+\section{数据来源}{Data Sources}
+本文从2018年中国上市公司财务年报和相关违规信息数据中提取样本，数据主要来源于国泰安（CSMAR）数据库，所使用的财务造假公司信息主要从国泰安数据库的公司研究违规信息数据中提取，构建模型所用的自变量指标数据主要来自于国泰安数据库的公司研究系列，并使用Wind数据对其进行了补充。
+
+\section{样本选取}{Sample Selection}
+国泰安金融数据库对上市公司违规性质的分类共有16类，具体分类有
+\begin{table}[!ht]
+	\centering
+	\begin{threeparttable}[b]
+		\footnotesize
+		\caption{国泰安金融数据库企业违规分类表}
+	\begin{tabular}{cc|cc}
+		\toprule
+	违规编码  & 违规行为        & 违规编码  & 违规行为     \\ \bottomrule
+	P2501 & 虚构利润        & P2509 & 擅自改变资金用途 \\
+	P2502 & 虚列资产        & P2510 & 占用公司资产   \\
+	P2503 & 虚假记载(误导性陈述) & P2511 & 内幕交易     \\
+	P2504 & 推迟披露        & P2512 & 违规买卖股票   \\
+	P2505 & 重大遗漏        & P2513 & 操纵股价     \\
+	P2506 & 披露不实(其它)    & P2514 & 违规担保     \\
+	P2507 & 欺诈上市        & P2515 & 一般会计处理不当 \\
+	P2508 & 出资违规        & P2599 & 其他       \\ \bottomrule
+	\end{tabular}
+	\label{Fraud_type}
+\end{threeparttable}
+\end{table}
+
+在表\ref{Fraud_type}中
+%下面的内容是引用《基于数据的财务造假的研究》
+本文直接把虚构利润和虚列资产的违规行为全部归为财务造假\cite{Research-on-Corporate-Financial-Fraud-Identific-ation-Model-Based-on-Data-Mining}。对于其他的几种违规行为，需要结合具体违规行为进行判断，最终得到了22个造假样本。
+
+再结合各上市公司的年度审计报告中审计师给出的意见，包括标准无保留意见、保留意见、否定意见、无法发表意见、无保留意见加事项段、保留意见加事项段，本文对给出保留意见、否定意见、保留意见加事项段的事项进行审阅，最终认定有极强的造假嫌疑的样本共120个，无造假嫌疑的样本有3088个。
+
+\section{变量选择}{Variable Selection}
+\subsection{初步变量选择}{Preliminary Variable Selection}
+本文参照GONE成因理论，再结合公司财务造假的手段等因素。从公司的财务数据、治理结构、造假动力与造假表现四个方面进行构建变量。
+
+在财务数据的分类构建中，本文参照了国泰安数据库——公司研究的分类方法，从公司偿债能力、盈利能力、经营能力、发展能力4个方面构建财务数据指标，其中偿债能力选取了流动比率、速动比率、资产负债率、经营活动产生的的现金流量净额/负债和，经营能力选取了存货与收入比、流动资产与收入比、总资产周转率，盈利能力选取了营业毛利率，发展能力选取了资本保值增值率、利润总额增长率、可持续增长率。
+
+在治理结构的分类构建中，本文股权集中度以及监管层的持股比例进行描述。
+
+在造假动力的指标构建中，由于高层管理人员的报酬与财务业绩或公司股票的市场表现挂钩\cite{Research-on-the-Influencing-Factors-of-Jin-Chao's-2013-Financial-Statement-Fraud}本文选取了财务类高管是否在上市公司领取薪酬这个二值变量。
+
+在造假表现方面，由于上市公司财务造假多围绕提升业绩展开，造假手段多样，主要有虚增收入、减少成本费用等\cite{Zhan-Hongyan-Common-Methods}，故本文选取了管理费用增长率、营业总成本增长率、销售费用增长率、坏账准备计提比例的变化率、2018年坏账准备比例这5个变量，最终得到初始变量选取情况表 \ref{Initial}中
+
+%这个表格太宽了，需要加入参数\footnotesize{}
+% Please add the following required packages to your document preamble:
+%、、引用要先写caption再写label
+
+\begin{sidewaystable}[!ht]\footnotesize{}
+	\centering
+	\caption{初始变量选取情况表}
+	\label{Initial}
+	\begin{tabular}{ccc|c}
+	\toprule
+	指标类型                  & 指标代码 & 指标名称               & 指标计算方法                                                                              \\ \toprule
+	\multirow{4}{*}{偿债能力} & liquidity\_ratio   & 流动比率               & 流动资产/流动负债                                                                           \\
+						  & quick\_ratio						  & 速动比率               & （流动资产-存货）/流动负债                                                                      \\
+						  & assets\_liabilities
+						  & 资产负债率              & 总负债/总资产                                                                             \\
+						  & cash\_liabilities
+						  & 经营活动产生的现金流量净额/负债合计 & 经营活动产生的现金流量净额/总负债                                                                   \\ \cline{2-4} 
+	\multirow{3}{*}{经营能力} & inventory\_income
+	& 存货与收入比             & 存货/总收入                                                                              \\
+						  & assets\_income\_ratio
+						  & 流动资产与收入比           & 流动资产/总收入                                                                            \\
+						  & asset\_turnover
+						  & 总资产周转率             & 收入净额/平均资产总额                                                                         \\ \cline{2-4} 
+	盈利能力                  & operating\_margin
+	& 营业毛利率              & 营业毛利额/主营业务收入                                                                        \\ \cline{2-4} 
+	\multirow{3}{*}{发展能力} & capital\_preservation
+	& 资本保值增值率            & 期末所有者权益/期初所有者权益                                                                     \\
+						  & profit\_growth
+						  & 利润总额增长率            & （本期利润总额-上期利润总额）/上期利润总额                                                              \\
+						  & sustain\_grow\_rate
+						  & 可持续增长率             & 资产收益率*收益留存率/（1-净资产收益率*收益留存率）                                                        \\ \cline{2-4} 
+	\multirow{2}{*}{治理结构} &TopTenHoldersRate
+	& 股权集中度              & 前十名股东持股比例之和(\%)                                                                        \\
+						  & reg\_shareholding
+						  & 监管层持股比例            & 监管层持股数/总股数                                                                          \\ \cline{2-4} 
+	动力指标                  & get\_paid
+& 是否领取薪酬             & \begin{tabular}[c]{@{}c@{}}财务类高管是否在上市公司领取薪酬\\ 1=在上市公司领取薪酬，2=未在上市公司领取薪酬\end{tabular} \\ \cline{2-4} 
+	\multirow{5}{*}{财务表现} & management\_rate
+& 管理费用增长率            & \begin{tabular}[c]{@{}c@{}}（管理费用本年本期金额—\\  管理费用上年同期金额）/(管理费用上年同期金额)\end{tabular}    \\
+						  & operating\_cost
+						& 营业总成本增长率           & \begin{tabular}[c]{@{}c@{}}（营业总成本本年本期金额—\\  营业总成本上年同期金额）/（营业总成本上年同期金额）\end{tabular} \\
+						  & sales\_expense\_rate
+						& 销售费用增长率               & \begin{tabular}[c]{@{}c@{}}（销售费用本年本期金额—\\  销售费用上年同期金额）/（销售费用上年同期金额）\end{tabular}    \\
+						  & bd\_ratio
+						  & 2018年坏账准备比例        & 
+						  \begin{tabular}[c]{@{}c@{}}(2018年坏账准备计提数/2018年应收账款数)\\-(2017年坏账准备计提数/2017年应收账款数)  
+						  \end{tabular}                                                                     \\
+						  & bad\_debt18
+						& 坏账准备计提比例的变化率       & \begin{tabular}[c]{@{}c@{}}（2018年坏账准备比例-\\ 2017年坏账准备比例）/2017年坏账准备比例\end{tabular}    \\ \bottomrule
+	\end{tabular}
+	\end{sidewaystable}
+
+
+
+
+
+\subsection{数据预处理与数据描述}{Data Preprocessing and Data Description}
+
+由于本文选取的的变量皆为比率变量，故排除了上市公司的体量大小对结果的影响。对于bd\_ratio，该数据来自于Wind,其不仅报告了2018年的坏账比例，而且还报告了该坏账持续的时间，从财务知识可以知道，坏账持续时间越长则其收回的可能性越低，即成为坏账的可能性越高。因此本文对来自不同年份的坏账进行了加权处理，对于年份越久远的坏账给予更高的权重。
+
+
+在处理缺失值方面，对于除get\_paid和bd\_ratio即财务类高管是否领取薪酬和坏账计提比例其他数据选择用2017年的数据对其进行补足，如果2017年的数据没有，则用该行业的平均水平来代替\footnote{依据证监会2012版行业分类标准}；对于get\_paid，如果没有找到当前财务主管是否领取薪酬，则选取其有报告的最高的管理层是否领取薪酬来代替；对于bd\_ratio的缺失值，本文选择将其为0代替，即2018年的坏账比例相对2017年来说明没有发生变化。
+
+
+观察如表\ref{descriptive_statistics}所示，发现流动比率、速动比率、存货与收入比、流动资产与收入比、资本保值增值率、利润总额增长率、管理费用增长率、营业总成本增长率、销售费用增长率的最大值比上四分位数都大出10倍左右，出于对数据真实性考虑以及希望排除某些数据录入错误造成的影响，对这些异常值进行处理，\citep{winsorization}的研究表明在财务比率的异常值处理方面，winsorize\footnote{是一种处理离群值的方法，在公司金融、财务管理等微观领域应用非常广泛，将超出变量特定百分位范围的数值替换为其特定百分位数值的方法}处理具有非常好的效果。因此，本文采用了winsorize方法，将上述变量超出95\%分位数的值用其95\%分位数进行替代。
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: 周五, 12月 20, 2019 - 14:58:31
+\begin{table}[!htbp] \centering 
+    \caption{描述性统计} 
+    \label{descriptive_statistics}
+  \begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+  \\[-1.8ex]\hline 
+  \hline \\[-1.8ex] 
+  Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
+  \hline \\[-1.8ex] 
+  liquidity\_ratio & 3,208 & 2.370 & 2.673 & 0.123 & 1.180 & 2.580 & 54.507 \\ 
+  quick\_ratio & 3,208 & 1.902 & 2.414 & 0.081 & 0.799 & 2.032 & 41.266 \\ 
+  assets\_liabilities & 3,208 & 0.421 & 0.197 & 0.017 & 0.265 & 0.561 & 0.993 \\ 
+  cash\_liabilities & 3,208 & 0.176 & 0.348 & $-$2.213 & 0.022 & 0.259 & 3.770 \\ 
+  inventory\_income & 3,208 & 0.404 & 1.837 & 0.000 & 0.099 & 0.327 & 83.662 \\ 
+  assets\_income\_ratio & 3,208 & 6.468 & 251.986 & 0.068 & 0.696 & 1.576 & 14,236.340 \\ 
+  asset\_turnover & 3,208 & 0.648 & 0.531 & 0.0001 & 0.357 & 0.800 & 9.663 \\ 
+  operating\_margin & 3,208 & 0.307 & 0.183 & $-$0.728 & 0.181 & 0.397 & 0.990 \\ 
+  capital\_preservation & 3,208 & 1.155 & 1.682 & 0.022 & 1.010 & 1.124 & 69.264 \\ 
+  profit\_growth & 3,208 & $-$0.399 & 10.785 & $-$213.431 & $-$0.358 & 0.331 & 371.127 \\ 
+  sustain\_grow\_rate & 3,208 & 0.040 & 0.141 & $-$0.977 & 0.018 & 0.089 & 1.592 \\ 
+  TopTenHoldersRate & 3,208 & 60.209 & 14.726 & 10.890 & 51.227 & 69.755 & 100.970 \\ 
+  bad\_debt18 & 3,208 & 53.899 & 12.819 & 0 & 50 & 61.5 & 91 \\ 
+  bd\_ratio & 3,208 & 0.012 & 0.256 & $-$1 & 0 & 0 & 12 \\ 
+  management\_rate & 3,208 & 0.298 & 2.346 & $-$0.737 & 0.049 & 0.309 & 125.092 \\ 
+  sales\_expense\_rate & 3,208 & 1.723 & 73.196 & $-$1.000 & $-$0.001 & 0.315 & 4,133.569 \\ 
+  Ownership & 3,208 & 1.860 & 0.809 & 1 & 1 & 2 & 8 \\ 
+  operating\_cost & 3,208 & 0.418 & 8.991 & $-$0.829 & 0.038 & 0.299 & 504.738 \\ 
+  reg\_shareholding & 3,208 & 0.115 & 0.178 & 0.000 & 0.000 & 0.196 & 0.823 \\ 
+  \hline \\[-1.8ex] 
+  \end{tabular} 
+  \end{table} 
+
+
+\subsection{多重共线性分析}{Multicollinearity Analysis}
+由于财务报表数据本身所具有的内部逻辑性，本文初选出的指标之间也必然存在着某种程度的自相关性，这对模型估计的参数准确性会产生影响。因此，在代入模型之前，我们首先要分析多重共线性，把部分自相关性较高的变量剔除。
+
+首先对所有变量进行VIF检验\footnote{VIF(方差扩大(膨胀)因子法)是通过考察给定的解释变量被方程中其他所有解释变量所解释的程度，以此来判断是否存在多重共线性的一种方法。}最终得到如表\ref{vif}所示,其中流动比率，速动比率、资本保值增值率、可持续增长率的VIF值大于10，可以认为其具有较强的多重共线性，最终去掉了流动比率与资本保值增值率这两个变量，得到的最终变量都通过了vif检验。而且根据两两之间的线性关系图如\ref{corrplot}所示(详见附录)，两两之间的关系也是比较弱的。至此，我们的初步变量选择完成。
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+	\centering
+	\caption{VIF检验}
+	\label{vif}
+	\begin{tabular}{@{}c|l@{}}
+	\toprule
+	变量                 & VIF     \\ \toprule
+	流动比率               & 83.047 \\
+	速动比率               & 81.285 \\
+	资产负债率              & 1.825  \\
+	经营活动产生的现金流量净额/负债合计 & 1.454  \\
+	存货与收入比             & 1.315  \\
+	流动资产与收入比           & 1.014  \\
+	总资产周转率             & 1.131  \\
+	营业毛利率              & 1.330  \\
+	资本保值增值率            & 10.679  \\
+	利润总额增长率            & 1.407  \\
+	可持续增长率             & 12.630 \\
+	股权集中度              & 1.456  \\
+	监管层持股比例            & 1.1279  \\
+	是否领取薪酬             & 1.0539  \\
+	管理费用增长率            & 1.130  \\
+	营业总成本增长率           & 1.677  \\
+	销售费用增长率               & 1.041  \\
+	坏账准备计提比例的变化率       & 1.038  \\
+	2018年坏账准备比例        & 1.083  \\ \bottomrule
+	\end{tabular}
+	\end{table}
+%要讲清楚数据的来源与数据清洗的过程
+%descriptive analysis要做，要和下一步有关系

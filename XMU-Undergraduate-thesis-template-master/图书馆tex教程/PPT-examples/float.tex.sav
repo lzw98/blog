@@ -1,0 +1,57 @@
+%# -*- coding:utf-8 -*-
+% 导言区
+\documentclass{ctexart}
+\usepackage{graphicx}
+\graphicspath{{figures/}} % 图片路径
+
+% 浮动位置：
+% h 当前位置(here)
+% t 顶部(top)
+% b 底部(bottom)
+% p 单独成页(page)
+
+% 正文区（文稿区）
+\begin{document}
+    \LaTeX 中的图像，魔瓶图像如图\ref{bottle}所示。
+    \begin{figure}[htbp]
+         \centering %居中显示
+        \includegraphics[height=10cm]{bottle}
+        \caption{魔瓶}
+        \label{bottle}
+    \end{figure}
+
+     更多玩具图片如图\ref{cars}和图\ref{balls}。
+
+     \begin{figure}[htbp]
+         \centering %居中显示
+        \includegraphics[height=6cm]{cars}
+        \caption{汽车图片}
+        \label{cars}
+    \end{figure}
+
+     \begin{figure}[htbp]
+         \centering %居中显示
+        \includegraphics[height=5cm]{balls}
+        \caption{球图}
+        \label{balls}
+    \end{figure}
+
+    \newpage
+    \LaTeX 中的表格,如表\ref{cjd}所示
+    \begin{table}[htbp]
+        \centering
+        \begin{tabular}{|l|c|c|c|r|}
+            \hline
+            姓名&语文&数学&外语&备注\\
+            \hline
+            张三&87&100&93&优秀\\
+            \hline
+            李四&86&90&83&\\
+            \hline
+            王五&70&60&50&不及格，补考时间另行通知\\
+            \hline
+        \end{tabular}
+        \caption{成绩单}
+        \label{cjd}
+    \end{table}
+\end{document}

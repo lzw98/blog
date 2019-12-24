@@ -1,0 +1,145 @@
+%# -*- coding:utf-8 -*-
+% 导言区
+\documentclass{ctexart}
+\usepackage{amsmath,amssymb}
+
+
+% 正文区（文稿区）
+\begin{document}
+    \section{简介}
+    \LaTeX 将排版内容分为文本模式和数学模式。文本模式用于普通文本排版,数学模式用于数学公式排版。
+
+    \section{行内公式}
+    \subsection{美元符号}
+    交换律是 $a+b=b+a$，如$1+2=2+1=3$。
+    \subsection{小括号}
+    交换律是 \(a+b=b+a\)，如\(1+2=2+1=3\)。
+    \subsection{math环境}
+    \begin{math}a+b=b+a\end{math}
+
+    \section{上下标}
+    \subsection{上标}
+    $3x^2-x+2=0$
+    \subsection{下标}
+    $a_1,a_2,...,a_100$
+
+    \section{希腊字母}
+    $\alpha$
+    $\beta$
+    $\gamma$
+    $\epsilon$
+    $\pi$
+    $\omega$
+
+    $\Gamma$
+    $\Delta$
+    $\Pi$
+    $\Omega$
+
+    $\alpha^2 + \beta^2 + \gamma = 0$
+    \section{数学函数}
+    $\log$
+    $\sin$
+    $\cos$
+    $\arcsin$
+    $\arccos$
+    $\ln$
+
+    $\cos^2x + \sin^2x = 1 $
+
+    $\sqrt{2}$
+    $\sqrt{x^2 + y^2}$
+    $\sqrt{2+ \sqrt{2}}$
+    $\sqrt[4]{x}$
+
+    \section{分式}
+    大于是体积的$3/4$
+
+    大于是体积的 $\frac{3}{4}$
+
+    \section{行间公式}
+    \subsection{美元符号}
+    交换律是 $$a+b=b+a$$ 如$$1+2=2+1=3$$
+    \subsection{中括号}
+     交换律是 \[a+b=b+a\] 如\[1+2=2+1=3\]
+    \subsection{displaymath环境}
+    \begin{displaymath} a+b=b+a \end{displaymath}
+    \begin{displaymath} 1+2=2+1 \end{displaymath}
+    \subsection{自动编号公式equation环境，单行单个公式}
+        \begin{equation}
+            a+b=b+a
+        \end{equation}
+        \begin{equation}
+            1+2=2+1
+        \end{equation}
+        如公式\ref{eq:c}所示，如公式\ref{eq:t}所示
+        \begin{equation}
+            a+b=b+a
+            \label{eq:c}
+        \end{equation}
+        \begin{equation}
+            a+b=b+a
+            \label{eq:t}
+        \end{equation}
+        equation只能生成单行单个公式，如\ref{eq:eq}所示。
+        \begin{equation}
+            \label{eq:eq}
+            x^2+y^2=z^2 \\
+            \sqrt{abc}-\sqrt[2]{edf} =\sum_2 z
+        \end{equation}
+
+    \subsection{不编号公式equation*环境}
+        \begin{equation*}
+            1+2=2+1
+        \end{equation*}
+    \section{多行公式}
+    \subsection{gather环境，多行多编号}
+        \begin{gather}
+            a + b = b + a \\
+            ab ba
+        \end{gather}
+    \subsection{gather*环境，多行无编号}
+        \begin{gather*}
+            a + b = b + a \\
+            ab ba
+        \end{gather*}
+        %在\\前使用\notag，阻止编号
+        \begin{gather}
+            a + b = b + a \notag \\
+            3^2 + 4^2 = 5^2 \notag \\
+            a^2 + b^2 = c^2
+        \end{gather}
+    \subsection{align环境和align*环境}
+        % 用&进行对齐
+        \begin{align}
+            x &= t+1 \\
+            y+1 &= 2
+        \end{align}
+        % 不带编号，任意位置对齐
+        \begin{align*}
+            x &= t+1& x&=6+2 &x&=t+8 \\
+            y &= 2 &y&=12 &y &=\cos x
+        \end{align*}
+    \subsection{split环境：对齐采用align环境的方式，编号在中间}
+        \begin{equation}
+        \begin{split}
+            \label{eq:eq}
+            x^2+y^2 &=z^2 \\
+            \sqrt{abc}-\sqrt[2]{edf} &=\sum_2 z
+        \end{split}
+        \end{equation}
+     \subsection{cases环境：类似分段函数的公式排版}
+     \begin{equation}
+        %每行公式中使用&分割为两部分
+        %通常表示值和后面的条件
+        D(x) =
+        \begin{cases}
+           1,& \text{如果} x \in \mathbb{Q};\\
+           0,& \text{如果} x \in
+           \mathbb{R}\setminus \mathbb{Q}.
+        \end{cases}
+        \end{equation}
+        如果需要在公式中输入中文，那么可以用text命令临时切换到文本模式。
+
+        公式的编号和交叉引用也是自动实现的，大家在排版中，要习惯于采用自动化的方式处理注入图、表、公式的编号和交叉引用。
+\end{document}

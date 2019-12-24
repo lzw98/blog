@@ -1,0 +1,41 @@
+%# -*- coding:utf-8 -*-
+%告诉编辑器以utf-8的模式打开该文档
+\documentclass{paper}
+
+\input{intro} %导入导言区内容
+
+\begin{document}
+\titleformat{\chapter}{\vspace*{-5.5em}\centering\heiti\zihao{-3}\bfseries}{第\,\chaptername 章}{1em}{\vspace{0em}}
+
+\graphicspath{{figures/}}
+
+%封面
+\include{data/cover}
+
+%声明
+\include{data/declaration}
+
+\zihao{-4}
+%摘要
+ \include{data/abstract}
+
+%生成中文目录
+\tableofcontents
+
+%生成英文目录
+\tableofengcontents
+
+%章节
+\include{data/introduction}
+\include{data/related-technologies}
+
+%研究成果
+\include{data/publications}
+
+%参考文献
+\include{data/ref}
+
+%致谢
+\include{data/ack}
+
+\end{document}

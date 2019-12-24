@@ -1,0 +1,16 @@
+\usepackage{geometry}
+\usepackage{float} %图片浮动
+%\usepackage[section]{placeins} %避免浮动体跨过 \section
+\usepackage{placeins}
+\usepackage{array}
+\usepackage{setspace} %设置间距
+\usepackage{fontspec} %设置字体库
+\setmainfont{Times New Roman} %设置西文字体
+\setCJKmainfont{SimSun} %设置中文字体
+\geometry{a4paper,top=2.54cm,bottom=2.54cm,left=3.17cm,right=3.17cm,head=1.57cm,foot=1.5cm}
+
+%对齐格式
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}

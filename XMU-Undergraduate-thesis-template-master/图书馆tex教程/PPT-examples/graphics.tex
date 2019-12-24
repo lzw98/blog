@@ -1,0 +1,46 @@
+%# -*- coding:utf-8 -*-
+% 导言区
+\documentclass{ctexart}
+
+%导言区需引入宏包 \usepackage{graphicx}
+%语 法：\includegraphics[< 选项 >]{< 文件名 >}
+%格 式：EPS,PDF,PNG,JPEG,BMP
+\usepackage{graphicx}
+\graphicspath{{figures/}} % 图片路径
+
+% 正文区（文稿区）
+\begin{document}
+\includegraphics{bottle}
+\includegraphics{cars}
+\includegraphics{balls}
+
+%缩放
+\includegraphics[scale=0.3]{bottle}
+\includegraphics[scale=0.3]{cars}
+\includegraphics[scale=0.3]{balls}
+
+%固定高度
+\includegraphics[height=2cm]{bottle}
+\includegraphics[height=2cm]{cars}
+\includegraphics[height=2cm]{balls}
+
+%固定宽度
+\includegraphics[width=5cm]{bottle}
+\includegraphics[width=5cm]{cars}
+\includegraphics[width=5cm]{balls}
+
+%相对高度，版型文本高度0.1倍
+\includegraphics[height=0.1\textheight]{bottle}
+\includegraphics[height=0.1\textheight]{cars}
+\includegraphics[height=0.1\textheight]{balls}
+
+%相对宽度，版型宽度0.2倍
+\includegraphics[width=0.2\textwidth]{bottle}
+\includegraphics[width=0.2\textwidth]{cars}
+\includegraphics[width=0.2\textwidth]{balls}
+
+\includegraphics[angle=-45,width=0.2\textwidth]{bottle}
+\includegraphics[angle=-30,width=0.2\textwidth]{cars}
+\includegraphics[angle=90,width=0.2\textwidth]{balls}
+
+\end{document}

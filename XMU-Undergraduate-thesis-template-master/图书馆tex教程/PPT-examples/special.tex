@@ -1,0 +1,62 @@
+%# -*- coding:utf-8 -*-
+% 导言区
+\documentclass{ctexart}
+
+% 正文区（文稿区）
+\begin{document}
+\section{空白符号}
+
+客户关系管理作为一种新的管理模式、业务营销理念和信息技术前沿产品，是信息技术与业务管理相结合的产物。银行客户关系管理是指商业银行树立以客户为中心的经营理念，在准确市场定位的基础上合理配置资源，发现并最大限度满足优质客户的需要，持续进行流程优化和金融创新，充分发挥客户经理的积极性，在提高客户价值的过程中实现银行自身价值的提升。
+
+Firstly, this paper introduces the need for banks to establish a CRM system, CRM system for banks to help. Then, Bank CRM system requirements analysis, design the architecture of the bank CRM system, consisting of three-layer structure, one data source layer, is the analysis of the data warehouse layer, interface presentation layer. The data warehouse analysis layer is the core of the CRM system as a whole. Then the article describes the bank's CRM system technology, using the J2EE platform using Struts 2, Spring, Hibernate framework. Finally, the CRM system to achieve some interface screen shots, and some of the key code presents.
+
+
+
+
+% 空行分段，多个空行等同1个
+% 自动缩进，不能用空格代替
+% 英文中多个空格处理为1个空格，中文空格将被忽略
+% 汉字与其他字符的间距由XeLaTeX自动处理
+% 禁止使用中文全角空格
+
+% 1em(当前字体中M的宽度)
+a\quad b
+
+% 2em
+a\qquad b
+
+% 约为1/6个em
+a\,b a\thinspace b
+
+% 约0.5个em
+a\enspace b
+
+%硬空格
+a~b
+% 1pc=12pt=4.218mm
+a\kern 1pc b
+a\kern -1em b
+
+
+a\hskip 1em b
+a\hspace{35pt}b
+
+%占位宽度
+a\hphantom{xyz}b
+
+%弹性长度
+a\hfill b
+
+\section{\LaTeX 控制符}
+\# \$ \% \{ \} \~{} \_{} \^{} \& \textbackslash
+\section{排版符号}
+\S \P \dag \ddag \copyright \pounds
+\section{\TeX 基本符号}
+\TeX \LaTeX
+\section{连字符}
+- -- ---
+\section{非英文字符}
+\oe \OE \ae \AE \aa \AA \o \O \l \L \ss \SS
+\section{重音符号(以o为例)}
+\`o \'o \^o \''o \~o \.o \u{o} \v{o} \H{o}
+\end{document}
