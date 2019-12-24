@@ -439,9 +439,6 @@ summary(m1)</code></pre>
 ## 
 ## 
 ## Reference group is level  3  of the response</code></pre>
-<ul>
-<li>coefficients of the model are not significant mostly, the coefficient of variable SV2B is significant under the level 0.0001. So the equation is <span class="math inline">\(\log (\frac{{{{\hat \pi }_M}}}{{{{\hat \pi }_C}}}) = 12.5942 - 1.23602 \times SV2B\)</span> and the other equation is <span class="math inline">\(\log (\frac{{{{\hat \pi }_S}}}{{{{\hat \pi }_C}}}) = - 1.8488 - 0.59783 \times SV2B\)</span></li>
-</ul>
 <pre class="r"><code>Y = factor(Y,levels = c(&#39;S&#39;,&#39;M&#39;,&#39;C&#39;))
 fmla &lt;- as.formula(paste(&quot;Y ~ &quot;, paste(xnam, collapse= &quot;+&quot;)))
 m2.para &lt;- vglm(fmla,family = cumulative(parallel = TRUE),data = data)</code></pre>

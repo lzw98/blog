@@ -44,7 +44,6 @@ Y = factor(Y,levels = c('S','M','C'))
 m1 <- vglm(fmla,family = multinomial,data = data)
 summary(m1)
 ```
-- coefficients of the model are not significant mostly, the coefficient of variable SV2B is significant under the level 0.0001. So the equation is $\log (\frac{{{{\hat \pi }_M}}}{{{{\hat \pi }_C}}}) = 12.5942 - 1.23602 \times SV2B$ and the other equation is $\log (\frac{{{{\hat \pi }_S}}}{{{{\hat \pi }_C}}}) =  - 1.8488 - 0.59783 \times SV2B$ 
 
 ```{r error= TRUE}
 Y = factor(Y,levels = c('S','M','C'))
